@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # FastAPI Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    environment:
+      - VAULT_PATH=/app/data/vault
+      - VAULT_ENCRYPTION_KEY=${VAULT_ENCRYPTION_KEY:-goat_secret_key_change_me}
+      - KNOWLEDGE_DB=/app/data/knowledge/graph.db
+      - PRIVATE_KEY=${PRIVATE_KEY:-}
+      - POLYGON_RPC=${POLYGON_RPC:-https://polygon-rpc.com}
+      - ANCHOR_CONTRACT=${ANCHOR_CONTRACT:-0x0000000000000000000000000000000000000000}
+    volumes:
+      - ./data:/app/data
+      - ./vault:/app/vault
+      - ./collector:/app/collector
+      - ./knowledge:/app/knowledge
+      - ./teacher:/app/teacher
+      - ./licenser:/app/licenser
+      - ./server:/app/server
+    networks:
+      - goat-network
+    depends_on:
+      - neo4j
+      - chroma
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    networks:
+      - goat-network
+    depends_on:
+      - backend
+
+  # Neo4j Graph Database (optional - for advanced knowledge graph)
+  neo4j:
+    image: neo4j:5.20
+    environment:
+      - NEO4J_AUTH=neo4j/goatpassword123
+      - NEO4J_PLUGINS=["apoc"]
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j-data:/data
+    networks:
+      - goat-network
+
+  # ChromaDB for vector embeddings (optional)
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+    networks:
+      - goat-network
+
+  # IPFS Node (optional - for local IPFS)
+  ipfs:
+    image: ipfs/kubo:latest
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ipfs-data:/data/ipfs
+    networks:
+      - goat-network
+
+networks:
+  goat-network:
+    driver: bridge
+
+volumes:
+  neo4j-data:
+  chroma-data:
+  ipfs-data:

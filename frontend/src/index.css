@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0f172a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+@layer components {
+  .goat-card {
+    @apply bg-slate-800 rounded-lg p-6 shadow-lg border border-slate-700;
+  }
+
+  .goat-button {
+    @apply bg-goat-primary hover:bg-opacity-90 text-white font-semibold py-2 px-4 rounded transition-all duration-200;
+  }
+
+  .goat-button-secondary {
+    @apply bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2 px-4 rounded transition-all duration-200;
+  }
+
+  .goat-input {
+    @apply bg-slate-700 border border-slate-600 text-white rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-goat-primary;
+  }
+
+  .glyph-badge {
+    @apply inline-flex items-center gap-2 bg-gradient-to-r from-goat-primary to-goat-secondary px-3 py-1 rounded-full text-sm font-semibold text-slate-900;
+  }
+}
