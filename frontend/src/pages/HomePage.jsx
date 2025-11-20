@@ -85,7 +85,7 @@ export function HomePage() {
       {/* Quick Actions */}
       <div className="goat-card">
         <h2 className="text-2xl font-bold mb-4">Quick Start</h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-4 gap-4">
           <QuickAction
             title="Collect NFT Knowledge"
             description="Ingest NFTs from IPFS, OpenSea, or on-chain"
@@ -103,6 +103,12 @@ export function HomePage() {
             description="View cryptographic proofs and glyph provenance"
             link="/vault"
             buttonText="Open Vault"
+          />
+          <QuickAction
+            title="Forge Immortal Vault"
+            description="Create permanent, immutable storage packages"
+            link="/vault-forge"
+            buttonText="Forge Vault"
           />
         </div>
       </div>

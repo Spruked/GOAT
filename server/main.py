@@ -21,6 +21,7 @@ from collector.glyph_generator import GlyphGenerator
 from knowledge.graph import KnowledgeGraph
 from teacher.engine import TeacherEngine, QuizGenerator
 from licenser.verifier import Verifier
+from vault_forge.vault_generator import create_vault
 
 # Initialize FastAPI
 app = FastAPI(
@@ -344,6 +345,28 @@ async def submit_feedback(feedback: FeedbackRequest):
         }
     )
     return result
+
+# ===== VAULT FORGE ENDPOINTS =====
+
+@app.post("/api/vault-forge/create")
+async def create_vault_package(
+    project_name: str,
+    tier: str = "basic",
+    deliverables_path: str = "./deliverables",
+    auto_upload: bool = False
+):
+    """Create immutable vault package for permanent storage"""
+    try:
+        zip_path = create_vault(project_name, tier, deliverables_path, auto_upload)
+        return {
+            "success": True,
+            "vault_zip": zip_path,
+            "tier": tier,
+            "auto_upload": auto_upload,
+            "message": f"Vault package created for {project_name}"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ===== ON-CHAIN ANCHOR ENDPOINTS =====
 

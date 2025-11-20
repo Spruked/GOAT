@@ -5,6 +5,7 @@ import { CollectorPage } from './pages/CollectorPage'
 import { TeacherPage } from './pages/TeacherPage'
 import { VaultPage } from './pages/VaultPage'
 import { ProfilePage } from './pages/ProfilePage'
+import { VaultForgePage } from './pages/VaultForgePage'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             <Route path="/collect" element={<CollectorPage />} />
             <Route path="/learn" element={<TeacherPage />} />
             <Route path="/vault" element={<VaultPage />} />
-            <Route path="/profile/:userId" element={<ProfilePage />} />
+            <Route path="/vault-forge" element={<VaultForgePage />} />
           </Routes>
         </main>
       </div>

@@ -1,0 +1,30 @@
+{
+  "legacy_bundle": {
+    "name": "Legacy Creator Empire Bundle",
+    "original_price": 1259,
+    "bundle_price": 399,
+    "includes": "Everything in Pro Bundle + Vault Dynasty + CertSig Legacy Pre-Mint + TrueMark .go Domain Reservation",
+    "savings": "Save $860+"
+  },
+  "pro_bundle": {
+    "name": "Pro Creator Bundle",
+    "original_price": 480,
+    "bundle_price": 249,
+    "includes": "Masterclass Builder Elite + Audiobook Suite Premium + Coaching Program High-Ticket",
+    "savings": "Save $231"
+  },
+  "creator_bundle": {
+    "name": "Creator Bundle",
+    "original_price": 240,
+    "bundle_price": 149,
+    "includes": "Masterclass Builder Deep Dive + Audiobook Suite Standard + Coaching Program Signature",
+    "savings": "Save $91"
+  },
+  "basic_bundle": {
+    "name": "Basic Bundle",
+    "original_price": 110,
+    "bundle_price": 79,
+    "includes": "Masterclass Builder Standard + Audiobook Suite Mini + Booklet/PDF Builder",
+    "savings": "Save $31"
+  }
+}
