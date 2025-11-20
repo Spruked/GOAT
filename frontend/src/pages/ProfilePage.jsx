@@ -1,21 +1,55 @@
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { User, Award, TrendingUp } from 'lucide-react'
+import { User, Award, TrendingUp, AlertTriangle } from 'lucide-react'
 import axios from 'axios'
 
 export function ProfilePage() {
   const { userId } = useParams()
 
-  const { data: progress } = useQuery({
+  const { data: progress, isLoading, isError, error } = useQuery({
     queryKey: ['progress', userId],
     queryFn: async () => {
       const { data } = await axios.get(`/api/teach/progress/${userId}`)
       return data
-    }
+    },
+    enabled: !!userId
   })
+
+  // Helper
+  const formatDate = (d) =>
+    d ? new Date(d).toLocaleDateString('en-US') : 'No data'
+
+  if (!userId) {
+    return (
+      <div className="max-w-xl mx-auto goat-card text-center py-10">
+        <AlertTriangle className="w-10 h-10 text-red-400 mx-auto mb-4" />
+        <h2 className="text-2xl font-bold mb-2">Invalid Profile</h2>
+        <p className="text-slate-400">No user ID was provided.</p>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-20">
+        <p className="text-slate-400">Loading profile...</p>
+      </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <div className="max-w-xl mx-auto goat-card text-center py-10">
+        <AlertTriangle className="w-10 h-10 text-red-400 mx-auto mb-4" />
+        <h2 className="text-2xl font-bold mb-2">Error Loading Profile</h2>
+        <p className="text-slate-400">{error.message}</p>
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      {/* Header */}
       <div className="goat-card">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 bg-gradient-to-r from-goat-primary to-goat-secondary rounded-full flex items-center justify-center">
@@ -55,26 +89,44 @@ export function ProfilePage() {
           {/* Mastered Skills */}
           <div className="goat-card">
             <h2 className="text-2xl font-bold mb-4">Mastered Skills</h2>
+
+            {progress.mastered_skills?.length === 0 && (
+              <p className="text-slate-400 text-sm">No mastered skills yet — keep going!</p>
+            )}
+
             <div className="space-y-3">
-              {progress.mastered_skills?.map((skill, idx) => (
-                <div key={idx} className="bg-slate-700 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold">{skill.name}</h3>
-                    <span className="text-goat-primary font-bold">
-                      {Math.round(skill.mastery_level * 100)}%
-                    </span>
+              {progress.mastered_skills?.map((skill, idx) => {
+                const percent = skill.mastery_level * 100
+
+                const barColor =
+                  percent >= 70
+                    ? 'from-green-500 to-emerald-500'
+                    : percent >= 40
+                    ? 'from-yellow-500 to-amber-500'
+                    : 'from-red-500 to-orange-500'
+
+                return (
+                  <div key={idx} className="bg-slate-700 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-semibold">{skill.name}</h3>
+                      <span className="font-bold text-goat-primary">
+                        {Math.round(percent)}%
+                      </span>
+                    </div>
+
+                    <div className="w-full bg-slate-600 rounded-full h-2 overflow-hidden">
+                      <div
+                        className={`bg-gradient-to-r ${barColor} h-2 rounded-full transition-all duration-700 ease-out`}
+                        style={{ width: `${percent}%` }}
+                      />
+                    </div>
+
+                    <div className="text-xs text-slate-400 mt-2">
+                      Last practiced: {formatDate(skill.last_practiced)}
+                    </div>
                   </div>
-                  <div className="w-full bg-slate-600 rounded-full h-2">
-                    <div
-                      className="bg-gradient-to-r from-goat-primary to-goat-secondary h-2 rounded-full transition-all"
-                      style={{ width: `${skill.mastery_level * 100}%` }}
-                    />
-                  </div>
-                  <div className="text-xs text-slate-400 mt-2">
-                    Last practiced: {new Date(skill.last_practiced).toLocaleDateString()}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </>
