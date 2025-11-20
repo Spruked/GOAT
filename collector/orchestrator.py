@@ -180,6 +180,76 @@ class NFTOrchestrator:
                 source=f"onchain://{contract}/{token_id}"
             )
     
+    async def ingest_manual(self, request) -> Any:
+        """
+        Process manually entered knowledge and generate glyphs
+        
+        Args:
+            request: ManualKnowledgeRequest with name, category, description, content, tags, concepts, skill_level
+        
+        Returns:
+            Created glyph with metadata
+        """
+        # Parse concepts from content if not provided
+        extracted_concepts = []
+        if not request.concepts:
+            # Simple extraction: split content by double newlines, take first sentence as concept
+            paragraphs = request.content.split('\n\n')
+            for para in paragraphs[:5]:  # Limit to 5 concepts
+                if para.strip():
+                    first_sentence = para.split('.')[0].strip()
+                    if first_sentence:
+                        extracted_concepts.append({
+                            "name": first_sentence[:50],  # First 50 chars as name
+                            "definition": para.strip()[:200],  # First 200 chars as definition
+                            "example": ""
+                        })
+        else:
+            extracted_concepts = request.concepts
+        
+        # Generate glyph IDs for each concept
+        concept_glyphs = []
+        for concept in extracted_concepts:
+            concept_glyph = self.vault.create_glyph(
+                data={
+                    "name": concept.get("name", ""),
+                    "definition": concept.get("definition", ""),
+                    "example": concept.get("example", ""),
+                    "type": "concept"
+                },
+                source=f"manual://concept/{concept.get('name', 'unnamed')}"
+            )
+            concept_glyphs.append(concept_glyph.id)
+        
+        # Prepare IPFS metadata structure
+        ipfs_metadata = {
+            "name": request.name,
+            "description": request.description,
+            "category": request.category,
+            "tags": [tag.strip() for tag in request.tags.split(',') if tag.strip()],
+            "skill_level": request.skill_level,
+            "content": request.content,
+            "concepts": extracted_concepts,
+            "glyph_list": concept_glyphs,
+            "creator": "manual",
+            "version": "2.1.0",
+            "type": "knowledge_nft"
+        }
+        
+        # Create main knowledge glyph
+        main_glyph = self.vault.create_glyph(
+            data=ipfs_metadata,
+            source=f"manual://knowledge/{request.name}"
+        )
+        
+        # Store glyph list in data field for return
+        if not main_glyph.data:
+            main_glyph.data = {}
+        main_glyph.data["glyph_list"] = concept_glyphs
+        main_glyph.data.update(ipfs_metadata)
+        
+        return main_glyph
+    
     async def enrich_with_ai(self, glyph_id: str, llm_prompt: Optional[str] = None) -> Dict[str, Any]:
         """
         Enrich glyph data with AI analysis

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useQuery, useMutation } from '@tantml:react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
 import { GraduationCap, BookOpen, Award } from 'lucide-react'
 import axios from 'axios'
 

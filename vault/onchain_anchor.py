@@ -3,11 +3,70 @@ On-Chain Anchoring - Merkle tree anchoring for vault glyphs
 """
 
 import os
+import hashlib
 from typing import List, Dict, Any, Optional
-from merkletools import MerkleTools
 from web3 import Web3
 from eth_account import Account
 import json
+
+
+class SimpleMerkleTree:
+    """Simple Merkle tree implementation using hashlib"""
+    
+    def __init__(self):
+        self.leaves = []
+        self.tree = []
+        self.root = None
+    
+    def add_leaf(self, value: bytes):
+        """Add a leaf to the tree"""
+        leaf_hash = hashlib.sha256(value).digest()
+        self.leaves.append(leaf_hash)
+    
+    def make_tree(self):
+        """Build the Merkle tree"""
+        if not self.leaves:
+            return
+        
+        self.tree = [self.leaves[:]]
+        current_level = self.leaves[:]
+        
+        while len(current_level) > 1:
+            next_level = []
+            for i in range(0, len(current_level), 2):
+                left = current_level[i]
+                right = current_level[i + 1] if i + 1 < len(current_level) else left
+                parent = hashlib.sha256(left + right).digest()
+                next_level.append(parent)
+            self.tree.append(next_level)
+            current_level = next_level
+        
+        self.root = current_level[0] if current_level else b'\x00' * 32
+    
+    def get_merkle_root(self) -> bytes:
+        """Get the Merkle root"""
+        return self.root if self.root else b'\x00' * 32
+    
+    def get_proof(self, index: int) -> List[bytes]:
+        """Get Merkle proof for a leaf at given index"""
+        if index >= len(self.leaves):
+            return []
+        
+        proof = []
+        curr_index = index
+        
+        for level in self.tree[:-1]:
+            if curr_index % 2 == 0:
+                sibling_index = curr_index + 1
+            else:
+                sibling_index = curr_index - 1
+            
+            if sibling_index < len(level):
+                proof.append(level[sibling_index])
+            
+            curr_index = curr_index // 2
+        
+        return proof
 
 
 class OnChainAnchor:
@@ -76,7 +135,7 @@ class OnChainAnchor:
         else:
             self.contract = None
     
-    def create_merkle_tree(self, glyph_ids: List[str]) -> MerkleTools:
+    def create_merkle_tree(self, glyph_ids: List[str]) -> SimpleMerkleTree:
         """
         Create Merkle tree from glyph IDs
         
@@ -84,19 +143,13 @@ class OnChainAnchor:
             glyph_ids: List of glyph IDs to include
         
         Returns:
-            MerkleTools instance
+            SimpleMerkleTree instance
         """
-        mt = MerkleTools(hash_type='sha256')
+        mt = SimpleMerkleTree()
         
         # Add each glyph ID as a leaf
         for glyph_id in glyph_ids:
-            # Convert to bytes if hex string
-            if glyph_id.startswith("0x"):
-                leaf = bytes.fromhex(glyph_id[2:])
-            else:
-                leaf = glyph_id.encode()
-            
-            mt.add_leaf(leaf, do_hash=True)
+            mt.add_leaf(glyph_id.encode('utf-8'))
         
         mt.make_tree()
         return mt
@@ -135,7 +188,7 @@ class OnChainAnchor:
             return []
         
         proof = mt.get_proof(index)
-        return ["0x" + p['right'].hex() if p.get('right') else "0x" + p['left'].hex() for p in proof]
+        return ["0x" + p.hex() for p in proof]
     
     def anchor_batch(self, glyph_ids: List[str], gas_price: Optional[int] = None) -> Dict[str, Any]:
         """

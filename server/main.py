@@ -80,6 +80,15 @@ class FeedbackRequest(BaseModel):
 class AnchorRequest(BaseModel):
     glyph_ids: List[str]
 
+class ManualKnowledgeRequest(BaseModel):
+    name: str
+    category: str
+    description: str
+    content: str
+    tags: str
+    concepts: List[Dict[str, str]] = []
+    skill_level: str = "Beginner"
+
 # Health check
 @app.get("/")
 async def root():
@@ -189,6 +198,21 @@ async def ingest_onchain(request: IngestOnChainRequest):
             "glyph_id": glyph.id,
             "contract": request.contract,
             "token_id": request.token_id
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/collect/manual")
+async def ingest_manual_knowledge(request: ManualKnowledgeRequest):
+    """Process manually entered knowledge and generate glyphs"""
+    try:
+        result = await orchestrator.ingest_manual(request)
+        return {
+            "status": "success",
+            "glyph_id": result.id,
+            "glyph_ids": result.data.get("glyph_list", []) if result.data else [],
+            "source": "manual",
+            "ipfs_metadata": result.data
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
