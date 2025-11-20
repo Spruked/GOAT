@@ -11,6 +11,12 @@ import random
 sys.path.append(str(Path(__file__).parent.parent))
 
 from knowledge.graph import KnowledgeGraph
+from teacher.difficulty_engine import DifficultyEngine
+from teacher.ucm_bridge import UCMBridge
+from teacher.event_logger import EventLogger
+from teacher.teaching_package_builder import TeachingPackageBuilder
+from teacher.glyph_forge import GlyphForge
+from teacher.vault_bridge import VaultBridge
 
 
 class TeacherEngine:
@@ -18,6 +24,12 @@ class TeacherEngine:
     
     def __init__(self, knowledge_graph: KnowledgeGraph):
         self.graph = knowledge_graph
+        self.difficulty_engine = DifficultyEngine()
+        self.ucm_bridge = UCMBridge()
+        self.event_logger = EventLogger()
+        self.package_builder = TeachingPackageBuilder()
+        self.glyph_forge = GlyphForge()
+        self.vault_bridge = VaultBridge()
     
     def recommend_lesson(
         self,
@@ -77,27 +89,25 @@ class TeacherEngine:
         style: str = "concise"
     ) -> Dict[str, Any]:
         """
-        Generate personalized explanation
-        (In production, this would call an LLM)
-        
-        Args:
-            glyph_id: NFT glyph to explain
-            user_level: User's skill level
-            style: Explanation style (concise, detailed, eli5)
-        
-        Returns:
-            Generated explanation
+        Generate personalized explanation using UCM
         """
-        # Mock LLM explanation
-        explanations = {
-            "concise": "This NFT teaches storage patterns in Solidity using mappings and arrays for gas efficiency.",
-            "detailed": "This comprehensive NFT lesson covers Solidity storage patterns...",
-            "eli5": "Think of storage like boxes where you keep your toys..."
-        }
+        # Try UCM first
+        ucm_explanation = self.ucm_bridge.request_explanation(glyph_id, user_level)
         
+        if ucm_explanation:
+            explanation_text = ucm_explanation
+        else:
+            # Fallback explanations
+            explanations = {
+                "concise": "This NFT teaches storage patterns in Solidity using mappings and arrays for gas efficiency.",
+                "detailed": "This comprehensive NFT lesson covers Solidity storage patterns...",
+                "eli5": "Think of storage like boxes where you keep your toys..."
+            }
+            explanation_text = explanations.get(style, explanations["concise"])
+
         return {
             "glyph_id": glyph_id,
-            "explanation": explanations.get(style, explanations["concise"]),
+            "explanation": explanation_text,
             "user_level": user_level,
             "estimated_time": "15 minutes",
             "key_concepts": [
@@ -126,6 +136,13 @@ class TeacherEngine:
         """
         # Update mastery
         self.graph.update_user_mastery(user_id, skill_id, quiz_score)
+        
+        # Log event
+        self.event_logger.log_quiz_completion(user_id, skill_id, {
+            "score": quiz_score,
+            "passed": quiz_score >= 0.7,
+            "difficulty": "medium"  # Could be dynamic
+        })
         
         # Get updated progress
         progress = self.graph.get_user_progress(user_id)
@@ -160,31 +177,84 @@ class TeacherEngine:
         return None
 
 
+class TeachingNFTGenerator:
+    """Generates teaching NFTs from skills"""
+    
+    def __init__(self, teacher_engine: TeacherEngine, quiz_generator: QuizGenerator):
+        self.teacher = teacher_engine
+        self.quiz_gen = quiz_generator
+    
+    def generate_teaching_nft(self, skill_id: str, user_id: str = "system") -> Dict[str, Any]:
+        """Generate complete teaching NFT for a skill"""
+        
+        # Build teaching package
+        teaching_package = self.teacher.package_builder.build_package(
+            skill_id, self.teacher, self.quiz_gen
+        )
+        
+        # Forge glyph
+        glyph = self.teacher.glyph_forge.forge_teaching_glyph(skill_id, teaching_package)
+        
+        # Export glyph
+        glyph_id = self.teacher.glyph_forge.export_glyph(glyph)
+        
+        # Create vault package
+        vault_zip = self.teacher.vault_bridge.create_teaching_vault(
+            skill_id, 
+            self.teacher.package_builder.get_package_path(skill_id)
+        )
+        
+        # Log NFT mint
+        self.teacher.event_logger.log_nft_mint(user_id, glyph_id, {
+            "type": "teaching",
+            "skill_id": skill_id,
+            "cert_sig_ready": True
+        })
+        
+        return {
+            "glyph_id": glyph_id,
+            "teaching_package": teaching_package,
+            "vault_package": vault_zip,
+            "nft_metadata": glyph["metadata"]
+        }
+
+
 class QuizGenerator:
     """Generate quizzes from NFT content"""
     
-    def __init__(self):
-        pass
+    def __init__(self, difficulty_engine: DifficultyEngine = None):
+        self.difficulty_engine = difficulty_engine or DifficultyEngine()
     
     def generate_quiz(
         self,
         skill_id: str,
         difficulty: str = "medium",
-        num_questions: int = 5
+        num_questions: int = 5,
+        user_id: str = None,
+        user_history: List[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
-        Generate quiz for skill
-        (In production, this would use LLM to generate from NFT content)
+        Generate personalized quiz for skill
         
         Args:
             skill_id: Skill to quiz on
-            difficulty: Quiz difficulty
+            difficulty: Base difficulty level
             num_questions: Number of questions
+            user_id: User ID for personalization
+            user_history: User's quiz history
         
         Returns:
             Generated quiz
         """
-        # Mock quiz generation
+        # Get personalized parameters if user data available
+        if user_id and user_history:
+            params = self.difficulty_engine.get_personalized_quiz_params(
+                user_id, skill_id, user_history
+            )
+            difficulty = params["difficulty"]
+            num_questions = params["num_questions"]
+        
+        # Mock quiz generation (would use LLM in production)
         questions = []
         
         for i in range(num_questions):
@@ -193,7 +263,7 @@ class QuizGenerator:
                 "question": f"Question {i+1} about {skill_id}?",
                 "options": [
                     "Option A",
-                    "Option B",
+                    "Option B", 
                     "Option C",
                     "Option D"
                 ],
@@ -206,7 +276,7 @@ class QuizGenerator:
             "difficulty": difficulty,
             "questions": questions,
             "passing_score": 0.7,
-            "time_limit_minutes": 10
+            "time_limit_minutes": 10  # Could use params
         }
     
     def grade_quiz(
