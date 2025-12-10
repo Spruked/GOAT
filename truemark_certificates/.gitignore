@@ -1,0 +1,36 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Ignore virtual environments
+.venv/
+venv/
+ENV/
+
+# Ignore vault data (contains sensitive certificates)
+vault/
+!vault/.gitkeep
+
+# Ignore crypto keys (NEVER commit keys!)
+keys/
+!keys/.gitkeep
+
+# Ignore generated certificates and QR codes
+*.pdf
+verification_qr_*.png
+
+# Ignore test outputs
+test_output/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,7 @@
+# Enhanced TrueMark Certificate Generator Requirements
+# Install with: pip install -r requirements.txt
+
+reportlab==4.0.7
+qrcode[pil]==7.4.2
+Pillow==10.1.0
+pathlib2==2.3.7

@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  truemark-forge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: truemark-certificate-forge
+    image: truemark/certificate-forge:v2.0
+    volumes:
+      # Persist vault data
+      - ./vault:/app/vault
+      # Persist crypto keys
+      - ./keys:/app/keys
+      # Mount custom assets (logo, seal, watermark)
+      - ./truemark_logo.png:/app/truemark_logo.png:ro
+      - ./goldsealtruemark1600.png:/app/goldsealtruemark1600.png:ro
+      - ./watermark_truemark.png:/app/watermark_truemark.png:ro
+    environment:
+      - VAULT_PATH=/app/vault
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "echo 'TrueMark Certificate Forge v2.0' &&
+             echo 'Ready for certificate minting' &&
+             tail -f /dev/null"
+    restart: unless-stopped
+    networks:
+      - truemark-network
+
+  # Optional: API server for web integration (future)
+  # truemark-api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: truemark-api-server
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - ./vault:/app/vault
+  #     - ./keys:/app/keys
+  #   environment:
+  #     - VAULT_PATH=/app/vault
+  #   command: python api_server.py
+  #   depends_on:
+  #     - truemark-forge
+  #   restart: unless-stopped
+  #   networks:
+  #     - truemark-network
+
+networks:
+  truemark-network:
+    driver: bridge
+
+volumes:
+  truemark-vault:
+    driver: local
+  truemark-keys:
+    driver: local
