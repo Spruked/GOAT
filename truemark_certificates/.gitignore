@@ -45,10 +45,12 @@ keys/
 *.crt
 
 # Generated Outputs
-*.pdf
-verification_qr_*.png
-test_output/
 output/
+!output/.gitkeep
+*.pdf
+!output/certificates/.gitkeep
+!output/qr_codes/.gitkeep
+test_output/
 
 # Logs
 *.log

@@ -413,7 +413,11 @@ class ForensicCertificateRenderer:
     
     def generate_verification_qr(self, serial: str) -> Path:
         """Standalone QR generator for verification"""
-        qr_path = Path(f"verification_qr_{serial}.png")
+        # Save to output/qr_codes directory
+        output_dir = Path(__file__).parent / "output" / "qr_codes"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        qr_path = output_dir / f"verification_qr_{serial}.png"
         
         qr = qrcode.QRCode(
             version=1,
