@@ -211,4 +211,22 @@ docker-compose up -d
 
 ## License
 
-Same as parent TrueMark Certificate Forge system.
+MIT License - See [LICENSE](LICENSE) file for details.
+
+## Support & Contributing
+
+- **Issues**: https://github.com/Spruked/GOAT/issues
+- **Pull Requests**: Welcome! See [CONTRIBUTING.md](../CONTRIBUTING.md)
+- **Discussions**: GitHub Discussions for questions
+- **Security**: Report vulnerabilities to bryan@truemark.io
+
+## Changelog
+
+### v2.0.0 (December 2025)
+- Initial release with forensic PDF rendering
+- HMAC-SHA256 cryptographic signing
+- Swarm Knowledge Graph (SKG) integration
+- Docker deployment support
+- Vault JSONL persistence
+- Pattern learning and drift detection
+- Portfolio queries and duplicate detection

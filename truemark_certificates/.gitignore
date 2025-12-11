@@ -1,36 +1,99 @@
-# Ignore Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PIPFILE.lock
 
-# Ignore virtual environments
+# Virtual Environments
 .venv/
 venv/
 ENV/
+env/
+.virtualenv/
 
-# Ignore vault data (contains sensitive certificates)
+# Vault Data (contains sensitive certificates)
 vault/
 !vault/.gitkeep
+!vault/certificates/.gitkeep
+!vault/events/.gitkeep
+!vault/skg/.gitkeep
 
-# Ignore crypto keys (NEVER commit keys!)
+# Cryptographic Keys (NEVER commit!)
 keys/
 !keys/.gitkeep
+*.key
+*.pem
+*.crt
 
-# Ignore generated certificates and QR codes
+# Generated Outputs
 *.pdf
 verification_qr_*.png
-
-# Ignore test outputs
 test_output/
-*.log
+output/
 
-# IDE files
+# Logs
+*.log
+logs/
+*.log.*
+
+# IDE & Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.project
+.pydevproject
+.settings/
 
-# OS files
+# OS Files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+*.tar
+*.tar.gz
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Environment Variables
+.env
+.env.local
+.env.*.local

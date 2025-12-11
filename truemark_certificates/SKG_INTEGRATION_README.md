@@ -265,6 +265,14 @@ for txn in transactions:
 
 ## License
 
-Same as parent TrueMark Certificate Forge system.
+MIT License - See [LICENSE](LICENSE) file for details.
 
 **Legal Notice**: SKG system is for business documentation and pattern analysis only. It is NOT a legal monitoring instrument or government surveillance system.
+
+## Support
+
+For issues, questions, or contributions:
+- **GitHub Issues**: https://github.com/Spruked/GOAT/issues
+- **Documentation**: See README.md and DOCKER_DEPLOYMENT.md
+- **Email**: bryan@truemark.io
+- **Discussions**: GitHub Discussions

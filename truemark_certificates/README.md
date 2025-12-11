@@ -237,6 +237,36 @@ create_enhanced_truemark_certificate(
 
 ---
 
-**Enhanced TrueMark® Certificate Generator v2.0**  
+## License
+
+MIT License - See [LICENSE](LICENSE) file for details.
+
+**Legal Notice**: This certificate is for business documentation purposes only. It is NOT a legal financial instrument or government document.
+
+## Contributing
+
+Contributions welcome! Please read [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+
+## Support
+
+- **GitHub Issues**: https://github.com/Spruked/GOAT/issues
+- **Discussions**: GitHub Discussions for questions
+- **Email**: bryan@truemark.io
+
+## Author
+
+Bryan A. Spruk - TrueMark Technologies  
+Email: bryan@truemark.io  
+GitHub: [@Spruked](https://github.com/Spruked)
+
+## Acknowledgments
+
+- ReportLab for PDF generation
+- Python community for excellent libraries
+- DALS Framework contributors
+
+---
+
+**TrueMark® Enterprise Certificate Forge v2.0**  
 *Digital Asset Ledger System (DALS)*  
 *Professional Business Documentation Only*
