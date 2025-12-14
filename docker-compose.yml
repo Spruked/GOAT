@@ -15,6 +15,8 @@ services:
       - PRIVATE_KEY=${PRIVATE_KEY:-}
       - POLYGON_RPC=${POLYGON_RPC:-https://polygon-rpc.com}
       - ANCHOR_CONTRACT=${ANCHOR_CONTRACT:-0x0000000000000000000000000000000000000000}
+      # DALS Configuration
+      - DALS_ENDPOINT=http://backend:5000
     volumes:
       - ./data:/app/data
       - ./vault:/app/vault
