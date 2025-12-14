@@ -5,15 +5,27 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-009688.svg)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.20-363636.svg)](https://soliditylang.org/)
+[![DALS](https://img.shields.io/badge/DALS-Integrated-00D4AA.svg)](https://github.com/Spruked/GOAT)
 
-**NFT Knowledge Engine with Glyph + Vault Provenance System**
+**NFT Knowledge Engine with Glyph + Vault Provenance System & Digital Asset Logistics**
 
-> Turn any NFT into a self-improving, AI-powered teacher that verifies learning on-chain.  
+> Turn any NFT into a self-improving, AI-powered teacher that verifies learning on-chain.
 > Every lesson is signed. Every skill is provable. Every teacher is accountable.
+> Now enhanced with Digital Asset Logistics System (DALS) for comprehensive asset management and monitoring.
 
 ---
 
 ## 🌟 Features
+
+### 📊 **Digital Asset Logistics System (DALS)**
+- **Unified Dashboard**: Complete GOAT functionality accessible through DALS gateway
+- **Configuration Overrides**: Runtime configuration management with monitoring
+- **Host Messaging**: Push/pull messaging system for workers and GOAT integration
+- **UQV Storage**: Universal Query Vault for data persistence and retrieval
+- **TTS Synthesis**: Text-to-speech capabilities for audio content generation
+- **Broadcast System**: Multi-channel communication and notification system
+- **GOAT Proxy**: All GOAT endpoints accessible through DALS with override capabilities
+- **Real-time Monitoring**: Comprehensive system status and performance tracking
 
 ### 🔐 **Glyph + Vault System**
 - **Unique Glyph IDs**: Cryptographically signed identifiers for every NFT
@@ -73,8 +85,9 @@ docker-compose up -d
 ### 3. Access the Application
 
 - **Frontend**: http://localhost:5173
-- **API**: http://localhost:5000
-- **API Docs**: http://localhost:5000/docs
+- **API**: http://localhost:8000
+- **API Docs**: http://localhost:8000/docs
+- **DALS Dashboard**: http://localhost:8000/dals/host/dashboard
 - **Neo4j Browser**: http://localhost:7474
 - **IPFS Gateway**: http://localhost:8080
 
@@ -91,8 +104,18 @@ GOAT/
 │   │   └── App.jsx
 │   ├── package.json
 │   └── vite.config.js
-├── server/
-│   └── main.py              # FastAPI backend
+├── backend/
+│   └── app/
+│       ├── main.py          # FastAPI backend with DALS integration
+│       ├── api/v1/endpoints/# GOAT API endpoints
+│       └── config.py        # Configuration
+├── DALS/                     # Digital Asset Logistics System
+│   ├── api/
+│   │   ├── host_routes.py   # Host messaging & dashboard
+│   │   ├── uqv_routes.py    # Universal Query Vault
+│   │   ├── tts_routes.py    # Text-to-speech
+│   │   └── broadcast_routes.py # Broadcasting
+│   └── registry/            # Component registry
 ├── vault/
 │   ├── core.py              # Glyph + encryption
 │   ├── glyph_svg.py         # SVG generation
@@ -125,8 +148,8 @@ GOAT/
 pip install -r requirements.txt
 
 # Run FastAPI server
-cd server
-uvicorn main:app --reload --port 5000
+cd backend/app
+uvicorn main:app --reload --port 8000
 ```
 
 ### Run Frontend Locally
@@ -152,32 +175,37 @@ npm run build
 
 ## 📡 API Endpoints
 
+### DALS Dashboard
+- `GET /dals/host/dashboard` - Complete GOAT + DALS dashboard
+- `GET /dals/host/config` - Get DALS configuration
+- `POST /dals/host/config/override` - Override configuration
+- `GET /dals/host/monitoring` - Real-time monitoring
+- `GET /dals/host/connections` - Connection status
+
+### GOAT Knowledge Graph
+- `POST /api/v1/triples/ingest` - Ingest triples
+- `GET /api/v1/triples/search` - Search triples
+- `POST /api/v1/query/sparql` - SPARQL queries
+- `POST /api/v1/query/vector` - Vector search
+
+### GOAT Analytics
+- `GET /api/v1/analytics/stats` - System statistics
+- `GET /api/v1/analytics/graph` - Graph analytics
+
+### GOAT Video Generation
+- `POST /api/v1/video/generate-memory` - Generate memory videos
+- `GET /api/v1/video/job/{job_id}` - Check job status
+- `GET /api/v1/video/templates` - Available templates
+
 ### Vault
 - `GET /api/vault/stats` - Get vault statistics
 - `GET /api/glyph/{id}` - Retrieve glyph by ID
 - `GET /api/vault/proof/{id}` - Get cryptographic proof
-- `GET /glyph/svg/{id}` - Get glyph SVG image
-- `GET /glyph/badge/{id}` - Get verification badge
 
 ### Collector
 - `POST /api/collect/ipfs` - Ingest from IPFS
 - `POST /api/collect/onchain` - Ingest from blockchain
 - `POST /api/collect/webhook` - Handle mint webhooks
-
-### Teacher
-- `GET /api/teach/recommend/{user_id}` - Get personalized lesson
-- `GET /api/teach/quiz/{skill_id}` - Generate quiz
-- `POST /api/teach/submit-quiz` - Submit quiz answers
-- `GET /api/teach/progress/{user_id}` - Get user progress
-
-### Verifier
-- `POST /api/verify/mint-badge` - Mint learner badge
-- `POST /api/verify/feedback` - Submit feedback
-
-### On-Chain Anchor
-- `POST /api/anchor/batch` - Anchor glyph batch
-- `GET /api/anchor/verify/{root}` - Verify anchor
-- `GET /api/anchor/proof` - Get Merkle proof
 
 ---
 
@@ -188,12 +216,19 @@ npm run build
 - **EIP-191 Signatures**: Ethereum-compatible signing
 - **SQLite Ledger**: Immutable audit log
 
+### DALS Security
+- **Configuration Overrides**: Runtime security settings
+- **Monitoring**: Real-time security status tracking
+- **Access Control**: Integrated authentication with GOAT
+
 ### Environment Variables
 ```bash
 VAULT_ENCRYPTION_KEY=your_secret_key  # Change in production!
 PRIVATE_KEY=0x...                      # For EIP-191 signing
 POLYGON_RPC=https://polygon-rpc.com
 ANCHOR_CONTRACT=0x...                  # Deployed contract address
+OPENAI_API_KEY=sk-...                  # For AI features
+DALS_ENDPOINT=http://localhost:8000    # DALS gateway
 ```
 
 ---
@@ -205,18 +240,21 @@ ANCHOR_CONTRACT=0x...                  # Deployed contract address
 2. GOAT auto-ingests and creates glyphs
 3. AI generates lessons and quizzes
 4. Students earn verifiable badges
+5. DALS provides monitoring and asset management
 
 ### For Learners
-1. Browse recommended skills
+1. Browse recommended skills through DALS dashboard
 2. Complete adaptive lessons
 3. Take AI-generated quizzes
 4. Mint proof-of-learning badges
+5. Track progress via DALS monitoring
 
 ### For Platforms
 1. Integrate via webhook for auto-ingestion
 2. Embed GOAT widget in marketplace
 3. Verify learner credentials on-chain
-4. Track learning analytics
+4. Track learning analytics through DALS
+5. Manage assets via DALS logistics system
 
 ---
 
@@ -225,11 +263,11 @@ ANCHOR_CONTRACT=0x...                  # Deployed contract address
 ### Deploy to Production
 
 ```bash
-# Build optimized images
-docker-compose -f docker-compose.prod.yml build
+# Build and start all services
+docker-compose up --build
 
-# Deploy
-docker-compose -f docker-compose.prod.yml up -d
+# Or run in detached mode
+docker-compose up -d
 ```
 
 ### Deploy Contract
@@ -252,12 +290,17 @@ forge create --rpc-url $POLYGON_RPC \
 
 ### Health Check
 ```bash
-curl http://localhost:5000/api/health
+curl http://localhost:8000/health
+```
+
+### DALS Dashboard
+```bash
+curl http://localhost:8000/dals/host/dashboard
 ```
 
 ### Vault Stats
 ```bash
-curl http://localhost:5000/api/vault/stats
+curl http://localhost:8000/api/vault/stats
 ```
 
 ---
@@ -280,15 +323,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## � Links
+## 🔗 Links
 
-- **Documentation**: [BUILD_SUMMARY.md](BUILD_SUMMARY.md) | [DEPLOYMENT.md](DEPLOYMENT.md) | [QUICK_START.md](QUICK_START.md)
+- **Documentation**: [BUILD_SUMMARY.md](BUILD_SUMMARY.md) | [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) | [QUICK_START.md](QUICK_START.md)
 - **GitHub Setup**: [GITHUB_SETUP.md](GITHUB_SETUP.md)
 - **Contract**: [GOATVaultAnchor.sol](contracts/GOATVaultAnchor.sol)
 
 ---
 
-## �🙏 Acknowledgments
+## 🙏 Acknowledgments
 
 - **FastAPI** for the amazing Python async framework
 - **React** + **Vite** for lightning-fast frontend development
@@ -296,6 +339,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **TailwindCSS** for utility-first styling
 - **IPFS** for decentralized storage
 - **Polygon** for scalable blockchain infrastructure
+- **DALS** for comprehensive asset logistics
 
 ---
 
@@ -310,4 +354,4 @@ For issues and questions:
 
 **Built with ❤️ by the GOAT team**
 
-*The GOAT now doesn't just teach — it **proves**.*
+*The GOAT now doesn't just teach — it **proves*. And with DALS, it **manages**.*
