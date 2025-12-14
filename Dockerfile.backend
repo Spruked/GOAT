@@ -20,6 +20,7 @@ COPY knowledge ./knowledge
 COPY teacher ./teacher
 COPY licenser ./licenser
 COPY server ./server
+COPY DALS ./DALS
 
 # Create data directories
 RUN mkdir -p /app/data/vault /app/data/knowledge
@@ -29,4 +30,3 @@ EXPOSE 5000
 
 # Run FastAPI server
 CMD ["uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "5000"]
-
