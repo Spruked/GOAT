@@ -4,10 +4,10 @@
 
 ### Backend Image
 - **Repository**: `spruked/goat-backend`
-- **Tags**: `2.1.0`, `latest`
+- **Tags**: `2.1.0`, `latest`, `v2`, `v3`
 - **Size**: 814 MB
 - **Base**: Python 3.11-slim
-- **Includes**: FastAPI, Web3.py, cryptography, custom Merkle implementation
+- **Includes**: FastAPI, Web3.py, cryptography, custom Merkle implementation, DALS integration
 
 ### Frontend Image
 - **Repository**: `spruked/goat-frontend`
@@ -24,19 +24,30 @@
 - Removed `merkletools` (build issues with pysha3)
 - Implemented custom `SimpleMerkleTree` class using Python's built-in `hashlib`
 - Fixed `eth-account` version constraint to work with `web3==6.20.0`
+- Added `structlog` for enhanced logging in DALS integration
 
 ### 2. **Build Configuration**
 - Added build dependencies (`gcc`, `g++`, `python3-dev`) to backend Dockerfile
 - Fixed PostCSS configuration (removed conflicting `.js` file, kept `.cjs`)
 - Fixed typo in TeacherPage.jsx (`@tantml:react-query` → `@tanstack/react-query`)
+- Updated docker-compose.yml with DALS endpoint configuration
 
-### 3. **Documentation Updates**
+### 3. **DALS Integration**
+- Integrated Digital Asset Logistics System (DALS) into GOAT backend
+- Added DALS routers for host messaging, UQV storage, TTS synthesis, and broadcasting
+- Implemented GOAT proxy through DALS gateway with override capabilities
+- Added configuration management and monitoring for DALS operations
+- Created unified dashboard combining GOAT and DALS functionality
+- All GOAT endpoints accessible through DALS with runtime configuration overrides
+
+### 4. **Documentation Updates**
 - Added MIT LICENSE
 - Enhanced README.md with badges and links
 - Created CONTRIBUTING.md with development guidelines
 - Created GITHUB_SETUP.md with repository setup instructions
 - Created .dockerignore for optimized builds
 - Updated all documentation with actual repository URL
+- Added comprehensive DALS integration documentation
 
 ---
 
@@ -49,8 +60,9 @@ docker-compose up
 
 # Access at:
 # Frontend: http://localhost:5173
-# Backend API: http://localhost:5000
-# API Docs: http://localhost:5000/docs
+# Backend API: http://localhost:8000
+# API Docs: http://localhost:8000/docs
+# DALS Dashboard: http://localhost:8000/dals/host/dashboard
 ```
 
 ### Push to Docker Hub
@@ -61,6 +73,8 @@ docker login
 # Push backend images
 docker push spruked/goat-backend:2.1.0
 docker push spruked/goat-backend:latest
+docker push spruked/goat-backend:v2
+docker push spruked/goat-backend:v3
 
 # Push frontend images
 docker push spruked/goat-frontend:2.1.0
@@ -72,26 +86,29 @@ Already pushed to: **https://github.com/Spruked/GOAT.git**
 
 To create a release:
 ```powershell
-git tag -a v2.1.0 -m "GOAT v2.1 - Initial Release"
+git tag -a v2.1.0 -m "GOAT v2.1 - Initial Release with DALS Integration"
 git push origin v2.1.0
 ```
 
 Then create release on GitHub with:
 - Tag: `v2.1.0`
-- Title: `GOAT v2.1 - The Proven Teacher`
+- Title: `GOAT v2.1 - The Proven Teacher with DALS`
 - Description: See GITHUB_SETUP.md for template
 
 ---
 
 ## 📊 Image Details
 
-### Backend (spruked/goat-backend:2.1.0)
+### Backend (spruked/goat-backend:v3)
 ```dockerfile
 FROM python:3.11-slim
 # Includes build tools for crypto libraries
 # All GOAT modules: vault, collector, knowledge, teacher, licenser
-# FastAPI server with 25+ endpoints
+# DALS integration: host messaging, UQV, TTS, broadcasting
+# FastAPI server with 35+ endpoints (GOAT + DALS)
 # Custom Merkle tree implementation
+# httpx for proxy functionality
+# structlog for enhanced monitoring
 ```
 
 ### Frontend (spruked/goat-frontend:2.1.0)
@@ -112,7 +129,7 @@ Update `docker-compose.yml` to pull from Docker Hub:
 ```yaml
 services:
   backend:
-    image: spruked/goat-backend:latest
+    image: spruked/goat-backend:v3
     # Remove build section
   
   frontend:
@@ -126,7 +143,7 @@ services:
 - Railway: `railway up` (Dockerfile auto-detected)
 - Render: Connect GitHub repo, use `Dockerfile.backend`
 - Google Cloud Run: `gcloud run deploy`
-- AWS ECS: Use `spruked/goat-backend:latest`
+- AWS ECS: Use `spruked/goat-backend:v3`
 
 **Frontend**:
 - Vercel: Build command `npm run build`, output `dist/`
@@ -152,9 +169,12 @@ spec:
     spec:
       containers:
       - name: backend
-        image: spruked/goat-backend:2.1.0
+        image: spruked/goat-backend:v3
         ports:
-        - containerPort: 5000
+        - containerPort: 8000
+        env:
+        - name: DALS_ENDPOINT
+          value: "http://localhost:8000"
 ```
 
 ---
@@ -163,12 +183,12 @@ spec:
 
 **For GitHub "About" Section:**
 ```
-NFT Knowledge Engine with cryptographic provenance - Turn any NFT into an AI-powered teacher with verifiable learning credentials on Polygon
+NFT Knowledge Engine with cryptographic provenance & Digital Asset Logistics - Turn any NFT into an AI-powered teacher with verifiable learning credentials and comprehensive asset management on Polygon
 ```
 
 **Topics:**
 ```
-nft web3 blockchain polygon education ai machine-learning react fastapi python javascript cryptography ipfs smart-contracts erc721 merkle-tree adaptive-learning knowledge-graph docker tailwindcss web3py solidity decentralized-storage educational-technology proof-of-learning
+nft web3 blockchain polygon education ai machine-learning react fastapi python javascript cryptography ipfs smart-contracts erc721 merkle-tree adaptive-learning knowledge-graph docker tailwindcss web3py solidity decentralized-storage educational-technology proof-of-learning dals digital-asset-logistics asset-management monitoring dashboard
 ```
 
 ---
@@ -181,6 +201,9 @@ nft web3 blockchain polygon education ai machine-learning react fastapi python j
 - [x] Comprehensive documentation created
 - [x] .dockerignore configured
 - [x] .gitignore updated
+- [x] DALS integration completed
+- [x] GOAT proxy through DALS implemented
+- [x] Configuration overrides and monitoring added
 - [ ] Docker images pushed to Docker Hub
 - [ ] GitHub release v2.1.0 created
 - [ ] Environment variables configured for production
@@ -200,13 +223,15 @@ Before deploying to production:
 6. **Enable** HTTPS/SSL for all endpoints
 7. **Rotate** private keys regularly
 8. **Monitor** blockchain transactions
+9. **Configure** DALS monitoring and overrides securely
 
 ---
 
 ## 📈 What's Included
 
-### 47 Files Total:
+### 60+ Files Total:
 - **13** Python modules (vault, collector, knowledge, teacher, licenser, server)
+- **4** DALS API modules (host, uqv, tts, broadcast)
 - **9** React components and pages
 - **7** Configuration files (Docker, Vite, Tailwind, etc.)
 - **7** Documentation files (README, DEPLOYMENT, CONTRIBUTING, etc.)
@@ -223,13 +248,19 @@ Before deploying to production:
 - ✅ AI-powered adaptive learning engine
 - ✅ Knowledge graph with skill trees and prerequisites
 - ✅ Verifiable credential badge minting
-- ✅ Full REST API with FastAPI (25+ endpoints)
+- ✅ Full REST API with FastAPI (35+ endpoints)
 - ✅ Modern React UI with Tailwind CSS
 - ✅ Docker Compose orchestration (6 services)
 - ✅ Production-ready deployment configurations
+- ✅ **DALS Integration**: Complete asset logistics and monitoring
+- ✅ **GOAT Proxy**: All functionality accessible through DALS gateway
+- ✅ **Configuration Overrides**: Runtime management of all settings
+- ✅ **Real-time Monitoring**: Comprehensive system status tracking
 
 ---
 
 **Built with ❤️ for the Web3 education community**
 
 **Repository**: https://github.com/Spruked/GOAT.git
+
+**DALS Dashboard**: http://localhost:8000/dals/host/dashboard
