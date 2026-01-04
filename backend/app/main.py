@@ -16,7 +16,7 @@ from app.config import settings
 from app.core.database import init_database
 from app.core.cache import init_cache
 from app.core.tracing import setup_tracing
-from app.api.v1.endpoints import triples, query, analytics, admin, video
+from app.api.v1.endpoints import triples, query, analytics, admin, video, auth
 from app.security.auth import dual_auth
 
 # Import DALS routers
@@ -77,6 +77,7 @@ app.add_middleware(
 )
 
 # ROUTES
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
 app.include_router(triples.router, prefix="/api/v1/triples", tags=["Triples"])
 app.include_router(query.router, prefix="/api/v1/query", tags=["Query"])
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["Analytics"])
