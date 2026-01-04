@@ -22,10 +22,11 @@ export function AuthProvider({ children }) {
     const loadUser = async () => {
       if (token) {
         try {
+          // Configure authorization header before making request
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
           const { data } = await axios.get('/api/v1/auth/me')
           setUser(data)
         } catch (error) {
-          console.error('Failed to load user:', error)
           // Token is invalid, remove it
           localStorage.removeItem('token')
           setToken(null)
@@ -46,6 +47,9 @@ export function AuthProvider({ children }) {
     localStorage.setItem('token', data.access_token)
     setToken(data.access_token)
     
+    // Set authorization header before fetching user data
+    axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`
+    
     // Fetch user data
     const { data: userData } = await axios.get('/api/v1/auth/me')
     setUser(userData)
@@ -62,6 +66,9 @@ export function AuthProvider({ children }) {
     
     localStorage.setItem('token', data.access_token)
     setToken(data.access_token)
+    
+    // Set authorization header before fetching user data
+    axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`
     
     // Fetch user data
     const { data: userData } = await axios.get('/api/v1/auth/me')

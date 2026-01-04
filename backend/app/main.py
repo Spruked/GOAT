@@ -5,7 +5,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from contextlib import asynccontextmanager
 import uvicorn
 import structlog
-from datetime import datetime
+from datetime import datetime, timezone
 import sys
 import os
 
@@ -109,7 +109,7 @@ async def health_check():
         "version": "2.0.0",
         "database": db_ok,
         "cache": cache_ok,
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
 async def verify_external_services():

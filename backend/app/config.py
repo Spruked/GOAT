@@ -12,10 +12,10 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     ENABLE_DOCS: bool = True
     
-    # Security
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "goat-super-secret-key-change-in-production")
+    # Security - SECRET_KEY should be set via environment variable
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "goat-super-secret-key-change-in-production-INSECURE-DEFAULT")
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30 * 24 * 60  # 30 days
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60  # 1 hour (reduced from 30 days for better security)
     
     # Database
     DATABASE_URL: str = "sqlite:///./goat.db"
@@ -29,7 +29,12 @@ class Settings(BaseSettings):
     
     def validate_environment(self):
         """Validate critical environment variables"""
-        pass
+        if self.SECRET_KEY == "goat-super-secret-key-change-in-production-INSECURE-DEFAULT":
+            import warnings
+            warnings.warn(
+                "Using default SECRET_KEY! Set SECRET_KEY environment variable in production!",
+                RuntimeWarning
+            )
 
 
 settings = Settings()
