@@ -1,0 +1,23 @@
+{
+  "vault_type": "verdict_memory",
+  "description": "Caleon's final judgments combining apriori and aposteriori reasoning",
+  "version": "1.0.0",
+  "created": "2025-11-24",
+  "entries": [],
+  "schema": {
+    "verdict_id": "string (unique identifier)",
+    "timestamp": "float (unix timestamp)",
+    "apriori_decision_id": "string (reference to apriori decision)",
+    "aposteriori_decision_id": "string (reference to aposteriori decision)",
+    "verdict": "string (the final judgment)",
+    "reasoning_balance": "float (0.0 = pure apriori, 1.0 = pure aposteriori)",
+    "confidence": "float (0.0-1.0)",
+    "context": "object (integration reasoning)",
+    "reflection_id": "string (link to reflection vault if applicable)"
+  },
+  "metadata": {
+    "total_verdicts": 0,
+    "last_updated": null,
+    "integrity_hash": null
+  }
+}

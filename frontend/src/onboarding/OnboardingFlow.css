@@ -1,0 +1,64 @@
+.onboarding-flow {
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 0 12px;
+}
+.onboarding-card {
+  background: rgba(20,24,32,0.98);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 36px 28px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  animation: fadeIn 0.5s;
+}
+.onboarding-card h1, .onboarding-card h2 {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+.onboarding-card p {
+  color: #b3c2e0;
+  font-size: 1.1rem;
+}
+.onboarding-card ul {
+  text-align: left;
+  color: #b3c2e0;
+  margin-bottom: 1em;
+}
+.onboarding-card select, .onboarding-card input[type="radio"], .onboarding-card input[type="checkbox"] {
+  margin: 8px 0;
+}
+.onboarding-card button {
+  background: linear-gradient(135deg, #4b9cff, #8a2be2);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.5em;
+  transition: background 0.2s;
+}
+.onboarding-card button:hover {
+  background: linear-gradient(135deg, #8a2be2, #4b9cff);
+}
+.onboarding-back {
+  background: none;
+  color: #4b9cff;
+  border: none;
+  font-size: 1rem;
+  margin-top: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.fade-in {
+  animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import DumpZone from '../components/DumpZone'
 import { useMutation } from '@tanstack/react-query'
 import { Upload, Link as LinkIcon, CheckCircle, BookOpen, Plus, X } from 'lucide-react'
 import axios from 'axios'
@@ -86,6 +87,12 @@ export function CollectorPage() {
     })
   }
 
+  // Handler for when Somedaa set upload completes
+  const handleSomedaaUpload = () => {
+    // Optionally refresh state or show a message
+    setResult({ glyph_id: 'SOMEDAA_SET', source: 'Somedaa Set Upload' });
+  };
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div>
@@ -93,6 +100,15 @@ export function CollectorPage() {
         <p className="text-slate-400">
           Ingest NFT knowledge with cryptographic glyph generation
         </p>
+      </div>
+
+      {/* Somedaa Set Drag-and-Drop Ingestion */}
+      <div className="goat-card">
+        <div className="flex items-center gap-3 mb-4">
+          <Upload className="w-6 h-6 text-goat-primary" />
+          <h2 className="text-2xl font-bold">Ingest Somedaa Set (Drag & Drop)</h2>
+        </div>
+        <DumpZone projectId="somedaa" onUploadComplete={handleSomedaaUpload} />
       </div>
 
       {/* IPFS Ingestion */}
@@ -211,7 +227,7 @@ export function CollectorPage() {
             <textarea
               value={manualKnowledge.content}
               onChange={(e) => setManualKnowledge({ ...manualKnowledge, content: e.target.value })}
-              placeholder="Enter your teaching, expertise, principles, steps, instructions, skills..."
+              placeholder="Enter your expertise, principles, frameworks, processes, instructions, skills..."
               className="goat-input w-full h-48 font-mono text-sm"
             />
             <p className="text-xs text-slate-400 mt-1">
@@ -357,7 +373,7 @@ export function CollectorPage() {
           <li>GOAT downloads and analyzes the NFT metadata</li>
           <li>Generates unique cryptographic Glyph ID</li>
           <li>Stores encrypted in vault with EIP-191 signature</li>
-          <li>Links to knowledge graph for teaching</li>
+          <li>Links to knowledge graph for content creation</li>
         </ol>
       </div>
     </div>

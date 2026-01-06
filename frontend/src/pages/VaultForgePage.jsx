@@ -9,10 +9,10 @@ export function VaultForgePage() {
   const [result, setResult] = useState(null)
 
   const tiers = [
-    { id: 'basic', name: 'Vault Basic', price: '$29', desc: 'IPFS only', features: ['IPFS storage', 'Basic metadata'] },
-    { id: 'pro', name: 'Vault Pro', price: '$69', desc: 'IPFS + Arweave', features: ['IPFS + Arweave', 'Multi-gateway pins', 'Compression'] },
-    { id: 'immortal', name: 'Vault Immortal', price: '$129', desc: 'IPFS + Arweave + Filecoin', features: ['All chains', '10+ year Filecoin deal', '3-node backup'] },
-    { id: 'dynasty', name: 'Vault Dynasty', price: '$299', desc: 'All + TrueMark GDIS', features: ['Everything above', 'TrueMark .go domain', 'GDIS identity linking', 'White-label vault'] }
+    { id: 'basic', name: 'Vault Basic', price: '$38', desc: 'IPFS ready', features: ['IPFS metadata prep', 'Basic encryption', 'Partner referral ready'] },
+    { id: 'pro', name: 'Vault Pro', price: '$90', desc: 'IPFS + Arweave', features: ['Multi-gateway prep', 'Compression', 'ChaCha24 encryption option', '30% partner discount'] },
+    { id: 'immortal', name: 'Vault Immortal', price: '$168', desc: 'IPFS + Arweave + Filecoin', features: ['All chains prep', '10+ year deal ready', '3-node backup config', 'ChaCha128 encryption'] },
+    { id: 'dynasty', name: 'Vault Dynasty', price: '$389', desc: 'All + TrueMark ready', features: ['Everything above', 'TrueMark .go domain prep', 'GDIS identity ready', 'White-label vault', 'ChaCha256 encryption'] }
   ]
 
   const handleCreate = async () => {
@@ -39,11 +39,16 @@ export function VaultForgePage() {
     <div className="space-y-8">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">GOAT Vault Forge</h1>
-        <p className="text-xl text-slate-300">Make Your Empire Immortal</p>
+        <p className="text-xl text-slate-300">Prepare Your Empire for Blockchain Immortality</p>
         <p className="text-slate-400 max-w-2xl mx-auto">
-          Turn your GOAT-created masterclass, audiobook, or coaching empire into an immutable,
-          CertSig-ready, TrueMark-linked legacy package.
+          Package your GOAT creations with blockchain-ready metadata, cryptographic signatures, and export to
+          Alpha CertSig or TrueMark Mint with exclusive 30% discount.
         </p>
+        <div className="bg-goat-primary/10 border border-goat-primary/30 rounded-lg p-4 max-w-2xl mx-auto mt-4">
+          <p className="text-sm text-goat-primary font-semibold">
+            🎁 GOAT users get 30% OFF at Alpha CertSig & TrueMark Mint! Use code: GOAT30
+          </p>
+        </div>
       </div>
 
       <div className="goat-card max-w-2xl mx-auto">

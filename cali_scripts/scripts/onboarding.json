@@ -1,0 +1,10 @@
+{
+  "start": "Alright {{{ name }}}, here's the plan. We move through three steps: structure, draft, refine. You follow me, I'll handle the heavy lifting.",
+  "step_books": "Book Builder activated. We'll outline your chapters, define your tone, and build the blueprint.",
+  "step_courses": "Masterclass Builder ready. Modules, lessons, outcomes — all structured with clarity.",
+  "step_frameworks": "Framework Builder online. We'll map your methodology and create the architecture.",
+  "step_archives": "Archive Builder engaged. We'll organize your knowledge and build the repository.",
+  "done": "Onboarding complete. Not bad, right? Let's get to work.",
+  "need_help": "Stuck? Ask me anything. I'm here to guide you through every step.",
+  "first_project": "Your first project. We'll take it slow, build it right, and make it count."
+}

@@ -1,0 +1,25 @@
+# phi3_requirements.txt
+"""
+Requirements for Phi-3 Mini integration with Caleon Prime
+Install these to enable full Phi-3 articulation capabilities
+"""
+
+# Core Phi-3 dependencies
+transformers>=4.36.0
+torch>=2.0.0
+accelerate>=0.25.0
+
+# Alternative backend (faster inference)
+llama-cpp-python>=0.2.0
+
+# For GGUF model support (if using llama-cpp)
+protobuf>=3.20.0
+sentencepiece>=0.1.99
+
+# Optional: GPU acceleration
+# torch-audio>=2.0.0  # For CUDA support
+# torchvision>=0.15.0  # For CUDA support
+
+# Development and testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0

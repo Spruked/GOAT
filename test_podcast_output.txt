@@ -1,0 +1,7 @@
+Composed narrative for podcast with tone casual, brotherly, enthusiastic and audience fishing enthusiasts, outdoor lovers, family audiences:
+Generated content based on prompt: Expand into a detailed podcast script:
+Topic: The Phil and Jim Dandy Show - Brothers who fish daily
+Audience: fishing enthusiasts, outdoor lovers, family audiences
+Tone: casual, brotherly, enthusiastic
+Length multiplier: 1.0
+Template: Podcast template with sections and narrative structure.

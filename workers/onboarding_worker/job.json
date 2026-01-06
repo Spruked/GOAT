@@ -1,0 +1,75 @@
+{
+  "job_id": "onboarding_worker_v1.0",
+  "job_name": "User Onboarding Guide",
+  "description": "Interactive onboarding worker that guides new users through their first experience with GOAT",
+  "version": "1.0.0",
+  "worker_class": "OnboardingWorker",
+  "worker_module": "workers.onboarding_worker.worker_body",
+  "config": {
+    "logic_file": "logic.json",
+    "script_file": "onboarding_script.json",
+    "temp_vault_dir": "temp_vault",
+    "learning_mode": "restricted",
+    "transfer_triggers": {
+      "unanswered_threshold": 5,
+      "time_window_hours": 24
+    }
+  },
+  "dependencies": {
+    "required_modules": [
+      "pathlib",
+      "json",
+      "datetime",
+      "uuid",
+      "sqlite3",
+      "sentence_transformers"
+    ],
+    "optional_modules": [
+      "numpy",
+      "scipy"
+    ]
+  },
+  "metadata": {
+    "author": "GOAT Worker Forge",
+    "created": "2024-01-06",
+    "tags": ["onboarding", "user-experience", "conversational", "guided-tour"],
+    "category": "user_engagement",
+    "priority": "high"
+  },
+  "endpoints": {
+    "start_onboarding": {
+      "method": "POST",
+      "path": "/workers/onboarding/start",
+      "description": "Start the onboarding process for a user"
+    },
+    "continue_conversation": {
+      "method": "POST",
+      "path": "/workers/onboarding/continue",
+      "description": "Continue the onboarding conversation"
+    },
+    "get_status": {
+      "method": "GET",
+      "path": "/workers/onboarding/status",
+      "description": "Get current onboarding status"
+    }
+  },
+  "monitoring": {
+    "metrics": [
+      "conversations_started",
+      "conversations_completed",
+      "average_completion_time",
+      "unanswered_questions_count",
+      "improvements_applied"
+    ],
+    "alerts": [
+      {
+        "condition": "unanswered_questions_count > 10",
+        "message": "High volume of unanswered questions detected"
+      },
+      {
+        "condition": "conversations_completed < 0.8 * conversations_started",
+        "message": "Low conversation completion rate detected"
+      }
+    ]
+  }
+}

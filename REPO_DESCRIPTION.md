@@ -4,11 +4,11 @@
 
 **For GitHub "About" Section:**
 ```
-NFT Knowledge Engine with cryptographic provenance - Turn any NFT into an AI-powered teacher with verifiable learning credentials on Polygon
+NFT Knowledge Engine with cryptographic provenance - Turn any NFT into an AI-powered knowledge platform with verifiable learning credentials on Polygon
 ```
 
 **Extended Description:**
-GOAT (The Greatest Of All Teachers) v2.1 is a full-stack NFT knowledge engine that transforms any NFT into an AI-powered, self-improving teacher. Built with React and FastAPI, it features cryptographic glyph provenance, on-chain Merkle anchoring, adaptive learning paths, and verifiable credential badges. Every lesson is signed, every skill is provable, and every teacher is accountable.
+GOAT (Greatest Of All Time) v2.1 is a full-stack NFT knowledge engine that transforms any NFT into an AI-powered, self-improving knowledge platform. Built with React and FastAPI, it features cryptographic glyph provenance, on-chain Merkle anchoring, adaptive learning paths, and verifiable credential badges. Every lesson is signed, every skill is provable, and every achievement is accountable.
 
 ---
 

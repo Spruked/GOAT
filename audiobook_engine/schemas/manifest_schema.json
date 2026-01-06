@@ -1,0 +1,255 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Audiobook Manifest Schema",
+  "description": "JSON schema for audiobook manifest files",
+  "type": "object",
+  "required": [
+    "title",
+    "author",
+    "chapters",
+    "total_duration_seconds",
+    "created_at",
+    "version"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Audiobook title"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Book author"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Audiobook description"
+    },
+    "publisher": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Publisher name"
+    },
+    "isbn": {
+      "type": "string",
+      "pattern": "^(?:ISBN(?:-13)?:? )?(?=[0-9]{13}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9]$",
+      "description": "ISBN identifier"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+      "default": "en",
+      "description": "Language code (ISO 639-1)"
+    },
+    "genres": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "description": "Audiobook genres"
+    },
+    "chapters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "chapter_number",
+          "title",
+          "start_time_seconds",
+          "duration_seconds"
+        ],
+        "properties": {
+          "chapter_number": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Chapter number"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Chapter title"
+          },
+          "start_time_seconds": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Start time in seconds"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Chapter duration in seconds"
+          },
+          "word_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Word count in chapter"
+          },
+          "voice_profile": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "Voice profile used"
+          },
+          "checksum": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "SHA256 checksum of chapter audio"
+          },
+          "quality_metrics": {
+            "type": "object",
+            "properties": {
+              "rms_db": {
+                "type": "number",
+                "description": "RMS level in dB"
+              },
+              "peak_db": {
+                "type": "number",
+                "description": "Peak level in dB"
+              },
+              "dynamic_range_db": {
+                "type": "number",
+                "description": "Dynamic range in dB"
+              },
+              "snr_db": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Signal-to-noise ratio in dB"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Chapter information"
+    },
+    "total_duration_seconds": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total audiobook duration in seconds"
+    },
+    "total_word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total word count"
+    },
+    "audio_format": {
+      "type": "string",
+      "enum": ["wav", "flac", "mp3", "m4a", "m4b"],
+      "default": "m4b",
+      "description": "Audio format"
+    },
+    "sample_rate": {
+      "type": "integer",
+      "enum": [22050, 44100, 48000],
+      "default": 44100,
+      "description": "Sample rate in Hz"
+    },
+    "bit_depth": {
+      "type": "integer",
+      "enum": [16, 24, 32],
+      "default": 16,
+      "description": "Bit depth"
+    },
+    "channels": {
+      "type": "integer",
+      "enum": [1, 2],
+      "default": 2,
+      "description": "Number of channels"
+    },
+    "quality_preset": {
+      "type": "string",
+      "enum": ["draft", "standard", "high"],
+      "default": "standard",
+      "description": "Quality preset used"
+    },
+    "processing_metadata": {
+      "type": "object",
+      "properties": {
+        "tts_engine": {
+          "type": "string",
+          "description": "TTS engine used"
+        },
+        "normalization_mode": {
+          "type": "string",
+          "enum": ["ebu_r128", "rms", "peak"],
+          "description": "Normalization mode"
+        },
+        "artifacts_removed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of artifacts removed"
+        },
+        "processing_time_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total processing time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "glyph_lineage": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{16}$",
+        "description": "Glyph commit ID"
+      },
+      "description": "Immutable lineage tracking"
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 checksum of final audiobook file"
+    },
+    "file_size_bytes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Final file size in bytes"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "default": "1.0.0",
+      "description": "Manifest version"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+      "description": "Associated project ID"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "description": "User-defined tags"
+    },
+    "custom_metadata": {
+      "type": "object",
+      "description": "Custom metadata fields",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

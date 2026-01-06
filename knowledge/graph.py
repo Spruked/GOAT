@@ -88,6 +88,21 @@ class KnowledgeGraph:
                     PRIMARY KEY (user_id, skill_id)
                 )
             """)
+
+            # Quizzes table for persistence
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS quizzes (
+                    id TEXT PRIMARY KEY,
+                    skill_id TEXT NOT NULL,
+                    user_id TEXT,
+                    difficulty TEXT,
+                    questions TEXT,  -- JSON
+                    answers_hash TEXT,  -- Hash of correct answers
+                    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                    completed_at TEXT,
+                    score REAL
+                )
+            """)
             
             # Create indexes
             conn.execute("CREATE INDEX IF NOT EXISTS idx_skill_category ON skills(category)")
@@ -243,13 +258,100 @@ class KnowledgeGraph:
                 ORDER BY um.mastery_level DESC
             """, (user_id,)).fetchall()
             
-            return {
-                "user_id": user_id,
-                "mastered_skills": [dict(m) for m in mastered],
-                "total_skills": len(mastered),
-                "average_mastery": sum(m["mastery_level"] for m in mastered) / len(mastered) if mastered else 0
-            }
+        return {
+            "user_id": user_id,
+            "mastered_skills": [dict(m) for m in mastered],
+            "total_skills": len(mastered),
+            "average_mastery": sum(m["mastery_level"] for m in mastered) / len(mastered) if mastered else 0
+        }
     
+    def store_quiz(self, quiz_id: str, skill_id: str, user_id: str, quiz_data: Dict[str, Any]) -> str:
+        """Store quiz for persistence"""
+        answers = {q["id"]: q["correct_answer"] for q in quiz_data["questions"]}
+        answers_json = json.dumps(answers)
+        answers_hash = hashlib.sha256(answers_json.encode()).hexdigest()
+
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                INSERT OR REPLACE INTO quizzes
+                (id, skill_id, user_id, difficulty, questions, answers_hash, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (
+                quiz_id,
+                skill_id,
+                user_id,
+                quiz_data.get("difficulty", "medium"),
+                json.dumps(quiz_data["questions"]),
+                answers_hash,
+                datetime.utcnow().isoformat()
+            ))
+
+        return quiz_id
+
+    def get_quiz(self, quiz_id: str) -> Optional[Dict[str, Any]]:
+        """Retrieve stored quiz"""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            row = conn.execute("SELECT * FROM quizzes WHERE id = ?", (quiz_id,)).fetchone()
+
+            if row:
+                return {
+                    "id": row["id"],
+                    "skill_id": row["skill_id"],
+                    "user_id": row["user_id"],
+                    "difficulty": row["difficulty"],
+                    "questions": json.loads(row["questions"]),
+                    "answers_hash": row["answers_hash"],
+                    "created_at": row["created_at"],
+                    "completed_at": row["completed_at"],
+                    "score": row["score"]
+                }
+        return None
+
+    def submit_quiz_answers(self, quiz_id: str, answers: Dict[str, str]) -> Dict[str, Any]:
+        """Submit quiz answers and calculate score"""
+        quiz = self.get_quiz(quiz_id)
+        if not quiz:
+            raise ValueError("Quiz not found")
+
+        # Verify answers against stored quiz
+        correct_answers = {q["id"]: q["correct_answer"] for q in quiz["questions"]}
+        results = []
+
+        correct_count = 0
+        for qid, user_answer in answers.items():
+            correct_answer = correct_answers.get(qid)
+            is_correct = user_answer == correct_answer
+            if is_correct:
+                correct_count += 1
+
+            results.append({
+                "question_id": qid,
+                "correct": is_correct,
+                "user_answer": user_answer,
+                "correct_answer": correct_answer,
+                "explanation": next((q["explanation"] for q in quiz["questions"] if q["id"] == qid), "")
+            })
+
+        score = correct_count / len(quiz["questions"])
+        passed = score >= 0.7
+
+        # Update quiz record
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                UPDATE quizzes
+                SET completed_at = ?, score = ?
+                WHERE id = ?
+            """, (datetime.utcnow().isoformat(), score, quiz_id))
+
+        return {
+            "score": score,
+            "passed": passed,
+            "correct_count": correct_count,
+            "total_questions": len(quiz["questions"]),
+            "results": results
+        }
+
     def recommend_next_skill(self, user_id: str, category: Optional[str] = None) -> Optional[Dict[str, Any]]:
         """Recommend next skill to learn based on user progress"""
         with sqlite3.connect(self.db_path) as conn:

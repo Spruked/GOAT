@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     python3-dev \
+    ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
@@ -14,19 +15,37 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
+COPY CertSig_upsell_manager.py .
+COPY podcast_engine.py .
+COPY user_tracker.py .
+COPY goat_core ./goat_core
+COPY cali_scripts ./cali_scripts
+COPY endpoints ./endpoints
+COPY routes ./routes
+COPY services ./services
+COPY teacher ./teacher
 COPY vault ./vault
 COPY collector ./collector
 COPY knowledge ./knowledge
-COPY teacher ./teacher
+COPY learning ./learning
 COPY licenser ./licenser
-COPY server ./server
+COPY vault_forge ./vault_forge
+COPY podcast_engine ./podcast_engine
+COPY backend ./backend
+COPY DALS ./DALS
 
 # Create data directories
 RUN mkdir -p /app/data/vault /app/data/knowledge
 
+# Set working directory to backend
+WORKDIR /app/backend
+
+# Set Python path
+ENV PYTHONPATH=/app/backend:/app/DALS:/app:/app/podcast_engine
+
 # Expose port
-EXPOSE 5000
+EXPOSE 8000
 
 # Run FastAPI server
-CMD ["uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]
 

@@ -1,0 +1,1 @@
+# goat_core package init

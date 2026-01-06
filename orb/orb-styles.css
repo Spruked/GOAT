@@ -1,0 +1,221 @@
+/* orb/orb-styles.css */
+/**
+ * CALI Orb Visual Design Language
+ * Distinct from bubble host - authoritative, composed, advanced
+ */
+
+#orb-cali-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Orb Avatar - Core Visual Identity */
+.orb-avatar {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.4));
+}
+
+.orb-pulse-ring {
+  position: absolute;
+  inset: -10px;
+  border: 2px solid #6366f1;
+  border-radius: 50%;
+  opacity: 0;
+  animation: orb-pulse 2s ease-out infinite;
+}
+
+.orb-core {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.orb-materialize .orb-core {
+  transform: scale(1);
+}
+
+/* Eyes - Expressiveness */
+.orb-eye {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  top: 35%;
+  transition: all 0.3s ease;
+}
+
+.orb-eye.left { left: 30%; }
+.orb-eye.right { right: 30%; }
+
+.orb-active-assistance .orb-eye {
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  animation: orb-blink 4s infinite;
+}
+
+/* Dialogue Container */
+.orb-dialogue {
+  background: #1f2937;
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 320px;
+  max-width: 400px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #374151;
+  backdrop-filter: blur(8px);
+}
+
+.orb-header {
+  margin-bottom: 16px;
+}
+
+.orb-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin-bottom: 4px;
+}
+
+.orb-subtitle {
+  font-size: 12px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.orb-message {
+  color: #e5e7eb;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+
+/* Action Buttons */
+.orb-action-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orb-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.orb-btn-primary {
+  background: #6366f1;
+  color: white;
+}
+
+.orb-btn-primary:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.orb-btn-secondary {
+  background: transparent;
+  color: #c7d2fe;
+  border: 1px solid #4f46e5;
+}
+
+.orb-btn-cancel {
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #374151;
+}
+
+/* Permissions */
+.orb-permissions {
+  background: #111827;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.orb-perm-label {
+  display: block;
+  color: #d1d5db;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.orb-perm-label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Status Indicator */
+.orb-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1f2937;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.orb-status-dot {
+  width: 8px;
+  height: 8px;
+  background: #fbbf24;
+  border-radius: 50%;
+  animation: orb-status-pulse 1.5s ease-in-out infinite;
+}
+
+.orb-status-text {
+  color: #f3f4f6;
+  font-size: 13px;
+}
+
+/* Animations */
+@keyframes orb-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes orb-materialize {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes orb-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+@keyframes orb-status-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Utility */
+.orb-hidden {
+  opacity: 0;
+  pointer-events: none;
+}

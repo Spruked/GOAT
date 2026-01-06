@@ -1,0 +1,76 @@
+{
+  "job_id": "signup_worker_v1.0",
+  "job_name": "User Signup",
+  "description": "Handles user registration, profile creation, and initial priority scoring",
+  "version": "1.0.0",
+  "worker_class": "SignupWorker",
+  "worker_module": "workers.signup_worker.worker_body",
+  "config": {
+    "logic_file": "logic.json",
+    "script_file": "signup_script.json",
+    "temp_vault_dir": "temp_vault",
+    "learning_mode": "restricted",
+    "transfer_triggers": {
+      "unanswered_threshold": 2,
+      "time_window_hours": 1
+    },
+    "creates_user_profiles": true,
+    "priority_calculation": {
+      "enabled": true,
+      "initial_scoring": true
+    }
+  },
+  "dependencies": {
+    "required_modules": [
+      "pathlib",
+      "json",
+      "datetime",
+      "uuid",
+      "re"
+    ],
+    "optional_modules": []
+  },
+  "metadata": {
+    "author": "GOAT Worker Forge",
+    "created": "2024-01-06",
+    "tags": ["signup", "registration", "profile", "priority", "scoring"],
+    "category": "user_management",
+    "priority": "critical"
+  },
+  "endpoints": {
+    "process_signup_step": {
+      "method": "POST",
+      "path": "/workers/signup/process",
+      "description": "Process a signup form step"
+    },
+    "complete_signup": {
+      "method": "POST",
+      "path": "/workers/signup/complete",
+      "description": "Complete user signup and create profile"
+    },
+    "get_signup_status": {
+      "method": "GET",
+      "path": "/workers/signup/status",
+      "description": "Get signup worker status"
+    }
+  },
+  "monitoring": {
+    "metrics": [
+      "signups_completed",
+      "profiles_created",
+      "average_completion_time",
+      "priority_scores_calculated",
+      "transfers_to_ucm"
+    ],
+    "alerts": [
+      {
+        "condition": "signups_completed < 5",
+        "message": "Low signup volume detected"
+      },
+      {
+        "condition": "priority_scores_calculated == 0",
+        "message": "Priority scoring system not working"
+      }
+    ]
+  }
+}

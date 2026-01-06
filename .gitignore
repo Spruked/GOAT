@@ -62,6 +62,9 @@ data/
 # Vault storage
 vault_storage/
 *.enc
+*.key
+*.pem
+*.crt
 
 # OS
 .DS_Store
@@ -80,3 +83,16 @@ htmlcov/
 tmp/
 temp/
 *.tmp
+*.wav
+*.mp3
+*.mp4
+*.mov
+
+# External dependencies (keep repos separate)
+Unified-Cognition-Module-Caleon-Prime-full-System/
+UCM/
+visidata/
+Phonatory_Output_Module/
+*.pkl
+*.h5
+*.model

@@ -1,0 +1,108 @@
+{
+  "script": [
+    {
+      "id": "basic_info",
+      "step": 1,
+      "title": "Account Setup",
+      "content": "Let's create your GOAT account. This takes less than 60 seconds.",
+      "fields": [
+        {
+          "field": "email",
+          "type": "email",
+          "required": true,
+          "validation": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        {
+          "field": "full_name",
+          "type": "text",
+          "required": true,
+          "validation": ".{2,100}"
+        },
+        {
+          "field": "organization",
+          "type": "text",
+          "required": false,
+          "validation": ".{0,200}"
+        },
+        {
+          "field": "use_case",
+          "type": "select",
+          "required": true,
+          "options": ["author", "educator", "corporate_trainer", "content_creator", "other"]
+        }
+      ],
+      "keywords": ["signup", "account", "register", "create", "name", "email"],
+      "expected_questions": [
+        "Do you offer free trials?",
+        "Is my data secure?",
+        "Can I change my email later?"
+      ]
+    },
+    {
+      "id": "marketing_consent",
+      "step": 2,
+      "title": "Stay Connected",
+      "content": "Get tips, feature updates, and special offers for content creators.",
+      "fields": [
+        {
+          "field": "marketing_email",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "label": "Send me product updates and tips"
+        },
+        {
+          "field": "beta_access",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "label": "Include me in beta feature testing"
+        }
+      ],
+      "keywords": ["marketing", "email", "updates", "spam", "communication"],
+      "expected_questions": [
+        "How often will you email me?",
+        "Can I unsubscribe anytime?",
+        "What are beta features?"
+      ]
+    },
+    {
+      "id": "initial_purchase_intent",
+      "step": 3,
+      "title": "Your Content Goals",
+      "content": "Help us serve you better by sharing your project scope.",
+      "fields": [
+        {
+          "field": "estimated_content_hours",
+          "type": "number",
+          "required": false,
+          "label": "Estimated hours of audio content (optional)"
+        },
+        {
+          "field": "timeline",
+          "type": "select",
+          "required": false,
+          "options": ["immediate", "this_month", "next_month", "exploring"]
+        },
+        {
+          "field": "budget_range",
+          "type": "select",
+          "required": false,
+          "options": ["under_50", "50_100", "100_500", "500_plus", "enterprise"]
+        }
+      ],
+      "keywords": ["budget", "price", "cost", "how much", "timeline", "when"],
+      "expected_questions": [
+        "Do I have to commit now?",
+        "What if my plans change?",
+        "Is this just an estimate?"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": null,
+    "total_steps": 3,
+    "creates_user_profile": true
+  }
+}

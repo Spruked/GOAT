@@ -1,0 +1,4 @@
+{
+  "model_name": "tts_models/en/ljspeech/tacotron2-DDC",
+  "output_path": "output_voice.wav"
+}

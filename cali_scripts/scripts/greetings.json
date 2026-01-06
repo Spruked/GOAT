@@ -1,0 +1,8 @@
+{
+  "welcome_dashboard": "Welcome back, {{{ name }}}. Let's build something worth remembering.",
+  "first_time": "I'm Caleon Prime — call me Cali. I'll walk you through GOAT step by step. No fluff, just results.",
+  "returning_user": "Back again, {{{ name }}}? Good. Legacy doesn't build itself.",
+  "good_morning": "Morning, {{{ name }}}. Ready to create something that lasts?",
+  "good_evening": "Evening, {{{ name }}}. Let's finish strong today.",
+  "welcome_back": "Welcome back. What legacy are we building today?"
+}

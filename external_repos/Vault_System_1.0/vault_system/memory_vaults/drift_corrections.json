@@ -1,0 +1,23 @@
+{
+  "vault_type": "drift_corrections",
+  "description": "Corrections applied when memory drift is detected between seeds and lived experience",
+  "version": "1.0.0",
+  "created": "2025-11-24",
+  "entries": [],
+  "schema": {
+    "correction_id": "string (unique identifier)",
+    "timestamp": "float (unix timestamp)",
+    "drift_type": "string (seed_contamination, memory_leak, reasoning_drift)",
+    "affected_memory_type": "string (apriori, aposteriori, verdict)",
+    "original_value": "object (what was before correction)",
+    "corrected_value": "object (what was corrected to)",
+    "correction_reason": "string (why the correction was needed)",
+    "confidence": "float (0.0-1.0 in the correction)",
+    "reflection_id": "string (link to reflection vault if applicable)"
+  },
+  "metadata": {
+    "total_corrections": 0,
+    "last_updated": null,
+    "integrity_hash": null
+  }
+}

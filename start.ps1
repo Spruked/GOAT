@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 # GOAT v2.1 Quick Start Script for Windows PowerShell
 
-Write-Host "🐐 GOAT v2.1 - The Proven Teacher" -ForegroundColor Cyan
+Write-Host "🐐 GOAT v2.1 - Greatest Of All Time" -ForegroundColor Cyan
 Write-Host "=================================" -ForegroundColor Cyan
 Write-Host ""
 

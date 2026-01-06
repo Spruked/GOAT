@@ -1,0 +1,13 @@
+{
+  "start_chapter": "Starting chapter {{{ chapter }}}, section {{{ section }}}. Give me a moment.",
+  "mid_progress": "Still drafting… good work takes a minute.",
+  "complete_chapter": "Chapter {{{ chapter }}} complete. Take a look before we move forward.",
+  "finalizing": "Finalizing your draft with tone + continuity.",
+  "done": "Draft complete. Strong work.",
+  "quality_check": "Running quality validation…",
+  "tone_harmonize": "Harmonizing tone and voice consistency.",
+  "continuity_update": "Updating continuity across all sections.",
+  "export_ready": "Draft exported and ready for review.",
+  "revision_start": "Starting revisions. What needs adjustment?",
+  "revision_complete": "Revisions complete. Better than before."
+}

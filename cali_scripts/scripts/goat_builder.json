@@ -1,0 +1,13 @@
+{
+  "book_start": "Book Builder initialized. What's your topic and audience?",
+  "course_start": "Course Builder ready. How many modules do you need?",
+  "framework_start": "Framework Builder activated. What's the methodology?",
+  "archive_start": "Archive Builder online. What knowledge are we organizing?",
+  "outline_ready": "Outline complete. Review and approve, then we'll draft.",
+  "drafting": "Drafting in progress. This will take a few minutes.",
+  "review_ready": "Draft complete. Review, edit, then finalize.",
+  "publishing": "Preparing for publication. Choose your format and platform.",
+  "complete": "Project complete. Ready for the world.",
+  "save_progress": "Progress saved. You can resume anytime.",
+  "export_options": "Export options: PDF, DOCX, EPUB, or web format."
+}

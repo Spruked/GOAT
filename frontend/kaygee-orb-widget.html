@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KayGee Orb - GOAT Integration</title>
+  <style>
+    #kaygee-orb-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      width: 280px;
+      height: 280px;
+      pointer-events: none;
+    }
+    #kaygee-orb {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="kaygee-orb-container">
+    <iframe 
+      id="kaygee-orb"
+      src="http://localhost:3000/orb-only" 
+      frameborder="0"
+      title="KayGee Orb of Truth">
+    </iframe>
+  </div>
+
+  <script>
+    // Optional: communication with parent GOAT app
+    const orbFrame = document.getElementById('kaygee-orb');
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'http://localhost:3000') return;
+      if (event.data.type === 'kaygee_speak') {
+        console.log('KayGee says:', event.data.text);
+        // Trigger GOAT notification, log, etc.
+      }
+    });
+  </script>
+</body>
+</html>

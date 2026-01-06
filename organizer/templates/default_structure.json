@@ -1,0 +1,42 @@
+{
+  "root_folder": "Project_Files",
+  "folders": [
+    "Code",
+    "Documents",
+    "Media",
+    "Data",
+    "Archives",
+    "Notes",
+    "Misc"
+  ],
+  "rules": {
+    "Code": [
+      ".py", ".js", ".ts", ".tsx", ".jsx", ".java", ".go", ".rs", ".c", ".cpp", ".cs", ".php",
+      ".rb", ".swift", ".kt", ".html", ".css", ".scss", ".json", ".yaml", ".yml", ".xml",
+      ".dockerfile", ".gitignore", "makefile", "requirements.txt", "package.json"
+    ],
+    "Documents": [
+      ".txt", ".md", ".pdf", ".docx", ".doc", ".rtf", ".odt", ".pptx", ".xlsx"
+    ],
+    "Media": [
+      ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".mp4", ".mov", ".mp3", ".wav"
+    ],
+    "Data": [
+      ".csv", ".xlsx", ".jsonl", ".db", ".sqlite", ".parquet"
+    ],
+    "Archives": [
+      ".zip", ".rar", ".7z", ".tar", ".gz", ".tgz"
+    ],
+    "Notes": [
+      ".note", ".annot", ".rtf"
+    ],
+    "Misc": ["*"]
+  },
+  "special_filenames": {
+    "Code": [
+      "dockerfile", ".dockerfile", ".gitignore", ".gitattributes",
+      "makefile", "requirements.txt", "package.json", "pyproject.toml",
+      "cargo.toml", "gemfile"
+    ]
+  }
+}

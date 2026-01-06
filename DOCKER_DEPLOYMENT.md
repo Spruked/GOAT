@@ -4,10 +4,10 @@
 
 ### Backend Image
 - **Repository**: `spruked/goat-backend`
-- **Tags**: `2.1.0`, `latest`
+- **Tags**: `2.1.0`, `latest`, `v2`, `v3`
 - **Size**: 814 MB
 - **Base**: Python 3.11-slim
-- **Includes**: FastAPI, Web3.py, cryptography, custom Merkle implementation
+- **Includes**: FastAPI, Web3.py, cryptography, custom Merkle implementation, DALS integration
 
 ### Frontend Image
 - **Repository**: `spruked/goat-frontend`
@@ -29,6 +29,14 @@
 - Added build dependencies (`gcc`, `g++`, `python3-dev`) to backend Dockerfile
 - Fixed PostCSS configuration (removed conflicting `.js` file, kept `.cjs`)
 - Fixed typo in TeacherPage.jsx (`@tantml:react-query` → `@tanstack/react-query`)
+
+### 4. **DALS Integration**
+- Integrated Digital Asset Logistics System (DALS) into GOAT backend
+- Added DALS routers for host messaging, UQV storage, TTS synthesis, and broadcasting
+- Implemented GOAT proxy through DALS gateway with override capabilities
+- Added configuration management and monitoring for DALS operations
+- Created unified dashboard combining GOAT and DALS functionality
+- All GOAT endpoints accessible through DALS with runtime configuration overrides
 
 ### 3. **Documentation Updates**
 - Added MIT LICENSE

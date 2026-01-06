@@ -1,0 +1,22 @@
+{
+  "worker_id": "worker_signup_v1",
+  "job_name": "signup",
+  "version": "1.0",
+  "learning_mode": "restricted",
+  "transfer_triggers": {
+    "unanswered_threshold": 2,
+    "time_interval_minutes": 30
+  },
+  "creates_user_profiles": true,
+  "priority_calculation": {
+    "enabled": true,
+    "initial_scoring": true,
+    "budget_weight": 0.4,
+    "timeline_weight": 0.3,
+    "use_case_weight": 0.2,
+    "organization_weight": 0.1
+  },
+  "fallback_response": "Please provide the required information to complete your signup.",
+  "approved_improvements": [],
+  "pending_reviews": []
+}

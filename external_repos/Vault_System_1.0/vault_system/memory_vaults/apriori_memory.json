@@ -1,0 +1,22 @@
+{
+  "vault_type": "apriori_memory",
+  "description": "Caleon's past decisions derived without evidence, based on pure reasoning or axioms",
+  "version": "1.0.0",
+  "created": "2025-11-24",
+  "entries": [],
+  "schema": {
+    "decision_id": "string (unique identifier)",
+    "timestamp": "float (unix timestamp)",
+    "reasoning_type": "string (kantian, spinozian, etc.)",
+    "axiom_used": "string (which philosophical principle)",
+    "decision": "string (the conclusion reached)",
+    "confidence": "float (0.0-1.0)",
+    "context": "object (additional reasoning context)",
+    "reflection_id": "string (link to reflection vault if applicable)"
+  },
+  "metadata": {
+    "total_decisions": 0,
+    "last_updated": null,
+    "integrity_hash": null
+  }
+}

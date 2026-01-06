@@ -44,10 +44,18 @@ docker-compose up --build
 ```
 GOAT/
 ├── frontend/          # React + Vite UI
-├── server/            # FastAPI backend
-├── vault/             # Glyph + encryption
-├── collector/         # NFT ingestion
-├── knowledge/         # Skill graph
+│   ├── src/
+│   │   ├── bubble/   # Bubble host system
+│   │   └── orb/      # Orb CALI escalation
+├── backend/           # FastAPI backend
+│   └── app/main.py    # Application entry point
+├── escalation/        # AI escalation detection
+├── orb/              # Orb CALI components
+├── bubble/           # Bubble host bridge
+├── workers/          # Background processing
+├── vault/            # Glyph + encryption
+├── collector/        # NFT ingestion
+├── knowledge/        # Skill graph
 ├── teacher/           # AI teaching
 ├── licenser/          # Badge minting
 └── contracts/         # Solidity contracts

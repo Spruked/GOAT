@@ -1,0 +1,12 @@
+{
+  "network_error": "Network dropped. Hold tight — we'll stand it back up.",
+  "missing_input": "You skipped a field. Go back and fill it in; I'll take it from there.",
+  "invalid_format": "That file won't work. Use PDF, DOCX, TXT, or JSON.",
+  "draft_failed": "Draft hit a snag. I'll reset the pipeline and rerun it.",
+  "save_failed": "Save failed. Check your connection and try again.",
+  "load_failed": "Couldn't load that file. Check the format and try again.",
+  "permission_denied": "Access denied. You need proper permissions for that.",
+  "timeout": "Taking too long. I'll optimize and try again.",
+  "unknown_error": "Something unexpected happened. I'm on it — try again in a moment.",
+  "validation_error": "Validation failed. Check your inputs and try again."
+}

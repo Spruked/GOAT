@@ -1,0 +1,22 @@
+{
+  "vault_type": "aposteriori_memory",
+  "description": "Caleon's past decisions derived from empirical evidence and lived experience",
+  "version": "1.0.0",
+  "created": "2025-11-24",
+  "entries": [],
+  "schema": {
+    "decision_id": "string (unique identifier)",
+    "timestamp": "float (unix timestamp)",
+    "evidence_type": "string (sensory, experimental, observational)",
+    "evidence_source": "string (what provided the evidence)",
+    "decision": "string (the conclusion reached)",
+    "confidence": "float (0.0-1.0)",
+    "context": "object (additional evidence context)",
+    "reflection_id": "string (link to reflection vault if applicable)"
+  },
+  "metadata": {
+    "total_decisions": 0,
+    "last_updated": null,
+    "integrity_hash": null
+  }
+}

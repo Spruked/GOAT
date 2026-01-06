@@ -1,0 +1,32 @@
+{
+  "user_id": "user_be4cb03e9e0f",
+  "created_at": "2026-01-06T13:50:10.627876",
+  "profile": {
+    "email": "standard@example.com",
+    "full_name": "Standard User",
+    "organization": "",
+    "use_case": "author",
+    "marketing_consent": {
+      "marketing_email": true,
+      "beta_access": true
+    }
+  },
+  "spending": {
+    "total_spent": 0,
+    "lifetime_value": 0,
+    "avg_transaction": 0,
+    "transaction_count": 0,
+    "products_purchased": []
+  },
+  "priority": {
+    "tier": "standard",
+    "score": 20.0,
+    "last_updated": "2026-01-06T13:50:10.627876"
+  },
+  "activity": {
+    "first_login": "2026-01-06T13:50:10.627876",
+    "last_login": null,
+    "projects_created": 0,
+    "projects_completed": 0
+  }
+}

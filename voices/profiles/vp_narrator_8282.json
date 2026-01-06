@@ -1,0 +1,8 @@
+{
+  "profile_id": "vp_narrator_8282",
+  "name": "test_speaker_embedding",
+  "description": "Test voice with speaker embedding",
+  "voice_type": "narrator",
+  "creation_method": "parameter",
+  "coqui_model": {
+    "speaker_embedding": 

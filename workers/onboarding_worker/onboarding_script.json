@@ -1,0 +1,109 @@
+{
+  "script": [
+    {
+      "id": "signup_step",
+      "step": 0,
+      "title": "Create Your GOAT Account",
+      "content": "Welcome! Let's get you started with GOAT. First, you'll need to create an account to access all our features.",
+      "keywords": ["signup", "register", "account", "create", "join", "start"],
+      "expected_questions": [
+        "How do I sign up?",
+        "Do I need an account?",
+        "Is registration free?",
+        "What information do you need?"
+      ]
+    },
+    {
+      "id": "goal_selection_step",
+      "step": 1,
+      "title": "What Do You Want to Create?",
+      "content": "Great! Now that you're signed up, let's decide what you want to create with GOAT. We specialize in transforming knowledge into premium content.",
+      "keywords": ["create", "make", "build", "book", "course", "masterclass", "podcast", "audiobook"],
+      "expected_questions": [
+        "What can I create?",
+        "What are my options?",
+        "What's the difference between these?",
+        "Which one should I choose?"
+      ]
+    },
+    {
+      "id": "welcome_step",
+      "step": 2,
+      "title": "Welcome to GOAT",
+      "content": "Welcome! GOAT helps you transform your knowledge into premium audiobooks, podcasts, and training materials. Let's get you set up.",
+      "keywords": ["welcome", "start", "begin", "what is goat", "purpose"],
+      "expected_questions": [
+        "What can I create with GOAT?",
+        "How does this work?",
+        "Is this for fiction or non-fiction?"
+      ]
+    },
+    {
+      "id": "upload_step",
+      "step": 3,
+      "title": "Upload Your Content",
+      "content": "Upload your source material (manuscript, training docs, lessons). GOAT accepts PDF, DOCX, TXT, and markdown files.",
+      "keywords": ["upload", "file", "content", "manuscript", "document"],
+      "expected_questions": [
+        "What file formats are supported?",
+        "Is there a file size limit?",
+        "Can I upload multiple files?"
+      ]
+    },
+    {
+      "id": "voice_selection_step",
+      "step": 4,
+      "title": "Choose Your Voice Profile",
+      "content": "Select from our library of voices or upload a voice sample to create a custom profile for your narrator.",
+      "keywords": ["voice", "narrator", "profile", "custom", "choose"],
+      "expected_questions": [
+        "How many voices are available?",
+        "Can I clone my own voice?",
+        "What languages are supported?"
+      ]
+    },
+    {
+      "id": "pricing_step",
+      "step": 5,
+      "title": "Understanding Pricing",
+      "content": "GOAT uses pay-per-GB processing: $19.99 for first GB, then $5/GB. Packages: 5GB ($49), 10GB ($99), 20GB ($175).",
+      "keywords": ["price", "cost", "pricing", "pay", "package", "gb"],
+      "expected_questions": [
+        "How much will my project cost?",
+        "Do you have monthly plans?",
+        "What if I need more than 20GB?"
+      ]
+    },
+    {
+      "id": "blockchain_step",
+      "step": 6,
+      "title": "Optional Blockchain Features",
+      "content": "Optional: Mint your content as NFTs for provenance. We prepare the data; you mint at TrueMark/CertSig on Polygon or Ethereum.",
+      "keywords": ["blockchain", "nft", "mint", "polygon", "ethereum", "provenance"],
+      "expected_questions": [
+        "Do I have to use blockchain?",
+        "What's the difference between Polygon and Ethereum?",
+        "How does NFT minting work?"
+      ]
+    },
+    {
+      "id": "final_step",
+      "step": 7,
+      "title": "Ready to Create",
+      "content": "You're all set! Start your first project and GOAT will guide you through each step of creating your audiobook or podcast.",
+      "keywords": ["ready", "start", "create", "begin", "finished"],
+      "expected_questions": [
+        "What happens next?",
+        "Can I save my progress?",
+        "Where do I start?"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.1",
+    "last_updated": "2024-01-06",
+    "total_steps": 8,
+    "completion_rate_target": 0.85,
+    "description": "Complete onboarding sequence including signup, goal selection, and setup"
+  }
+}

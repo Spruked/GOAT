@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookOpen, Database, GraduationCap, Shield } from 'lucide-react'
+import { BookOpen, Database, GraduationCap, Shield, Archive } from 'lucide-react'
 
 export function Header() {
   return (
@@ -7,21 +7,26 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-goat-primary to-goat-secondary rounded-full flex items-center justify-center font-bold text-xl text-slate-900">
-              G
-            </div>
+            <img 
+              src="/Goatvault64.ico" 
+              alt="GOAT Vault" 
+              className="w-10 h-10 rounded-full"
+            />
             <div>
-              <h1 className="text-xl font-bold">GOAT v2.1</h1>
-              <p className="text-xs text-slate-400">The Proven Teacher</p>
+              <h1 className="text-xl font-bold tracking-tight">GOAT v2.1</h1>
+              <p className="text-xs text-slate-400">The master of legacy preservation</p>
             </div>
           </Link>
           
           <nav className="flex items-center gap-6">
-            <Link to="/collect" className="flex items-center gap-2 hover:text-goat-primary transition">
+            <Link to="/" className="flex items-center gap-2 hover:text-goat-primary transition font-semibold">
+              <span>Home</span>
+            </Link>
+            <Link to="/collector" className="flex items-center gap-2 hover:text-goat-primary transition">
               <Database size={18} />
               <span>Collect</span>
             </Link>
-            <Link to="/learn" className="flex items-center gap-2 hover:text-goat-primary transition">
+            <Link to="/learning" className="flex items-center gap-2 hover:text-goat-primary transition">
               <GraduationCap size={18} />
               <span>Learn</span>
             </Link>
@@ -29,9 +34,21 @@ export function Header() {
               <Shield size={18} />
               <span>Vault</span>
             </Link>
-            <Link to="/profile/user_demo" className="flex items-center gap-2 hover:text-goat-primary transition">
+            <Link to="/profile" className="flex items-center gap-2 hover:text-goat-primary transition">
               <BookOpen size={18} />
               <span>Profile</span>
+            </Link>
+            <Link to="/project-panel" className="flex items-center gap-2 hover:text-goat-primary transition">
+              <Archive size={18} />
+              <span>Project</span>
+            </Link>
+            <Link to="/cart" className="flex items-center gap-2 hover:text-goat-primary transition font-semibold">
+              <span role="img" aria-label="cart">🛒</span>
+              <span>Cart</span>
+            </Link>
+            <Link to="/checkout" className="flex items-center gap-2 hover:text-goat-primary transition font-semibold">
+              <span role="img" aria-label="checkout">💳</span>
+              <span>Checkout</span>
             </Link>
           </nav>
         </div>

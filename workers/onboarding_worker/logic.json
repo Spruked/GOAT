@@ -1,0 +1,25 @@
+{
+  "worker_id": "worker_onboarding_v1",
+  "job_name": "onboarding",
+  "version": "1.0",
+  "learning_mode": "restricted",
+  "transfer_triggers": {
+    "unanswered_threshold": 3,
+    "time_interval_minutes": 60
+  },
+  "priority_aware": true,
+  "vip_acceleration": {
+    "enabled": true,
+    "skip_steps_for_vip": ["basic_intro"],
+    "priority_support_mention": true
+  },
+  "fallback_response": "That's a great question! I've noted it and our team will provide a detailed answer within 24 hours. For now, please continue with the onboarding steps.",
+  "approved_improvements": [],
+  "pending_reviews": [
+    {
+      "transfer_id": "9bdba7ad-ee3e-418f-b0c1-9f80c9911f2d",
+      "timestamp": "2026-01-06T13:39:55.151432",
+      "query_count": 3
+    }
+  ]
+}
