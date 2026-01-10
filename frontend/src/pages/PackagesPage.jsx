@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, GraduationCap, FileText, Archive, Package, Zap, Star, CheckCircle, ExternalLink, Award, Users, DollarSign } from 'lucide-react';
 
-export function LearningPage() {
+export function PackagesPage() {
   return (
     <div className="min-h-screen bg-slate-900 text-white">
       {/* Hero Section */}

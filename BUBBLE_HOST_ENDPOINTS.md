@@ -568,3 +568,9 @@ User → Host (guided or manual)
 **Status:** Architecture locked. Ready for backend implementation planning.
 
 **Next:** Backend routing table, API versioning strategy, authentication layer.
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

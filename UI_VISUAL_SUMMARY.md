@@ -427,3 +427,9 @@ TrueMark Mint        $0.15 ETH   $0.105 ETH   $0.045 ETH
 
 **Status**: ✅ Ready for your visual review!  
 **Next**: Open the UI in your browser and verify everything looks correct.
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

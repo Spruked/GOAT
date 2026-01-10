@@ -421,3 +421,9 @@ services:
 ---
 
 **Built with ❤️ for the GOAT community**
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

@@ -163,3 +163,9 @@ pytest -q
 ---
 
 IMPORTANT: You asked not to push these changes yet — this documentation is created locally in `docs/manuals.md` and `MANUAL_GENERATION_README.md`. No remote operations were performed.
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

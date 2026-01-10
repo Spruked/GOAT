@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     # Server
     HOST: str = "0.0.0.0"
-    PORT: int = 7777
+    PORT: int = 5000
     WORKERS: int = 1
     RELOAD: bool = False
     LOG_LEVEL: str = "INFO"

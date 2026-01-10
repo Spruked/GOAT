@@ -180,7 +180,7 @@ export function HomePage() {
             <ul className="text-slate-300 space-y-1">
               <li>• DALS (Digital Asset Logistics System)</li>
               <li>• CertSig NFT Engine</li>
-              <li>• UCM + Caleon AI</li>
+              <li>• SKG Knowledge System</li>
             </ul>
           </div>
           <div className="space-y-2">

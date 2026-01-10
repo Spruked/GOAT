@@ -16,7 +16,7 @@ export default function MasterclassPage() {
     includeTemplates: false,
     includeOneOnOne: false,
     includeCommunityAccess: false,
-    coreTeachings: '',
+    coreContent: '',
     expertStories: '',
     actionableSteps: '',
     bonusMaterials: '',
@@ -204,11 +204,11 @@ export default function MasterclassPage() {
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-lg font-semibold text-purple-100 mb-3">Core Teachings & Framework</label>
+                  <label className="block text-lg font-semibold text-purple-100 mb-3">Core Content & Framework</label>
                   <textarea
                     placeholder="The proprietary system you've developed...&#10;Step 1: Foundation&#10;Step 2: Implementation&#10;Step 3: Optimization"
-                    value={formData.coreTeachings}
-                    onChange={(e) => setFormData({...formData, coreTeachings: e.target.value})}
+                    value={formData.coreContent}
+                    onChange={(e) => setFormData({...formData, coreContent: e.target.value})}
                     rows={10}
                     className="w-full bg-slate-900/70 border-2 border-purple-500/50 rounded-lg px-6 py-4 text-white placeholder-slate-400 text-lg"
                   />
@@ -217,7 +217,7 @@ export default function MasterclassPage() {
                 <div>
                   <label className="block text-lg font-semibold text-purple-100 mb-3">Expert Stories & Case Studies</label>
                   <textarea
-                    placeholder="Real examples from your experience, client success stories, lessons learned..."
+                    placeholder="Real examples from your experience, client success stories, insights gained..."
                     value={formData.expertStories}
                     onChange={(e) => setFormData({...formData, expertStories: e.target.value})}
                     rows={6}
@@ -287,13 +287,13 @@ export default function MasterclassPage() {
             <div className="text-center pt-8">
               <button
                 onClick={createMasterclass}
-                disabled={loading || !formData.masterclassTitle || !formData.coreTeachings}
+                disabled={loading || !formData.masterclassTitle || !formData.coreContent}
                 className="bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-600 hover:from-purple-700 hover:via-pink-700 hover:to-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed px-12 py-6 rounded-xl font-bold text-2xl shadow-2xl transition transform hover:scale-105 border-2 border-yellow-400/50"
               >
                 {loading ? 'Creating Your Masterclass...' : '✨ Create Premium Masterclass ✨'}
               </button>
-              {!formData.coreTeachings && (
-                <p className="text-yellow-400 text-sm mt-3">Please provide your core teachings</p>
+              {!formData.coreContent && (
+                <p className="text-yellow-400 text-sm mt-3">Please provide your core content</p>
               )}
             </div>
           </div>

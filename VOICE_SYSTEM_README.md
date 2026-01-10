@@ -252,3 +252,9 @@ This implementation is part of the GOAT system. See LICENSE file for details.
 ---
 
 **Note**: This system uses mock implementations for POM 2.0 modules during development. Full functionality requires the actual POM 2.0 library installation.
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

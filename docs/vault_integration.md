@@ -69,3 +69,9 @@ python -c "import sys; sys.path.insert(0, r't:\\GOAT\\external_repos\\Vault_Syst
 - Create a small adapter `routes/vault_adapter.py` that exposes safe operations (status, start/stop components, start reasoning path) and routes calls to the `VAULT_SYSTEM_INSTANCE` when present.
 - Add health checks for the Vault system under `/api/vault/system/status`.
 - Add CI or Docker Compose orchestration to bring up both GOAT and Vault System together.
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

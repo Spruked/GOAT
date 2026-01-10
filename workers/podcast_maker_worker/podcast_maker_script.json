@@ -1,0 +1,122 @@
+{
+  "script": [
+    {
+      "pass_id": "foundation",
+      "name": "Foundation Pass",
+      "description": "Content analysis, episode structure planning, and show format design. Establishes the core narrative and timing.",
+      "base_price": 5500,
+      "price_min": 5488,
+      "price_max": 5488,
+      "required": true,
+      "duration_estimate": "2-4 hours",
+      "deliverables": [
+        "Episode outline",
+        "Content structure",
+        "Timing breakdown",
+        "Show format recommendations"
+      ]
+    },
+    {
+      "pass_id": "structure",
+      "name": "Structure Pass",
+      "description": "Script writing, dialogue development, and narrative flow optimization. Transforms raw content into engaging podcast format.",
+      "base_price": 2000,
+      "price_min": 10976,
+      "price_max": 21952,
+      "required": false,
+      "duration_estimate": "4-8 hours",
+      "deliverables": [
+        "Complete episode script",
+        "Dialogue optimization",
+        "Pacing adjustments",
+        "Hook and conclusion writing"
+      ]
+    },
+    {
+      "pass_id": "voice",
+      "name": "Voice Pass",
+      "description": "Voice acting, audio recording, and performance direction. Brings your podcast to life with professional narration.",
+      "base_price": 2000,
+      "price_min": 16464,
+      "price_max": 32928,
+      "required": false,
+      "duration_estimate": "6-12 hours",
+      "deliverables": [
+        "Professional voice recording",
+        "Character voice differentiation",
+        "Emotional delivery",
+        "Multiple take options"
+      ]
+    },
+    {
+      "pass_id": "audio_finish",
+      "name": "Audio Finish Pass",
+      "description": "Sound design, music integration, and audio post-production. Polishes your episode with professional audio engineering.",
+      "base_price": 1500,
+      "price_min": 8240,
+      "price_max": 16480,
+      "required": false,
+      "duration_estimate": "3-6 hours",
+      "deliverables": [
+        "Audio mixing and mastering",
+        "Sound effects integration",
+        "Background music",
+        "Noise reduction and cleanup"
+      ]
+    },
+    {
+      "pass_id": "production",
+      "name": "Production Pass",
+      "description": "Final packaging, metadata creation, and distribution preparation. Ready your podcast for upload to any platform.",
+      "base_price": 1500,
+      "price_min": 4120,
+      "price_max": 4120,
+      "required": false,
+      "duration_estimate": "1-2 hours",
+      "deliverables": [
+        "Episode metadata (title, description, tags)",
+        "Show notes in multiple formats",
+        "RSS feed XML generation",
+        "Platform-specific formatting"
+      ]
+    }
+  ],
+  "pricing_model": {
+    "base_currency": "USD",
+    "dynamic_pricing": {
+      "duration_factor": "30 minutes baseline",
+      "content_type_multiplier": {
+        "script_only": 1.0,
+        "audio_enhancement": 0.7
+      },
+      "episode_count_scaling": "linear up to 3x for 90+ min episodes"
+    },
+    "tax_rate": 0.0,
+    "platform_fees": "not included"
+  },
+  "content_types": {
+    "supported_inputs": [
+      "PDF scripts",
+      "DOCX transcripts",
+      "TXT outlines",
+      "Markdown show notes",
+      "MP3 audio files",
+      "WAV recordings",
+      "M4A interviews"
+    ],
+    "max_file_size": "500MB",
+    "estimated_processing_time": "8-24 hours depending on passes"
+  },
+  "deliverables": {
+    "audio_formats": ["MP3", "WAV"],
+    "metadata_formats": ["JSON", "XML"],
+    "documentation": ["Markdown", "HTML"],
+    "distribution_ready": ["RSS XML", "Platform metadata"]
+  },
+  "quality_standards": {
+    "audio_quality": "192kbps MP3 minimum",
+    "metadata_completeness": "All major platforms supported",
+    "content_optimization": "SEO-friendly titles and descriptions",
+    "accessibility": "Show notes include timestamps"
+  }
+}

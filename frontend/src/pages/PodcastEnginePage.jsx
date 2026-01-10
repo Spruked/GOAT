@@ -171,16 +171,16 @@ export default function PodcastEnginePage() {
           </p>
         </div>
 
-        {/* Caleon Guidance */}
+        {/* Host Guidance */}
         {caleonMessage && (
           <div className="bg-gradient-to-r from-purple-900/20 to-cyan-900/20 p-6 rounded-lg border border-purple-600/30 mb-8">
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm">C</span>
+                <span className="text-white font-bold text-sm">H</span>
               </div>
               <div>
                 <p className="text-slate-300 italic">"{caleonMessage}"</p>
-                <p className="text-slate-400 text-sm mt-2">— Caleon</p>
+                <p className="text-slate-400 text-sm mt-2">— HOST</p>
               </div>
             </div>
           </div>

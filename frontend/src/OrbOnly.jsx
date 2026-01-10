@@ -6,15 +6,21 @@ import { useState, useEffect } from 'react';
 function OrbOnly() {
   const [resonance, setResonance] = useState({ phaseCoherence: 0.5 });
 
-  // Connect to backend for live resonance
+  // Connect to backend WebSocket for UCM resonance data
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:8000/ws');
+    const ws = new WebSocket('ws://localhost:5000/ws/orb');
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if (data.type === 'resonance_update') {
         setResonance(data.data);
       }
     };
+    
+    ws.onerror = (error) => {
+      console.error('Orb WebSocket error:', error);
+    };
+    
+    return () => ws.close();
   }, []);
 
   const sides = 4 + Math.floor(resonance.phaseCoherence * 8);

@@ -1,6 +1,18 @@
 # ucm_bridge.py
 """
-GOAT UCM Bridge - Connects Teacher Engine to external UCM cognition service
+GOAT UCM Bridge - Connects GOAT to external UCM cognition service
+
+ALIGNMENT DOCTRINE:
+"DALS records truth. UCM learns from truth. GOAT produces behavior."
+
+UCM is the only learning and decision-making system.
+
+UCM consumes:
+- DALS-observed GOAT behavior
+- historical classifications
+- emitted learning events
+
+UCM learns about GOAT, not from GOAT instruction.
 """
 
 import requests
@@ -11,7 +23,7 @@ from typing import Dict, Any, Optional, List
 from pathlib import Path
 
 class UCMBridge:
-    """Bridge between GOAT Teacher Engine and external UCM cognition service"""
+    """Bridge between GOAT and external UCM cognition service"""
 
     def __init__(self, ucm_endpoint: str = None):
         self.ucm_endpoint = ucm_endpoint or os.getenv("UCM_ENDPOINT", "http://localhost:8080")

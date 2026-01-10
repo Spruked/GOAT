@@ -383,17 +383,17 @@ function getWalkthroughSteps(productId, productName) {
     course: [
       {
         title: "Welcome to Course Builder",
-        description: "Create comprehensive learning experiences with modules, videos, and interactive content. Help others master your expertise.",
+        description: "Create comprehensive content experiences with modules, videos, and interactive elements. Help others discover your expertise.",
         icon: <div className="text-3xl">🎓</div>,
         tips: [
-          "Focus on practical, actionable learning outcomes",
+          "Focus on practical, actionable content outcomes",
           "Break complex topics into manageable modules",
           "Include quizzes and exercises for engagement"
         ]
       },
       {
         title: "Course Structure",
-        description: "Organize your course into logical modules that build on each other. Each module should have a clear learning objective.",
+        description: "Organize your course into logical modules that build on each other. Each module should have a clear content objective.",
         icon: <div className="text-3xl">📚</div>,
         content: (
           <div className="space-y-2 text-sm">
@@ -415,7 +415,7 @@ function getWalkthroughSteps(productId, productName) {
       },
       {
         title: "Interactive Elements",
-        description: "Make your course engaging with quizzes, assignments, and community features. Learning is more effective when interactive.",
+        description: "Make your course engaging with multimedia, assignments, and community features. Content is more effective when interactive.",
         icon: <div className="text-3xl">🎯</div>,
         content: (
           <div className="text-sm text-gray-700">
@@ -431,7 +431,7 @@ function getWalkthroughSteps(productId, productName) {
         tips: [
           "Use quizzes to reinforce key concepts",
           "Provide feedback on assignments promptly",
-          "Create a supportive learning community"
+          "Create a supportive content community"
         ]
       }
     ],

@@ -98,3 +98,9 @@ POST /manuals/training-manual
   ---
 
   Note: This file is a companion README and the full developer documentation is in `docs/manuals.md`.
+
+  ---
+
+  ## 📄 Copyright
+
+  Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

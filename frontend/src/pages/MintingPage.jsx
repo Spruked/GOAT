@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Shield, CheckCircle, ExternalLink, Crown, Download, Info, Zap } from 'lucide-react';
 import axios from 'axios';
 
-export default function PartnerReferralPage() {
+export default function MintingPage() {
   const [searchParams] = useSearchParams();
   const legacyId = searchParams.get('legacyId');
   const [legacy, setLegacy] = useState(null);
@@ -315,111 +315,6 @@ export default function PartnerReferralPage() {
               <p className="text-slate-500">Identity linking</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-            </div>
-          </div>
-        </div>
-
-        {/* Minting Options */}
-        {!mintResult && (
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* CertSig */}
-            <div className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 p-6 rounded-lg border border-blue-600/30">
-              <div className="flex items-center space-x-3 mb-4">
-                <Shield className="w-8 h-8 text-blue-400" />
-                <h3 className="text-xl font-bold text-blue-300">CertSig</h3>
-              </div>
-              <p className="text-slate-300 mb-4">
-                Permanent authorship and ownership proof with cryptographic verification.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-400 mb-6">
-                <li>• Timestamped creation records</li>
-                <li>• Blockchain-verified authenticity</li>
-                <li>• Decentralized storage</li>
-                <li>• Royalty tracking ready</li>
-              </ul>
-              <button
-                onClick={() => mintLegacy('certsig')}
-                disabled={minting}
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:opacity-50 px-6 py-3 rounded-lg font-semibold transition"
-              >
-                {minting ? 'Minting...' : 'Mint with CertSig'}
-              </button>
-            </div>
-
-            {/* TrueMark */}
-            <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 p-6 rounded-lg border border-purple-600/30">
-              <div className="flex items-center space-x-3 mb-4">
-                <CheckCircle className="w-8 h-8 text-purple-400" />
-                <h3 className="text-xl font-bold text-purple-300">TrueMark</h3>
-              </div>
-              <p className="text-slate-300 mb-4">
-                Identity-linked permanent records with advanced verification features.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-400 mb-6">
-                <li>• Identity verification</li>
-                <li>• Multi-chain support</li>
-                <li>• Enhanced metadata</li>
-                <li>• Commercial licensing tools</li>
-              </ul>
-              <button
-                onClick={() => mintLegacy('truemark')}
-                disabled={minting}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 px-6 py-3 rounded-lg font-semibold transition"
-              >
-                {minting ? 'Minting...' : 'Mint with TrueMark'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Mint Result */}
-        {mintResult && (
-          <div className="bg-gradient-to-r from-green-900/20 to-cyan-900/20 p-8 rounded-lg border border-green-600/30">
-            <div className="text-center mb-6">
-              <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-green-300 mb-2">Legacy Minted Successfully!</h2>
-              <p className="text-slate-300">{mintResult.message}</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="font-semibold text-cyan-300 mb-3">Mint Details</h3>
-                <div className="space-y-2 text-sm">
-                  <p><span className="text-slate-400">Engine:</span> {mintResult.mint_result.engine_details.name}</p>
-                  <p><span className="text-slate-400">Token ID:</span> {mintResult.mint_result.token_id}</p>
-                  <p><span className="text-slate-400">Transaction:</span> {mintResult.mint_result.transaction_hash.substring(0, 20)}...</p>
-                  <p><span className="text-slate-400">Contract:</span> {mintResult.mint_result.contract_address.substring(0, 20)}...</p>
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold text-cyan-300 mb-3">What's Next?</h3>
-                <ul className="space-y-2 text-sm text-slate-300">
-                  <li>• Your work is now permanently preserved</li>
-                  <li>• Authorship is cryptographically verified</li>
-                  <li>• Share, sell, or license with confidence</li>
-                  <li>• Build upon your legacy anytime</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-6 p-4 bg-slate-800/50 rounded-lg">
-              <p className="text-slate-300 italic">"{mintResult.caleon_message}"</p>
-              <p className="text-slate-400 text-sm mt-2">— Caleon</p>
-            </div>
-          </div>
-        )}
-
-        {/* Footer */}
-        <div className="text-center mt-12">
-          <p className="text-slate-400">
-            Minting creates permanent, unalterable proof of your authorship.
-            Your legacy will outlive you and be verifiable by anyone, anywhere.
-          </p>
         </div>
       </div>
     </div>

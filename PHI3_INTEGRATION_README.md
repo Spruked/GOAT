@@ -74,7 +74,7 @@ export PHI3_MODEL_PATH="./models/Phi-3-mini-4k-instruct-q4.gguf"
 export PHI3_MODEL_PATH="./models/Phi-3-mini-4k-instruct-q4.gguf"
 
 # UCM endpoint (for reasoning)
-export CALEON_UCM_ENDPOINT="http://localhost:8000/v1/caleon/invoke"
+export CALEON_UCM_ENDPOINT="http://localhost:8080/v1/caleon/invoke"
 export CALEON_AUTH_TOKEN="your-auth-token"
 ```
 
@@ -271,3 +271,9 @@ logging.basicConfig(level=logging.DEBUG)
 ```
 
 This architecture ensures Caleon remains sovereign while leveraging Phi-3 Mini's excellent language generation capabilities.
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

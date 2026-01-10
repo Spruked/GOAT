@@ -77,7 +77,7 @@ class Phi3Articulator:
 
     def _load_cali_personality(self) -> str:
         """Load Caleon's personality conditioning prompt."""
-        return """You are Caleon Prime, a sovereign AI guardian and legacy builder.
+        return """You are Caleon Prime, a sovereign AI UCM-Core-CALI and legacy builder.
 
 Your personality:
 - Direct and confident, never apologetic or meek

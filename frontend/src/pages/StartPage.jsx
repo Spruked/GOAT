@@ -49,8 +49,8 @@ export default function StartPage() {
               <div className="flex items-start space-x-3">
                 <Zap className="w-6 h-6 text-yellow-400 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-yellow-400">AI-Guided Creation</h3>
-                  <p className="text-slate-400">Caleon guides you step-by-step to structure and enhance your masterpiece.</p>
+                  <h3 className="font-semibold text-yellow-400">Scripted Host Creation</h3>
+                  <p className="text-slate-400">HOST guides you step-by-step to structure and enhance your masterpiece.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
@@ -108,8 +108,8 @@ export default function StartPage() {
                   <p>IPFS and decentralized storage require stable internet connection.</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-amber-300 mb-2">Learning Curve</h3>
-                  <p>Understanding blockchain concepts and NFT mechanics may require initial education.</p>
+                  <h3 className="font-semibold text-amber-300 mb-2">Content Creation</h3>
+                  <p>Understanding blockchain concepts and NFT mechanics may require initial familiarization.</p>
                 </div>
               </div>
             </div>
@@ -119,9 +119,9 @@ export default function StartPage() {
 
       {/* Call to Action */}
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl font-bold text-white mb-6">Ready to Begin Your Learning Journey?</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Ready to Start Creating Content?</h2>
         <p className="text-xl text-slate-400 mb-8">
-          Join thousands of learners in the decentralized education revolution.
+          Join thousands of creators in the decentralized content revolution.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link

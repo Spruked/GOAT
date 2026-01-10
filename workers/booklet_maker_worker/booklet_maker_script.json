@@ -1,0 +1,87 @@
+{
+  "script": [
+    {
+      "pass_id": "foundation",
+      "name": "Foundation Pass",
+      "description": "Parse & Organize - Core structure and correctness. Includes: logical flow, section hierarchy, proper pagination, margins, center-fold safety, print-safe export.",
+      "base_price": 999,
+      "price_min": 999,
+      "price_max": 999,
+      "required": true,
+      "estimated_hours": 1,
+      "deliverables": ["organized_content.pdf", "structure_report.json"]
+    },
+    {
+      "pass_id": "layout",
+      "name": "Layout Pass",
+      "description": "Structured Layout - Clean booklet layout with final page sizing, refined margins, gutter spacing, and visual breathing room. This is typesetting, not design.",
+      "base_price": 1000,
+      "price_min": 1000,
+      "price_max": 1500,
+      "required": false,
+      "estimated_hours": 1.5,
+      "pricing_factors": {
+        "page_count_under_50": 1000,
+        "page_count_50_100": 1250,
+        "page_count_over_100": 1500
+      },
+      "deliverables": ["layout_optimized.pdf", "page_layout_spec.json"]
+    },
+    {
+      "pass_id": "typography",
+      "name": "Typography Pass",
+      "description": "Readability & Refinement - Print-safe font selection, header/body pairing, line spacing, rhythm, and hierarchy optimization for reading comfort.",
+      "base_price": 800,
+      "price_min": 800,
+      "price_max": 1200,
+      "required": false,
+      "estimated_hours": 2,
+      "pricing_factors": {
+        "page_count_under_50": 800,
+        "page_count_50_100": 1000,
+        "page_count_over_100": 1200
+      },
+      "deliverables": ["typography_optimized.pdf", "font_specifications.json"]
+    },
+    {
+      "pass_id": "presentation",
+      "name": "Presentation Pass",
+      "description": "Visual Finish - Cover treatment, section dividers, visual hierarchy cues, and light brand alignment for professional appearance.",
+      "base_price": 600,
+      "price_min": 600,
+      "price_max": 1000,
+      "required": false,
+      "estimated_hours": 3,
+      "pricing_factors": {
+        "basic": 600,
+        "with_cover_design": 800,
+        "with_full_brand": 1000
+      },
+      "deliverables": ["presentation_finale.pdf", "visual_specifications.json"]
+    },
+    {
+      "pass_id": "production",
+      "name": "Production Pass",
+      "description": "Print Optimization & Variants - Bleed and trim safety, CMYK export checks, multiple size variants, print-vendor-ready files with production checklist.",
+      "base_price": 400,
+      "price_min": 400,
+      "price_max": 800,
+      "required": false,
+      "estimated_hours": 1.5,
+      "pricing_factors": {
+        "single_variant": 400,
+        "multiple_sizes": 600,
+        "multiple_sizes_extended": 800
+      },
+      "deliverables": ["production_ready_files.zip", "production_checklist.json", "printer_specs.pdf"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": null,
+    "product_name": "GOAT Booklet Maker",
+    "requires_payment_before_processing": true,
+    "allows_cart_modification": true,
+    "modification_window_hours": 24
+  }
+}

@@ -15,7 +15,7 @@ export default function EnhancedAssistantBubble({ onToggle }) {
   const recognitionRef = useRef(null);
   const speechSynthRef = useRef(null);
 
-  // CALI Scripts for consistent responses
+  // CALI Scripts for consistent responses from scripted workers
   const {
     greet,
     confirm,
@@ -24,7 +24,7 @@ export default function EnhancedAssistantBubble({ onToggle }) {
     isLoading: caliLoading
   } = useCaliScripts();
 
-  // Caleon generative for dynamic AI responses
+  // SKG-powered host responses for dynamic assistance
   const {
     sendToCaleon,
     streamFromCaleon,

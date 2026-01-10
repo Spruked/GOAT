@@ -156,6 +156,11 @@ export default function TermsPage() {
             Return to Login
           </Link>
         </div>
+
+        {/* Copyright */}
+        <div className="mt-8 text-center text-slate-400 text-sm">
+          <p>Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.</p>
+        </div>
       </div>
     </div>
   );

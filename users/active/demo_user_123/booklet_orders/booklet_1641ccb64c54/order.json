@@ -1,0 +1,20 @@
+{
+  "order_id": "booklet_1641ccb64c54",
+  "user_id": "demo_user_123",
+  "created_at": "2026-01-06T19:13:06.491174",
+  "status": "draft",
+  "content_file": null,
+  "cart": {
+    "items": [],
+    "subtotal": 0,
+    "tax": 0,
+    "total": 0
+  },
+  "payment_status": "completed",
+  "payment_intent_id": "pi_e80f9560b232450c9450011a",
+  "processing_status": "in_progress",
+  "outputs": {},
+  "last_updated": "2026-01-06T19:13:06.495170",
+  "paid_at": "2026-01-06T19:13:06.494173",
+  "processing_started_at": "2026-01-06T19:13:06.495170"
+}

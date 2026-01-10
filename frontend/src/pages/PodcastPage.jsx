@@ -98,7 +98,7 @@ export default function PodcastPage() {
   const showCategories = [
     'Business & Entrepreneurship',
     'Technology & Innovation',
-    'Education & Learning',
+    'Education & Knowledge',
     'Health & Wellness',
     'Arts & Culture',
     'News & Politics',

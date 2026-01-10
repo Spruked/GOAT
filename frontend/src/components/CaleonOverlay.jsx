@@ -40,7 +40,7 @@ export function CaleonOverlay() {
     {
       id: 1,
       type: 'caleon',
-      content: '🧠 Caleon online. I\'m your AI guardian for the GOAT system. How can I assist you today?',
+      content: 'HOST online. How can I assist you today?',
       timestamp: new Date(),
       context: null
     }
@@ -120,37 +120,6 @@ export function CaleonOverlay() {
       setUnreadCount(prev => prev + 1)
     }
   }, [caleonContext?.activePanel])
-
-  // UCM status updates
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (Math.random() < 0.2) { // 20% chance every 15 seconds
-        const ucmUpdates = [
-          '🧠 UCM: Analyzing your current workflow...',
-          '🎯 UCM: Optimizing learning path based on your progress',
-          '📊 UCM: Processing knowledge graph connections',
-          '⚡ UCM: Cognitive load analysis complete',
-          '💡 UCM: New insights available for your current task',
-          '🔄 UCM: Adapting difficulty based on performance',
-          '🎓 UCM: Teaching recommendations updated',
-          '🔍 UCM: Scanning for optimization opportunities'
-        ]
-
-        const randomUpdate = ucmUpdates[Math.floor(Math.random() * ucmUpdates.length)]
-
-        setMessages(prev => [...prev, {
-          id: Date.now(),
-          type: 'ucm',
-          content: randomUpdate,
-          timestamp: new Date(),
-          context: 'system'
-        }])
-        setUnreadCount(prev => prev + 1)
-      }
-    }, 15000)
-
-    return () => clearInterval(interval)
-  }, [])
 
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
@@ -254,8 +223,8 @@ export function CaleonOverlay() {
 
     if (context?.activePanel === 'learn' && (lowerQuery.includes('learn') || lowerQuery.includes('quiz'))) {
       return {
-        text: 'I see you\'re in the learning panel. The UCM has analyzed your progress and suggests focusing on foundational skills first. Would you like me to generate a personalized quiz or recommend your next lesson?',
-        context: 'learning_help',
+        text: 'I see you\'re in the content panel. The UCM has analyzed your progress and suggests focusing on foundational skills first. Would you like me to generate personalized content or recommend your next creation?',
+        context: 'content_help',
         actions: ['generate_quiz', 'recommend_lesson']
       }
     }
@@ -281,7 +250,7 @@ export function CaleonOverlay() {
     const responses = [
       'I\'m here to help you navigate the GOAT system. The UCM is analyzing your request...',
       'Based on your current context, I recommend checking the knowledge graph for connections.',
-      'The vault system ensures your learning achievements are permanently stored and verifiable.',
+      'The vault system ensures your content achievements are permanently stored and verifiable.',
       'I can guide you through any workflow in the GOAT system. What would you like to accomplish?',
       'The UCM cognition engine is processing your query with full context awareness.',
       'I\'m monitoring your progress across all panels. You\'re doing great work!',
@@ -299,10 +268,10 @@ export function CaleonOverlay() {
     const descriptions = {
       'dashboard': 'main GOAT dashboard - your central hub for all activities',
       'collect': 'collect and ingest NFTs from various sources like IPFS and blockchain',
-      'learn': 'engage with adaptive learning powered by UCM cognition',
+      'learn': 'engage with adaptive content creation powered by UCM cognition',
       'vault': 'manage your immutable knowledge vault with cryptographic proofs',
       'vault-forge': 'create multi-tier vault packages for permanent storage',
-      'profile': 'view your learning progress and achievements'
+      'profile': 'view your content progress and achievements'
     }
     return descriptions[panel] || 'this section of the GOAT system'
   }

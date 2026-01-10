@@ -370,3 +370,9 @@ All components respect boundaries:
 - ❌ Nous Hermes  
 - ❌ OpenAI for speech
 - ❌ Claude for speech
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

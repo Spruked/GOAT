@@ -267,6 +267,12 @@ GitHub: [@Spruked](https://github.com/Spruked)
 
 ---
 
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.
+
+---
+
 **TrueMark® Enterprise Certificate Forge v2.0**  
 *Digital Asset Ledger System (DALS)*  
 *Professional Business Documentation Only*

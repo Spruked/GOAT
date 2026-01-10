@@ -580,3 +580,9 @@ This specification is ready for:
 **This is a governance layer, not a UI feature.**
 
 **This is not implementation. This is foundation.**
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

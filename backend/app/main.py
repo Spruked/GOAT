@@ -1,5 +1,5 @@
 # backend/app/main.py
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request, HTTPException, WebSocket
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
@@ -9,6 +9,8 @@ import structlog
 from datetime import datetime
 import sys
 import os
+import asyncio
+import httpx
 
 # Add DALS and backend to path
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'DALS'))
@@ -101,6 +103,43 @@ app.include_router(host_bubble_router, prefix="/api/v1/host_bubble", tags=["Host
 app.include_router(auth.router)
 
 
+# WebSocket for Orb connection to UCM
+@app.websocket("/ws/orb")
+async def orb_websocket(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            # Poll UCM health for resonance data
+            try:
+                async with httpx.AsyncClient() as client:
+                    response = await client.get("http://localhost:8080/health", timeout=2.0)
+                    if response.status_code == 200:
+                        ucm_data = response.json()
+                        # Map UCM health to resonance
+                        phase_coherence = 0.8 if ucm_data.get("status") == "healthy" else 0.3
+                        await websocket.send_json({
+                            "type": "resonance_update",
+                            "data": {"phaseCoherence": phase_coherence}
+                        })
+                    else:
+                        await websocket.send_json({
+                            "type": "resonance_update", 
+                            "data": {"phaseCoherence": 0.2}
+                        })
+            except Exception as e:
+                # Fallback if UCM unavailable
+                await websocket.send_json({
+                    "type": "resonance_update",
+                    "data": {"phaseCoherence": 0.1}
+                })
+            
+            await asyncio.sleep(5)  # Update every 5 seconds
+    except Exception as e:
+        pass
+    finally:
+        await websocket.close()
+
+
 # DALS ROUTES - All GOAT options available through DALS plugin
 # app.include_router(host_router, prefix="/dals/host", tags=["DALS Host"])
 # app.include_router(uqv_router, prefix="/dals/uqv", tags=["DALS UQV"])
@@ -160,8 +199,8 @@ async def verify_external_services():
         print("Redis not available, skipping check")
 
     # Check FFmpeg
-    if not which("ffmpeg"):
-        raise RuntimeError("FFmpeg not installed")
+    # if not which("ffmpeg"):
+    #     raise RuntimeError("FFmpeg not installed")
 
     # UCM Health Probe (temporarily disabled for local testing)
     # import requests

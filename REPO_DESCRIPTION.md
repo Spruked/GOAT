@@ -161,4 +161,10 @@ MIT License - See [LICENSE](LICENSE) file
 
 ---
 
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.
+
+---
+
 **Made with ❤️ for the Web3 education community**

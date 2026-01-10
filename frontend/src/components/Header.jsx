@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookOpen, Database, GraduationCap, Shield, Archive } from 'lucide-react'
+import { BookOpen, Database, GraduationCap, Shield, Archive, Package, FileText } from 'lucide-react'
 
 export function Header() {
   return (
@@ -26,9 +26,9 @@ export function Header() {
               <Database size={18} />
               <span>Collect</span>
             </Link>
-            <Link to="/learning" className="flex items-center gap-2 hover:text-goat-primary transition">
-              <GraduationCap size={18} />
-              <span>Learn</span>
+            <Link to="/packages" className="flex items-center gap-2 hover:text-goat-primary transition">
+              <Package size={18} />
+              <span>Products</span>
             </Link>
             <Link to="/vault" className="flex items-center gap-2 hover:text-goat-primary transition">
               <Shield size={18} />
@@ -37,6 +37,10 @@ export function Header() {
             <Link to="/profile" className="flex items-center gap-2 hover:text-goat-primary transition">
               <BookOpen size={18} />
               <span>Profile</span>
+            </Link>
+            <Link to="/book-builder" className="flex items-center gap-2 hover:text-goat-primary transition">
+              <FileText size={18} />
+              <span>Book Builder</span>
             </Link>
             <Link to="/project-panel" className="flex items-center gap-2 hover:text-goat-primary transition">
               <Archive size={18} />

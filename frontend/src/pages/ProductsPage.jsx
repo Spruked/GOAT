@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Mic, BookOpen, Headphones, GraduationCap, TrendingUp, Radio, 
   Sparkles, Heart, FileText, Activity, Check, LogOut 
@@ -6,6 +7,8 @@ import {
 
 export default function ProductsPage() {
   const [user, setUser] = useState(null);
+  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [comingSoonProduct, setComingSoonProduct] = useState(null);
   const [stats, setStats] = useState({
     yourProjects: 0,
     inProgress: 0,
@@ -62,7 +65,7 @@ export default function ProductsPage() {
       id: 'course', 
       name: 'Digital Course', 
       icon: GraduationCap, 
-      description: 'Module-based learning with text, video, and resources',
+      description: 'Module-based content with text, video, and resources',
       route: '/course'
     },
     { 
@@ -77,15 +80,17 @@ export default function ProductsPage() {
       id: 'audiocourse', 
       name: 'Audio Course', 
       icon: Radio, 
-      description: 'Mobile-first spoken learning series',
-      route: '/audio-course'
+      description: 'Mobile-first spoken content series',
+      route: '/course',
+      comingSoon: true
     },
     { 
       id: 'custom', 
-      name: 'Custom Projects', 
+      name: 'Client Projects', 
       icon: Sparkles, 
       description: 'Platform-specific ads and promotional content',
-      route: '/custom'
+      route: '/custom',
+      comingSoon: true
     },
     { 
       id: 'legacy', 
@@ -94,6 +99,7 @@ export default function ProductsPage() {
       description: 'Private archives of voices, memories, and meaning',
       badge: 'Private',
       route: '/legacy',
+      comingSoon: true,
       special: true
     }
   ];
@@ -129,6 +135,7 @@ export default function ProductsPage() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Products</h2>
+          <p className="text-lg text-gray-700 italic mb-2">Create once. Publish anywhere. Preserve forever.</p>
           <p className="text-gray-600">Select a product to begin creating</p>
         </div>
 
@@ -136,36 +143,64 @@ export default function ProductsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {products.map((product) => {
             const Icon = product.icon;
+            const isComingSoon = product.comingSoon;
+            
             return (
-              <a
+              <div
                 key={product.id}
-                href={product.route}
-                className={`block p-6 rounded-lg border-2 transition-all hover:shadow-lg ${
+                className={`block p-6 rounded-lg border-2 transition-all hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1 ${
                   product.special
-                    ? 'bg-slate-900/5 border-slate-300 hover:border-slate-400'
-                    : 'bg-white border-gray-200 hover:border-blue-500'
+                    ? 'bg-slate-900/5 border-slate-300 hover:border-slate-400 shadow-md'
+                    : isComingSoon
+                    ? 'bg-gray-50 border-gray-200 opacity-75 shadow-sm'
+                    : 'bg-white border-gray-200 hover:border-blue-500 shadow-md hover:shadow-blue-500/25'
                 }`}
+                onClick={() => {
+                  if (isComingSoon) {
+                    setComingSoonProduct(product);
+                    setShowComingSoon(true);
+                  }
+                }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <Icon className={`w-8 h-8 ${product.special ? 'text-slate-700' : 'text-blue-600'}`} />
-                  {product.badge && (
-                    <span className={`text-xs px-2 py-1 rounded ${
-                      product.badge === 'Flagship' ? 'bg-blue-100 text-blue-700' :
-                      product.badge === 'Premium' ? 'bg-purple-100 text-purple-700' :
-                      product.badge === 'Private' ? 'bg-slate-200 text-slate-700' :
-                      'bg-gray-100 text-gray-700'
-                    }`}>
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-                <h3 className={`text-xl font-semibold mb-2 ${product.special ? 'text-slate-900' : 'text-gray-900'}`}>
-                  {product.name}
-                </h3>
-                <p className={`text-sm ${product.special ? 'text-slate-600' : 'text-gray-600'}`}>
-                  {product.description}
-                </p>
-              </a>
+                {isComingSoon ? (
+                  <div className="relative">
+                    <div className="flex items-start justify-between mb-4">
+                      <Icon className={`w-8 h-8 ${product.special ? 'text-slate-700' : 'text-gray-400'}`} />
+                      <span className="text-xs px-2 py-1 rounded bg-orange-100 text-orange-700">
+                        Coming Soon
+                      </span>
+                    </div>
+                    <h3 className={`text-xl font-semibold mb-2 ${product.special ? 'text-slate-900' : 'text-gray-900'}`}>
+                      {product.name}
+                    </h3>
+                    <p className={`text-sm ${product.special ? 'text-slate-600' : 'text-gray-600'}`}>
+                      {product.description}
+                    </p>
+                  </div>
+                ) : (
+                  <Link to={product.route}>
+                    <div className="flex items-start justify-between mb-4">
+                      <Icon className={`w-8 h-8 ${product.special ? 'text-slate-700' : 'text-blue-600'}`} />
+                      {product.badge && (
+                        <span className={`text-xs px-2 py-1 rounded ${
+                          product.badge === 'Flagship' ? 'bg-blue-100 text-blue-700' :
+                          product.badge === 'Premium' ? 'bg-purple-100 text-purple-700' :
+                          product.badge === 'Private' ? 'bg-slate-200 text-slate-700' :
+                          'bg-gray-100 text-gray-700'
+                        }`}>
+                          {product.badge}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className={`text-xl font-semibold mb-2 ${product.special ? 'text-slate-900' : 'text-gray-900'}`}>
+                      {product.name}
+                    </h3>
+                    <p className={`text-sm ${product.special ? 'text-slate-600' : 'text-gray-600'}`}>
+                      {product.description}
+                    </p>
+                  </Link>
+                )}
+              </div>
             );
           })}
         </div>
@@ -201,6 +236,34 @@ export default function ProductsPage() {
           </div>
         </div>
       </div>
+
+      {/* Coming Soon Modal */}
+      {showComingSoon && comingSoonProduct && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                {React.createElement(comingSoonProduct.icon, { className: "w-8 h-8 text-orange-600" })}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {comingSoonProduct.name} - Coming Soon
+              </h3>
+              <p className="text-gray-600 mb-4">
+                {comingSoonProduct.description}
+              </p>
+              <p className="text-sm text-gray-500 mb-6">
+                This feature is currently in development. We're working hard to bring you the best experience possible.
+              </p>
+              <button
+                onClick={() => setShowComingSoon(false)}
+                className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

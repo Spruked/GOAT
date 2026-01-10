@@ -1,0 +1,117 @@
+{
+  "script": [
+    {
+      "pass_id": "foundation",
+      "name": "Foundation Pass",
+      "description": "Narration foundation - Script parsing & cleanup, chapter segmentation, reading flow optimization, pronunciation normalization, voice pacing guidance, narration-ready master script, watermarked sample excerpt.",
+      "base_price": 5988,
+      "price_min": 5988,
+      "price_max": 5988,
+      "required": true,
+      "estimated_hours": 2,
+      "deliverables": [
+        "narration_ready_script.txt",
+        "chapter_segmentation.json",
+        "pacing_guideline.md",
+        "watermarked_sample.mp3",
+        "pronunciation_guide.json"
+      ]
+    },
+    {
+      "pass_id": "audio_flow",
+      "name": "Audio Flow Pass",
+      "description": "Pacing & timing - Chapter timing normalization, pause and emphasis mapping, listener fatigue reduction, runtime estimates per chapter. About listening endurance, not performance.",
+      "base_price": 4000,
+      "price_min": 4000,
+      "price_max": 6000,
+      "required": false,
+      "estimated_hours": 1.5,
+      "pricing_factors": {
+        "chapters_under_10": 4000,
+        "chapters_10_25": 5000,
+        "chapters_over_25": 6000
+      },
+      "deliverables": [
+        "timing_normalization.json",
+        "pause_emphasis_map.md",
+        "fatigue_optimization_report.json",
+        "chapter_runtime_estimates.txt"
+      ]
+    },
+    {
+      "pass_id": "voice",
+      "name": "Voice Pass",
+      "description": "Narration voice - Full narration (AI or guided), consistent voice profile, chapter-by-chapter audio files. Clear, intelligible narration suitable for long-form listening.",
+      "base_price": 7000,
+      "price_min": 7000,
+      "price_max": 13000,
+      "required": false,
+      "estimated_hours": 10,
+      "pricing_factors": {
+        "duration_under_5_hours": 7000,
+        "duration_5_10_hours": 9500,
+        "duration_over_10_hours": 13000,
+        "per_additional_voice": 3000
+      },
+      "deliverables": [
+        "full_narration.mp3",
+        "chapter_audio_files.zip",
+        "voice_profile.json",
+        "narration_consistency_report.json"
+      ]
+    },
+    {
+      "pass_id": "audio_finish",
+      "name": "Audio Finish Pass",
+      "description": "Mastering - Noise leveling, compression & EQ, loudness normalization, platform-safe WAV/MP3 exports. Ensures audio meets baseline platform expectations.",
+      "base_price": 5000,
+      "price_min": 5000,
+      "price_max": 9000,
+      "required": false,
+      "estimated_hours": 3,
+      "pricing_factors": {
+        "standard_mastering": 5000,
+        "enhanced_mastering": 7000,
+        "premium_mastering": 9000
+      },
+      "deliverables": [
+        "mastered_audio.mp3",
+        "chapter_markers.json",
+        "loudness_normalization_report.txt",
+        "platform_exports.zip"
+      ]
+    },
+    {
+      "pass_id": "production",
+      "name": "Production Pass",
+      "description": "Platform prep - ACX / platform compliance checks, chapter metadata, cover size specifications, upload-ready folder structure. This is preparation—NOT publishing.",
+      "base_price": 3500,
+      "price_min": 3500,
+      "price_max": 7000,
+      "required": false,
+      "estimated_hours": 1,
+      "pricing_factors": {
+        "acx_only": 3500,
+        "multi_platform": 5000,
+        "full_distribution_prep": 7000
+      },
+      "deliverables": [
+        "acx_compliance_check.json",
+        "chapter_metadata.json",
+        "cover_specifications.txt",
+        "upload_folder_structure.zip",
+        "platform_prep_guide.md"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": null,
+    "product_name": "GOAT Audiobook Maker",
+    "requires_payment_before_processing": true,
+    "allows_cart_modification": true,
+    "modification_window_hours": 24,
+    "platform_compliance": ["ACX", "Spotify", "Google Play", "Apple Books"],
+    "key_differentiator": "Watermarked sample included in Foundation Pass"
+  }
+}

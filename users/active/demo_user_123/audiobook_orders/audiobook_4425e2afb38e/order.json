@@ -1,0 +1,72 @@
+{
+  "order_id": "audiobook_4425e2afb38e",
+  "user_id": "demo_user_123",
+  "created_at": "2026-01-06T19:23:32.016947",
+  "status": "draft",
+  "content_file": {
+    "filename": "my_novel.docx",
+    "size": 360000,
+    "uploaded_at": "2026-01-06T19:23:32.017948",
+    "status": "uploaded"
+  },
+  "cart": {
+    "items": [
+      {
+        "pass_id": "foundation",
+        "name": "Foundation Pass",
+        "description": "Narration foundation - Script parsing & cleanup, chapter segmentation, reading flow optimization, pronunciation normalization, voice pacing guidance, narration-ready master script, watermarked sample excerpt.",
+        "price": 5988,
+        "selected": true,
+        "required": true
+      },
+      {
+        "pass_id": "audio_flow",
+        "name": "Audio Flow Pass",
+        "description": "Pacing & timing - Chapter timing normalization, pause and emphasis mapping, listener fatigue reduction, runtime estimates per chapter. About listening endurance, not performance.",
+        "price": 4000,
+        "selected": true,
+        "required": false
+      },
+      {
+        "pass_id": "voice",
+        "name": "Voice Pass",
+        "description": "Narration voice - Full narration (AI or guided), consistent voice profile, chapter-by-chapter audio files. Clear, intelligible narration suitable for long-form listening.",
+        "price": 9285,
+        "selected": true,
+        "required": false
+      },
+      {
+        "pass_id": "audio_finish",
+        "name": "Audio Finish Pass",
+        "description": "Mastering - Noise leveling, compression & EQ, loudness normalization, platform-safe WAV/MP3 exports. Ensures audio meets baseline platform expectations.",
+        "price": 6428,
+        "selected": true,
+        "required": false
+      }
+    ],
+    "subtotal": 25701,
+    "tax": 0,
+    "total": 25701
+  },
+  "payment_status": "completed",
+  "processing_status": "completed",
+  "outputs": {
+    "foundation_sample": "audiobook_4425e2afb38e_sample.mp3",
+    "full_narration": "audiobook_4425e2afb38e_full.mp3",
+    "chapter_files": "audiobook_4425e2afb38e_chapters.zip",
+    "metadata_acx": "audiobook_4425e2afb38e_acx_metadata.json",
+    "chapter_markers": "audiobook_4425e2afb38e_markers.json",
+    "production_checklist": "audiobook_4425e2afb38e_production_checklist.txt"
+  },
+  "metadata": {
+    "estimated_words": 51428,
+    "estimated_chapters": 10,
+    "estimated_duration_hours": 5.714222222222222,
+    "estimated_duration_minutes": 342.85333333333335
+  },
+  "last_updated": "2026-01-06T19:23:42.349331",
+  "payment_intent_id": "pi_b8379217ee0b4687b76d9365",
+  "paid_at": "2026-01-06T19:23:32.248951",
+  "processing_started_at": "2026-01-06T19:23:32.249953",
+  "processing_completed_at": "2026-01-06T19:23:42.348330"
+}

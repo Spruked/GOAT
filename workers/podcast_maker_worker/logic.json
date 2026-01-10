@@ -1,0 +1,12 @@
+{
+  "worker_id": "worker_podcast_v1",
+  "job_name": "podcast_maker",
+  "version": "1.0",
+  "learning_mode": "restricted",
+  "transfer_triggers": {
+    "unanswered_threshold": 3,
+    "time_interval_minutes": 60
+  },
+  "approved_improvements": [],
+  "pending_reviews": []
+}

@@ -185,3 +185,9 @@ By contributing, you agree that your contributions will be licensed under the MI
 ---
 
 Thank you for helping make GOAT better! 🐐
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

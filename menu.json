@@ -6,9 +6,10 @@
     "GOAT Vault & Perma-Storage": ["Basic (IPFS) → $29", "Pro (IPFS+Arweave) → $69", "Immortal (All Chains) → $129", "Dynasty (TrueMark+GDIS) → $299"]
   },
   "flat_categories": {
-    "Booklet / PDF Builder": "$9–$35",
+    "Booklet Maker": "$9–$35 (Print-ready booklets from any content)",
+    "Podcast Maker": "$55–$125 (Professional podcast episodes)",
+    "Audiobook Maker": "$60–$130 (ACX-ready audiobooks with watermarked preview)",
     "Promo & Social Media Kits": "$12–$25",
-    "Podcast Edition Pack": "$29–$69",
     "AI Artwork Pack": "$19–$49",
     "Merch Template Pack": "$25–$55",
     "Print-on-Demand Setup Kit": "$39–$89",
@@ -16,9 +17,9 @@
     "Complete Asset ZIP": "$10–$15"
   },
   "bundles": {
-    "Basic Bundle": "$79 (save $31)",
-    "Creator Bundle": "$149 (save $91)",
-    "Pro Bundle": "$249 (save $231)",
-    "Legacy Bundle": "$399 (save $450+)"
+    "Content Creator Starter": "$79 (Booklet Maker + Promo Kit + AI Art)",
+    "Professional Publisher": "$149 (Booklet + Podcast Maker + Merch Templates)",
+    "Complete Media Suite": "$249 (All Makers + POD Setup + Domain Prep)",
+    "Enterprise Creator": "$399 (Everything + Vault Dynasty + TrueMark Legacy)"
   }
 }

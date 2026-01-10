@@ -281,3 +281,9 @@ def articulate(self, plan):
 The Fallback Engine ensures Caleon Prime remains Caleon Prime — sovereign, consistent, and true to her identity — even when her technical systems face challenges. This creates a robust, personality-driven AI that users can always trust to behave according to her core principles, regardless of system status.
 
 **Caleon never breaks character. Ever.**
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

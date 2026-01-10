@@ -1,0 +1,46 @@
+{
+  "order_id": "podcast_75a0ba6787ba",
+  "user_id": "demo_user_123",
+  "created_at": "2026-01-06T19:20:22.572342",
+  "status": "draft",
+  "content_file": {
+    "filename": "episode_script.docx",
+    "size": 25600,
+    "content_type": "script",
+    "uploaded_at": "2026-01-06T19:20:22.572342",
+    "status": "uploaded"
+  },
+  "cart": {
+    "items": [
+      {
+        "pass_id": "foundation",
+        "name": "Foundation Pass",
+        "description": "Content analysis, episode structure planning, and show format design. Establishes the core narrative and timing.",
+        "price": 5488,
+        "selected": true,
+        "required": true
+      }
+    ],
+    "subtotal": 5488,
+    "tax": 0,
+    "total": 5488
+  },
+  "payment_status": "completed",
+  "processing_status": "completed",
+  "outputs": {
+    "foundation_outline": "podcast_75a0ba6787ba_outline.json",
+    "episode_audio": "podcast_75a0ba6787ba_episode.mp3",
+    "show_notes": "podcast_75a0ba6787ba_shownotes.md",
+    "metadata_json": "podcast_75a0ba6787ba_metadata.json",
+    "rss_feed": "podcast_75a0ba6787ba_rss.xml"
+  },
+  "metadata": {
+    "estimated_words": 4266,
+    "estimated_duration_minutes": 28.44
+  },
+  "last_updated": "2026-01-06T19:20:32.681894",
+  "payment_intent_id": "pi_dd9d58e09ebd4a0198ca978d",
+  "paid_at": "2026-01-06T19:20:22.637344",
+  "processing_started_at": "2026-01-06T19:20:22.638343",
+  "processing_completed_at": "2026-01-06T19:20:32.680894"
+}

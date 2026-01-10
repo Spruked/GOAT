@@ -56,9 +56,9 @@ GOAT/
 ├── vault/            # Glyph + encryption
 ├── collector/        # NFT ingestion
 ├── knowledge/        # Skill graph
-├── teacher/           # AI teaching
-├── licenser/          # Badge minting
-└── contracts/         # Solidity contracts
+├── content/          # AI content creation
+├── licenser/         # Badge minting
+└── contracts/        # Solidity contracts
 ```
 
 ## 🎯 Test Flow
@@ -67,7 +67,7 @@ GOAT/
 2. **Visit**: http://localhost:5173
 3. **Collect**: Go to "Collect" → Enter IPFS CID
 4. **View**: Check "Vault" for glyph
-5. **Learn**: Try "Learn" for quizzes
+5. **Create**: Try "Create" for content generation
 6. **Profile**: See progress at /profile/user_demo
 
 ## 🔧 Environment Setup
@@ -114,11 +114,11 @@ POST /api/collect/ipfs          # Ingest from IPFS
 POST /api/collect/onchain       # Ingest from chain
 ```
 
-### Teacher
+### Content Creator
 ```bash
-GET  /api/teach/recommend/{id}  # Get lesson
-GET  /api/teach/quiz/{skill}    # Generate quiz
-POST /api/teach/submit-quiz     # Submit answers
+GET  /api/content/recommend/{id}  # Get content suggestions
+GET  /api/content/generate/{type} # Generate content
+POST /api/content/create         # Create new content
 ```
 
 ## 📜 Deploy Smart Contract
@@ -154,8 +154,8 @@ docker-compose down -v
 ```bash
 # Change ports in docker-compose.yml
 ports:
-  - "5001:5000"  # Backend
-  - "3000:80"    # Frontend
+  - "5000:5000"  # GOAT Backend / API
+  - "5173:80"    # GOAT Frontend
 ```
 
 ### Frontend Can't Reach Backend
@@ -178,7 +178,7 @@ ports:
 ✅ FastAPI backend (25+ endpoints)
 ✅ Glyph + Vault cryptographic system
 ✅ IPFS + blockchain integration
-✅ AI teaching engine
+✅ AI content creation engine
 ✅ Badge minting system
 ✅ Docker deployment ready
 ✅ Production-ready architecture
@@ -232,3 +232,9 @@ docker-compose -f docker-compose.prod.yml up -d
 **💡 Pro Tip**: Check `BUILD_SUMMARY.md` for complete feature list!
 
 **The GOAT is ready to teach. Let's go! 🚀**
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

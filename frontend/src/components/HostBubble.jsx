@@ -136,7 +136,7 @@ export function HostBubble(props) {
             data: { ...prev.data, goal: 'course' }
           }));
           return {
-            message: "Excellent! 🎓 Courses are fantastic for teaching and building communities. What subject would you like to teach?\n\n• Business & Entrepreneurship\n• Technology & Programming\n• Health & Wellness\n• Creative Arts\n• Personal Development\n• Professional Skills\n\nWhat's your area of expertise?"
+            message: "Excellent! 🎓 Courses are fantastic for sharing knowledge and building communities. What subject would you like to create content about?\n\n• Business & Entrepreneurship\n• Technology & Programming\n• Health & Wellness\n• Creative Arts\n• Personal Development\n• Professional Skills\n\nWhat's your area of expertise?"
           };
         } else if (lowerMessage.includes('masterclass') || lowerMessage.includes('3') || lowerMessage.includes('🎤')) {
           setOnboardingState(prev => ({

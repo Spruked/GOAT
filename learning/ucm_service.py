@@ -2,6 +2,26 @@
 """
 UCM Service - Universal Cognitive Model Service
 Deploys cognitive workers to GOAT departments via Caleon bubble
+
+ALIGNMENT DOCTRINE:
+"DALS records truth. UCM learns from truth. GOAT produces behavior."
+
+UCM is the only learning and decision-making system.
+
+UCM consumes:
+- DALS-observed GOAT behavior
+- historical classifications
+- emitted learning events
+
+UCM learns about GOAT, not from GOAT instruction.
+
+UCM verb authority (exclusive):
+- learn
+- infer
+- decide
+- adapt
+- correct
+- recommend
 """
 
 import os

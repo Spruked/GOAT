@@ -1,0 +1,45 @@
+# GOAT Booklet Foundation Template
+
+This is a template for creating professional booklets. Replace this content with your actual booklet content.
+
+## Structure Guidelines
+
+### Page Layout
+- **Page Size**: 8.5" x 11" (Letter) folded to 5.5" x 8.5"
+- **Margins**: 0.5" inside, 0.25" outside, 0.75" top/bottom
+- **Gutter**: 0.25" for binding
+- **Center Fold Safety**: Keep important content 0.5" from center
+
+### Content Organization
+1. **Cover Page**: Title, subtitle, author
+2. **Table of Contents**: Page numbers and sections
+3. **Main Content**: Organized sections with clear headings
+4. **Back Cover**: Contact info, copyright, additional resources
+
+### Typography
+- **Headers**: 18-24pt, Bold
+- **Body Text**: 10-12pt, Regular
+- **Line Spacing**: 1.2-1.5 for readability
+- **Font**: Professional, serif or sans-serif
+
+### Images and Graphics
+- **Resolution**: 300 DPI minimum
+- **Format**: CMYK for printing
+- **Placement**: Avoid center fold area
+
+## Production Notes
+
+This template will be processed through the following passes:
+- **Foundation**: Structure and organization
+- **Layout**: Professional formatting
+- **Typography**: Readability optimization
+- **Presentation**: Visual enhancements
+- **Production**: Print-ready files
+
+## Checklist
+
+- [ ] Content uploaded and parsed
+- [ ] Structure validated
+- [ ] Page count calculated
+- [ ] Print specifications set
+- [ ] Ready for next pass processing

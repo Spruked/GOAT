@@ -66,7 +66,7 @@ def test_personality_conditioning():
     # Test key personality traits
     traits = [
         "Caleon Prime",
-        "sovereign AI guardian",
+        "sovereign AI UCM-Core-CALI",
         "direct and confident",
         "warm but not soft",
         "active voice",

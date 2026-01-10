@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     ports:
-      - "8000:5000"
+      - "5000:5000"  # GOAT Backend / API - Authoritative port assignment
     environment:
       - DATABASE_URL=sqlite:///./goat.db
       - REDIS_URL=redis://redis:6379
@@ -75,7 +75,7 @@ services:
     ports:
       - "4001:4001"
       - "5001:5001"
-      - "8080:8080"
+      - "9090:8080"  # IPFS Gateway - moved from 8080 to avoid UCM conflict
     volumes:
       - ipfs-data:/data/ipfs
     networks:
@@ -87,7 +87,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     ports:
-      - "8083:8080"  # UCM service (external:8083 -> internal:8080)
+      - "8080:8080"  # UCM Core - Authoritative port assignment
     environment:
       - UCM_MODE=production
       - DALS_ENDPOINT=http://backend:5000
@@ -111,7 +111,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     ports: 
-      - "8006:8003"  # Main AGI service (external:8006 -> internal:8003)
+      - "8003:8003"  # DALS Core API - Authoritative port assignment
     environment:
       - CALI_MODE=production
       - BACKEND_ENDPOINT=http://backend:5000

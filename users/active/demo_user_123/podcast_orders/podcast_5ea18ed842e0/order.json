@@ -1,0 +1,70 @@
+{
+  "order_id": "podcast_5ea18ed842e0",
+  "user_id": "demo_user_123",
+  "created_at": "2026-01-06T19:20:43.042281",
+  "status": "draft",
+  "content_file": {
+    "filename": "episode_script.docx",
+    "size": 25600,
+    "content_type": "script",
+    "uploaded_at": "2026-01-06T19:20:43.042281",
+    "status": "uploaded"
+  },
+  "cart": {
+    "items": [
+      {
+        "pass_id": "foundation",
+        "name": "Foundation Pass",
+        "description": "Content analysis, episode structure planning, and show format design. Establishes the core narrative and timing.",
+        "price": 5488,
+        "selected": true,
+        "required": true
+      },
+      {
+        "pass_id": "structure",
+        "name": "Structure Pass",
+        "description": "Script writing, dialogue development, and narrative flow optimization. Transforms raw content into engaging podcast format.",
+        "price": 10976,
+        "selected": true,
+        "required": false
+      },
+      {
+        "pass_id": "voice",
+        "name": "Voice Pass",
+        "description": "Voice acting, audio recording, and performance direction. Brings your podcast to life with professional narration.",
+        "price": 21952,
+        "selected": true,
+        "required": false
+      },
+      {
+        "pass_id": "audio_finish",
+        "name": "Audio Finish Pass",
+        "description": "Sound design, music integration, and audio post-production. Polishes your episode with professional audio engineering.",
+        "price": 16480,
+        "selected": true,
+        "required": false
+      }
+    ],
+    "subtotal": 54896,
+    "tax": 0,
+    "total": 54896
+  },
+  "payment_status": "completed",
+  "processing_status": "completed",
+  "outputs": {
+    "foundation_outline": "podcast_5ea18ed842e0_outline.json",
+    "episode_audio": "podcast_5ea18ed842e0_episode.mp3",
+    "show_notes": "podcast_5ea18ed842e0_shownotes.md",
+    "metadata_json": "podcast_5ea18ed842e0_metadata.json",
+    "rss_feed": "podcast_5ea18ed842e0_rss.xml"
+  },
+  "metadata": {
+    "estimated_words": 4266,
+    "estimated_duration_minutes": 28.44
+  },
+  "last_updated": "2026-01-06T19:20:53.167080",
+  "payment_intent_id": "pi_634f90d7825e40db8c5dd638",
+  "paid_at": "2026-01-06T19:20:43.123283",
+  "processing_started_at": "2026-01-06T19:20:43.124282",
+  "processing_completed_at": "2026-01-06T19:20:53.167080"
+}

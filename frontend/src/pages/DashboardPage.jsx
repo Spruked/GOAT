@@ -173,7 +173,7 @@ export default function DashboardPage() {
                 <div className="p-4 bg-slate-50 rounded-lg">
                   <div className="flex items-center mb-2">
                     <Sparkles className="w-4 h-4 mr-2 text-slate-600" />
-                    <span className="text-sm font-medium text-slate-700">Custom Projects</span>
+                    <span className="text-sm font-medium text-slate-700">Client Projects</span>
                   </div>
                   <p className="text-2xl font-bold text-slate-900">{stats.products.custom.active}</p>
                   <p className="text-xs text-slate-600 mt-1">{stats.products.custom.completed} completed</p>
@@ -344,9 +344,9 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* Learning Products */}
+                {/* Content Products */}
                 <div>
-                  <h4 className="text-sm font-medium text-slate-600 mb-3">Learning & Authority</h4>
+                  <h4 className="text-sm font-medium text-slate-600 mb-3">Content & Authority</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
@@ -388,7 +388,7 @@ export default function DashboardPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
-                        <span className="flex items-center"><Sparkles className="w-4 h-4 mr-2 text-slate-600" />Custom Projects</span>
+                        <span className="flex items-center"><Sparkles className="w-4 h-4 mr-2 text-slate-600" />Client Projects</span>
                       </div>
                       <div className="space-y-1 text-sm">
                         <div className="flex justify-between"><span className="text-slate-600">Active:</span><span className="font-medium">{stats.products.custom.active}</span></div>

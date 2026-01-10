@@ -1,4 +1,4 @@
-# GOAT v2.1 - The Proven Teacher
+# GOAT v2.1 - Greatest Of All Time
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
@@ -9,9 +9,21 @@
 
 **NFT Knowledge Engine with Glyph + Vault Provenance System & Digital Asset Logistics**
 
-> Turn any NFT into a self-improving, AI-powered teacher that verifies learning on-chain.
-> Every lesson is signed. Every skill is provable. Every teacher is accountable.
+> Transform any NFT into a content creation and knowledge management platform with verifiable provenance on Polygon.
+> Every creation is signed. Every asset is provable. Every legacy is permanent.
 > Now enhanced with Digital Asset Logistics System (DALS) for comprehensive asset management and monitoring.
+
+---
+
+## 🔒 ALIGNMENT DOCTRINE
+
+**"DALS records truth. UCM learns from truth. GOAT produces behavior."**
+
+GOAT is a **content creation and knowledge management platform**.
+GOAT does not teach, instruct, train, or learn users.
+
+GOAT produces content, structures knowledge, and transforms assets.
+GOAT is a **system being observed**, not a system that observes or learns.
 
 ---
 
@@ -50,11 +62,11 @@
 - **EIP-191 Signatures**: Verifiable provenance for all data
 - **Merkle Tree Anchoring**: On-chain proof anchoring to Polygon
 
-### 🤖 **AI-Powered Teaching**
-- **Adaptive Learning Paths**: Personalized recommendations based on progress
-- **Auto-Generated Quizzes**: AI-created assessments from NFT content
-- **Skill Tree System**: Prerequisite tracking and mastery levels
-- **Progress Analytics**: Detailed learning metrics and achievements
+### 🤖 **AI-Powered Content Creation**
+- **Adaptive Content Generation**: Personalized recommendations based on user needs
+- **Auto-Generated Assets**: AI-created content from NFT knowledge bases
+- **Knowledge Graph System**: Semantic relationships and content connections
+- **Performance Analytics**: Detailed usage metrics and content insights
 
 ### 🔗 **Multi-Source Collection**
 - **IPFS Integration**: Direct CID ingestion with auto-pinning
@@ -62,10 +74,10 @@
 - **OpenSea API**: Marketplace metadata enrichment
 - **Webhook Support**: Auto-ingest from mint events
 
-### 🎓 **Verifiable Credentials**
-- **Learner Badges**: Mintable NFT badges for verified skills
-- **Cryptographic Proofs**: Full provenance chain for every achievement
-- **Feedback Loop**: Continuous improvement from learner input
+### 🎓 **Verifiable Provenance**
+- **Content Badges**: Mintable NFT badges for verified creations
+- **Cryptographic Proofs**: Full provenance chain for every asset
+- **Feedback Loop**: Continuous improvement from user interactions
 
 ---
 
@@ -102,9 +114,9 @@ docker-compose up -d
 ### 3. Access the Application
 
 - **Frontend**: http://localhost:5173
-- **API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
-- **DALS Dashboard**: http://localhost:8000/dals/host/dashboard
+- **API**: http://localhost:5000
+- **API Docs**: http://localhost:5000/docs
+- **DALS Dashboard**: http://localhost:5000/dals/host/dashboard
 - **Neo4j Browser**: http://localhost:7474
 - **IPFS Gateway**: http://localhost:8080
 
@@ -186,7 +198,7 @@ pip install -r requirements.txt
 
 # Run FastAPI server
 cd backend/app
-uvicorn main:app --reload --port 8000
+uvicorn main:app --reload --port 5000
 ```
 
 ### Run Frontend Locally
@@ -265,32 +277,32 @@ PRIVATE_KEY=0x...                      # For EIP-191 signing
 POLYGON_RPC=https://polygon-rpc.com
 ANCHOR_CONTRACT=0x...                  # Deployed contract address
 OPENAI_API_KEY=sk-...                  # For AI features
-DALS_ENDPOINT=http://localhost:8000    # DALS gateway
+DALS_ENDPOINT=http://localhost:5000    # DALS gateway
 ```
 
 ---
 
 ## 🎯 Use Cases
 
-### For Educators
-1. Mint educational NFTs with IPFS content
-2. GOAT auto-ingests and creates glyphs
-3. AI generates lessons and quizzes
-4. Students earn verifiable badges
+### For Content Creators
+1. Mint NFTs with rich IPFS content
+2. GOAT auto-ingests and creates visual glyphs
+3. AI generates related content and assets
+4. Collectors earn verifiable ownership badges
 5. DALS provides monitoring and asset management
 
-### For Learners
-1. Browse recommended skills through DALS dashboard
-2. Complete adaptive lessons
-3. Take AI-generated quizzes
-4. Mint proof-of-learning badges
-5. Track progress via DALS monitoring
+### For Collectors
+1. Browse recommended NFTs through DALS dashboard
+2. Access AI-enhanced content experiences
+3. Verify authenticity with cryptographic proofs
+4. Mint proof-of-ownership badges
+5. Track collection value via DALS monitoring
 
 ### For Platforms
 1. Integrate via webhook for auto-ingestion
 2. Embed GOAT widget in marketplace
-3. Verify learner credentials on-chain
-4. Track learning analytics through DALS
+3. Verify NFT credentials on-chain
+4. Track collection analytics through DALS
 5. Manage assets via DALS logistics system
 
 ---
@@ -327,17 +339,17 @@ forge create --rpc-url $POLYGON_RPC \
 
 ### Health Check
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:5000/health
 ```
 
 ### DALS Dashboard
 ```bash
-curl http://localhost:8000/dals/host/dashboard
+curl http://localhost:5000/dals/host/dashboard
 ```
 
 ### Vault Stats
 ```bash
-curl http://localhost:8000/api/vault/stats
+curl http://localhost:5000/api/vault/stats
 ```
 
 ---
@@ -389,6 +401,12 @@ For issues and questions:
 
 ---
 
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.
+
+---
+
 **Built with ❤️ by the GOAT team**
 
-*The GOAT now doesn't just teach — it **proves*. And with DALS, it **manages**.*
+*The GOAT now doesn't just create — it **proves*. And with DALS, it **manages**.*

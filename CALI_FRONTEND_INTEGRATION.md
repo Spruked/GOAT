@@ -324,3 +324,9 @@ Together they create Caleon Prime's complete personality across GOAT.
 ---
 
 **One voice. Infinite consistency. Pure Caleon.** 🧬✨
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

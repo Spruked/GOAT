@@ -433,3 +433,9 @@ console.log(`Audiobook created: ${result.total_duration}s`);
 ---
 
 **🎧 GOAT Audiobook Creation System - Transforming text into professional audio experiences with AI-powered voice synthesis and character authenticity.**
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

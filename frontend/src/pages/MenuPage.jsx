@@ -26,7 +26,7 @@ export default function MenuPage() {
       features: [
         "AI-powered content structuring",
         "VisiData integration for data analysis",
-        "Caleon-guided creation process",
+        "HOST-guided creation process",
         "Multiple output formats (books, courses, masterclasses)",
         "Automatic vault archiving",
         "Minting partner integration"
@@ -50,7 +50,7 @@ export default function MenuPage() {
     {
       icon: <GraduationCap className="w-8 h-8" />,
       title: "Masterclass Builder",
-      description: "Create immersive masterclass experiences that capture your unique methodology and teaching style.",
+      description: "Create immersive masterclass experiences that capture your unique methodology and expertise.",
       features: [
         "Video and audio integration",
         "Interactive exercises and worksheets",
@@ -68,7 +68,7 @@ export default function MenuPage() {
         "Automated assessment generation",
         "Progress certificates",
         "Multi-media content support",
-        "Learning analytics and insights"
+        "Content analytics and insights"
       ]
     },
     {
@@ -147,8 +147,8 @@ export default function MenuPage() {
     },
     {
       icon: <Cpu className="w-8 h-8" />,
-      title: "Caleon-Guided Creation",
-      description: "Work with Caleon, your AI creation companion, to structure, enhance, and perfect your masterpiece.",
+      title: "HOST-Guided Creation",
+      description: "Work with HOST, your scripted creation companion, to structure, enhance, and perfect your masterpiece.",
       features: [
         "Step-by-step guidance",
         "Content analysis and suggestions",
@@ -244,10 +244,10 @@ export default function MenuPage() {
       {/* Call to Action */}
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
         <h2 className="text-3xl font-bold text-white mb-6">
-          Ready to Transform Education?
+          Ready to Transform Content?
         </h2>
         <p className="text-xl text-slate-400 mb-8">
-          Join the decentralized knowledge revolution and start building your eternal legacy of learning.
+          Join the decentralized knowledge revolution and start building your eternal legacy of content.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link

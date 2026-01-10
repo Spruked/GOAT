@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Header } from '../components/Header';
 
 const BookBuilderPage = () => {
   const [bookData, setBookData] = useState({
@@ -261,9 +262,11 @@ const BookBuilderPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8 text-center">GOAT Book Builder</h1>
-      <p className="text-center text-gray-600 mb-8">Create complete books from outline to export</p>
+    <div className="min-h-screen bg-slate-900">
+      <Header />
+      
+      <div className="container mx-auto p-4 max-w-4xl">
+        <h1 className="text-4xl font-bold mb-2 text-center text-white">Book Builder</h1>
 
       {/* Status Message */}
       {status && (
@@ -275,103 +278,147 @@ const BookBuilderPage = () => {
       {/* Book Creation Form */}
       {!currentBook && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Create New Book</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-800">Create New Book</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Title</label>
+              <label className="block text-sm font-medium mb-1 text-white">Title</label>
               <input
                 type="text"
+                id="title"
                 name="title"
                 value={bookData.title}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter book title"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Author</label>
+              <label className="block text-sm font-medium mb-1 text-white">Author</label>
               <input
                 type="text"
+                id="author"
                 name="author"
                 value={bookData.author}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter author name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Genre</label>
+              <label className="block text-sm font-medium mb-1 text-white">Genre</label>
               <select
+                id="genre"
                 name="genre"
                 value={bookData.genre}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               >
                 {genres.map(genre => (
-                  <option key={genre.value} value={genre.value}>{genre.label}</option>
+                  <option key={genre.value} value={genre.value} className="bg-gray-800 text-white">{genre.label}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Topic</label>
+              <label className="block text-sm font-medium mb-1 text-white">Topic</label>
               <input
                 type="text"
+                id="topic"
                 name="topic"
                 value={bookData.topic}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Main topic or subject"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Target Audience</label>
+              <label className="block text-sm font-medium mb-1 text-white">Target Audience</label>
               <input
                 type="text"
+                id="target_audience"
                 name="target_audience"
                 value={bookData.target_audience}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Who is this book for?"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Word Count Goal</label>
+              <label className="block text-sm font-medium mb-1 text-white">Word Count Goal</label>
               <input
                 type="number"
+                id="word_count_goal"
                 name="word_count_goal"
                 value={bookData.word_count_goal}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 min="10000"
                 max="200000"
               />
             </div>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-white">Tone</label>
+              <select
+                id="tone"
+                name="tone"
+                value={bookData.tone}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="professional" className="bg-gray-800 text-white">Professional</option>
+                <option value="casual" className="bg-gray-800 text-white">Casual</option>
+                <option value="formal" className="bg-gray-800 text-white">Formal</option>
+                <option value="inspirational" className="bg-gray-800 text-white">Inspirational</option>
+                <option value="educational" className="bg-gray-800 text-white">Educational</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1 text-white">Writing Style</label>
+              <select
+                id="writing_style"
+                name="writing_style"
+                value={bookData.writing_style}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="narrative" className="bg-gray-800 text-white">Narrative</option>
+                <option value="expository" className="bg-gray-800 text-white">Expository</option>
+                <option value="persuasive" className="bg-gray-800 text-white">Persuasive</option>
+                <option value="descriptive" className="bg-gray-800 text-white">Descriptive</option>
+                <option value="technical" className="bg-gray-800 text-white">Technical</option>
+              </select>
+            </div>
+          </div>
+
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Key Themes (comma-separated)</label>
+            <label className="block text-sm font-medium mb-1 text-white">Key Themes (comma-separated)</label>
             <input
               type="text"
+              id="key_themes"
               value={bookData.key_themes.join(', ')}
               onChange={(e) => handleArrayInputChange('key_themes', e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               placeholder="leadership, innovation, growth"
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Source Materials (comma-separated)</label>
+            <label className="block text-sm font-medium mb-1 text-white">Source Materials (comma-separated)</label>
             <input
               type="text"
+              id="source_materials"
               value={bookData.source_materials.join(', ')}
               onChange={(e) => handleArrayInputChange('source_materials', e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-gray-600 rounded bg-gray-800 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               placeholder="books, articles, research, experience"
             />
           </div>
@@ -390,7 +437,7 @@ const BookBuilderPage = () => {
       {currentBook && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">{currentBook.outline.title}</h2>
+            <h2 className="text-xl font-semibold text-gray-800">{currentBook.outline.title}</h2>
             <button
               onClick={resetForm}
               className="text-gray-600 hover:text-gray-800"
@@ -435,7 +482,7 @@ const BookBuilderPage = () => {
           {/* Chapter Generation */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold">Chapters</h3>
+              <h3 className="font-semibold text-gray-800">Chapters</h3>
               {chapters.length < currentBook.outline.chapters.length && (
                 <button
                   onClick={generateAllChapters}
@@ -496,14 +543,15 @@ const BookBuilderPage = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Export Format</label>
+                    <label className="block text-sm font-medium mb-2 text-white">Export Format</label>
                     <select
+                      id="export_format"
                       value={exportFormat}
                       onChange={(e) => setExportFormat(e.target.value)}
-                      className="p-2 border rounded mr-2"
+                      className="p-2 border border-gray-600 rounded mr-2 bg-gray-800 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       {exportFormats.map(format => (
-                        <option key={format.value} value={format.value}>{format.label}</option>
+                        <option key={format.value} value={format.value} className="bg-gray-800 text-white">{format.label}</option>
                       ))}
                     </select>
                   </div>
@@ -525,7 +573,7 @@ const BookBuilderPage = () => {
       {/* Previous Books */}
       {books.length > 0 && (
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Previous Books</h2>
+          <h2 className="text-xl font-semibold mb-4 text-gray-800">Previous Books</h2>
           <div className="space-y-2">
             {books.map(book => (
               <div key={book.book_id} className="flex justify-between items-center p-3 bg-gray-50 rounded">
@@ -536,7 +584,7 @@ const BookBuilderPage = () => {
                 </div>
                 <div className="text-sm text-gray-600">
                   {book.chapters_generated}/{book.total_chapters} chapters
-                  {book.compiled && <span className="ml-2 text-green-600">✓ Compiled</span>}
+                  {/* {book.compiled && <span className="ml-2 text-green-600">✓ Compiled</span>} */}
                   {book.exports_count > 0 && <span className="ml-2 text-blue-600">✓ Exported</span>}
                 </div>
               </div>
@@ -544,8 +592,9 @@ const BookBuilderPage = () => {
           </div>
         </div>
       )}
-    </div>
-  );
-};
+        </div>
+          </div>
+        );
+      };
 
-export default BookBuilderPage;
+      export default BookBuilderPage;

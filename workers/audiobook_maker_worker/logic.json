@@ -1,0 +1,31 @@
+{
+  "worker_id": "worker_audiobook_v1",
+  "job_name": "audiobook_maker",
+  "version": "1.0",
+  "learning_mode": "restricted",
+  "transfer_triggers": {
+    "unanswered_threshold": 2,
+    "time_interval_minutes": 30
+  },
+  "ecommerce_features": {
+    "cart_persistence": true,
+    "price_calculation": "dynamic",
+    "payment_gateway": "stripe",
+    "allow_post_payment_modification": false,
+    "allow_pre_payment_modification": true,
+    "modification_requires_repayment": true
+  },
+  "content_type_support": {
+    "script_formats": ["pdf", "docx", "txt", "md"],
+    "max_file_size_mb": 200
+  },
+  "key_features": {
+    "watermarked_sample": true,
+    "chapter_based_processing": true,
+    "acx_compliance_checks": true,
+    "per_voice_pricing": true
+  },
+  "fallback_response": "I can help you prepare a professional audiobook. Please upload your manuscript, or ask about our audiobook passes (Foundation includes a watermarked sample, Audio Flow, Voice, Audio Finish, Production).",
+  "approved_improvements": [],
+  "pending_reviews": []
+}

@@ -351,3 +351,9 @@ npm run dev
 
 **Status**: ✅ Ready for User Review  
 **Next Step**: Your Approval → Production Deployment
+
+---
+
+## 📄 Copyright
+
+Copyright © 2025-2026 PRo Prime Series and GOAT, in association with TrueMark Mint LLC. All rights reserved.

@@ -1,0 +1,54 @@
+{
+  "order_id": "booklet_51a00354d61b",
+  "user_id": "demo_user_123",
+  "created_at": "2026-01-06T19:55:00.570808",
+  "status": "draft",
+  "content_file": {
+    "filename": "training_manual.pdf",
+    "size": 5242880,
+    "uploaded_at": "2026-01-06T19:55:00.570808",
+    "status": "uploaded"
+  },
+  "cart": {
+    "items": [
+      {
+        "pass_id": "foundation",
+        "name": "Foundation Pass",
+        "description": "Parse & Organize - Core structure and correctness. Includes: logical flow, section hierarchy, proper pagination, margins, center-fold safety, print-safe export.",
+        "price": 999,
+        "selected": true,
+        "required": true
+      },
+      {
+        "pass_id": "layout",
+        "name": "Layout Pass",
+        "description": "Structured Layout - Clean booklet layout with final page sizing, refined margins, gutter spacing, and visual breathing room. This is typesetting, not design.",
+        "price": 1000,
+        "selected": true,
+        "required": false
+      },
+      {
+        "pass_id": "typography",
+        "name": "Typography Pass",
+        "description": "Readability & Refinement - Print-safe font selection, header/body pairing, line spacing, rhythm, and hierarchy optimization for reading comfort.",
+        "price": 800,
+        "selected": true,
+        "required": false
+      }
+    ],
+    "subtotal": 2799,
+    "tax": 0,
+    "total": 2799
+  },
+  "payment_status": "completed",
+  "payment_intent_id": "pi_c1a73b51436a4079ba90a856",
+  "processing_status": "in_progress",
+  "outputs": {},
+  "metadata": {
+    "estimated_pages": 125,
+    "estimated_sheets": 31.25
+  },
+  "last_updated": "2026-01-06T19:55:00.880847",
+  "paid_at": "2026-01-06T19:55:00.878847",
+  "processing_started_at": "2026-01-06T19:55:00.880847"
+}
