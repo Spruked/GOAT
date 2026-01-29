@@ -12,7 +12,7 @@ class Config:
     # ═══════════════════════════════════════
     # CALEON PRIME INTEGRATION
     # ═══════════════════════════════════════
-    CALEON_UCM_ENDPOINT = os.getenv("CALEON_UCM_ENDPOINT", "http://localhost:8000/v1/caleon/invoke")
+    CALEON_UCM_ENDPOINT = os.getenv("CALEON_UCM_ENDPOINT", "http://localhost:8080/v1/caleon/invoke")
     CALEON_AUTH_TOKEN   = os.getenv("CALEON_AUTH_TOKEN", "founder-legacy-key-2025")
 
     # Content generation settings

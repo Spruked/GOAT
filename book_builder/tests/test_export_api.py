@@ -8,7 +8,7 @@ import json
 import time
 from pathlib import Path
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:5000"
 
 def test_export_formats():
     """Test getting available export formats"""

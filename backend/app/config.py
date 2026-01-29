@@ -14,7 +14,7 @@ from pathlib import Path
 
 class Settings(BaseSettings):
     # UCM Integration
-    UCM_BASE_URL: str = "http://localhost:8000"
+    UCM_BASE_URL: str = "http://localhost:8080"
     """Application settings with validation"""
 
     # Environment
