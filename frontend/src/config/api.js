@@ -20,7 +20,7 @@ export const ENDPOINTS = {
   video: `${API_URL}/video`,
   health: `${API_URL.replace('/api/v1', '')}/health`,
   analytics: `${API_URL}/analytics`,
-  auth: `${API_URL.replace('/api/v1', '')}/auth`
+  auth: `${API_URL}/auth`
 }
 
 console.log('✅ GOAT API Config loaded:', {

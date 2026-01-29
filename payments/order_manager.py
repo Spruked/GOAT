@@ -2,11 +2,13 @@
 Order Manager - Handles order state persistence and management
 """
 
-from pathlib import Path
-import json
-from datetime import datetime
-from typing import Dict, List, Any, Optional
-import uuid
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import func
+from app.core.database import get_db
+from app.models.order import Order
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.core.database import get_db
+from app.models.order import Order
 
 class OrderManager:
     """Manages order state persistence and operations"""
@@ -18,64 +20,76 @@ class OrderManager:
             # Default to project root
             self.orders_base_dir = Path(__file__).resolve().parents[1] / "users" / "active"
 
-    def load_order(self, user_id: str, order_id: str) -> Dict:
-        """Load order from disk or create new one"""
-        order_path = self._get_order_path(user_id, order_id)
-
-        if order_path.exists():
-            with open(order_path, 'r') as f:
-                return json.load(f)
-
-        # Create new order
-        return {
-            "order_id": order_id,
-            "user_id": user_id,
-            "created_at": datetime.utcnow().isoformat(),
-            "status": "draft",
-            "content_file": None,
-            "metadata": {},
-            "cart": {
-                "items": [],
-                "subtotal": 0,
-                "tax": 0,
-                "total": 0
-            },
-            "payment_status": "not_started",
-            "payment_intent_id": None,
-            "payment_client_secret": None,
-            "paid_at": None,
-            "processing_status": "not_started",
-            "processing_started_at": None,
-            "processing_completed_at": None,
-            "outputs": {},
+    async def load_order(self, user_id: str, order_id: str) -> Dict:
+        """Load order from database"""
+        async with get_db() as session:
+            order = await session.get(Order, order_id)
+            if order:
+                return json.loads(order.data)
+            
+            # Create new order if not exists
+            return {
+                "order_id": order_id,
+                "user_id": user_id,
+                "created_at": datetime.utcnow().isoformat(),
+                "status": "draft",
+                "content_file": None,
+                "metadata": {},
+                "cart": {
+                    "items": [],
+                    "subtotal": 0,
+                    "tax": 0,
+                    "total": 0
+                },
+                "payment_status": "not_started",
+                "payment_intent_id": None,
+                "payment_client_secret": None,
+                "paid_at": None,
+                "processing_status": "not_started",
+                "processing_started_at": None,
+                "processing_completed_at": None,
+                "outputs": {},
             "last_updated": datetime.utcnow().isoformat()
         }
 
-    def save_order(self, user_id: str, order_id: str, order: Dict):
-        """Save order to disk"""
-        order_path = self._get_order_path(user_id, order_id)
-        order_path.parent.mkdir(parents=True, exist_ok=True)
-
+    async def save_order(self, user_id: str, order_id: str, order: Dict):
+        """Save order to database"""
         order["last_updated"] = datetime.utcnow().isoformat()
+        order_json = json.dumps(order)
+        
+        async with get_db() as session:
+            # Check if order exists
+            existing = await session.get(Order, order_id)
+            if existing:
+                existing.data = order_json
+                existing.updated_at = func.now()
+            else:
+                # Determine order type from order_id or data
+                order_type = "booklet"  # Default, can be improved
+                if "audiobook" in order_id.lower():
+                    order_type = "audiobook"
+                elif "podcast" in order_id.lower():
+                    order_type = "podcast"
+                
+                new_order = Order(
+                    id=order_id,
+                    user_id=int(user_id) if user_id.isdigit() else 1,  # Demo user
+                    order_type=order_type,
+                    data=order_json
+                )
+                session.add(new_order)
+            
+            await session.commit()
 
-        with open(order_path, 'w') as f:
-            json.dump(order, f, indent=2)
-
-    def list_user_orders(self, user_id: str) -> List[Dict]:
-        """List all orders for a user"""
-        user_dir = self.orders_base_dir / user_id / "booklet_orders"
-        if not user_dir.exists():
-            return []
-
-        orders = []
-        for order_dir in user_dir.iterdir():
-            if order_dir.is_dir():
-                order_path = order_dir / "order.json"
-                if order_path.exists():
-                    with open(order_path, 'r') as f:
-                        orders.append(json.load(f))
-
-        return sorted(orders, key=lambda x: x.get("created_at", ""), reverse=True)
+    async def list_user_orders(self, user_id: str) -> List[Dict]:
+        """List all orders for a user from database"""
+        async with get_db() as session:
+            from sqlalchemy import select
+            result = await session.execute(
+                select(Order).where(Order.user_id == int(user_id) if user_id.isdigit() else 1)
+            )
+            orders = result.scalars().all()
+            return [json.loads(order.data) for order in orders]
 
     def update_order_status(self, user_id: str, order_id: str, status: str,
                           additional_data: Dict = None):

@@ -39,6 +39,13 @@ async def init_database(timeout: int = 30):
         async with engine.begin() as conn:
             await conn.run_sync(lambda sync_conn: None)
 
+        # Create tables
+        from app.models.user import Base as UserBase
+        from app.models.order import Base as OrderBase
+        async with engine.begin() as conn:
+            await conn.run_sync(UserBase.metadata.create_all)
+            await conn.run_sync(OrderBase.metadata.create_all)
+
     except Exception as e:
         raise RuntimeError(f"Database initialization failed: {e}")
 

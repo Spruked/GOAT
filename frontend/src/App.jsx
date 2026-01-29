@@ -27,6 +27,7 @@ import CookiePolicyPage from './pages/CookiePolicyPage';
 import DMCAPage from './pages/DMCAPage';
 import PricingPage from './pages/PricingPage';
 import { PackagesPage } from './pages/PackagesPage';
+import { UserProfile } from './pages/Dashboard/UserProfile';
 import { CaleonProvider, CaleonOverlay } from './components/CaleonOverlay';
 import './App.css';
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/dashboard/users/:userId" element={<UserProfile />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/podcast" element={<PodcastEnginePage />} />
             <Route path="/menu" element={<MenuPage />} />

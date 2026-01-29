@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  goat-backend:
+    environment:
+      - GOAT_ENV=development
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    command: ["python", "start_backend.py"]
+
+  goat-db:
+    ports:
+      - "5432:5432"
+
+  goat-redis:
+    ports:
+      - "6379:6379"

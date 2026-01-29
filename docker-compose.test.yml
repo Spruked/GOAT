@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  goat-backend-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: goat-backend-test
+    ports:
+      - "8001:8000"
+    environment:
+      - GOAT_ENV=test
+      - GOAT_VERSION=2.1.0
+      - DATABASE_URL=postgresql://goat:test_password@goat-db-test:5432/goat_test
+      - REDIS_URL=redis://goat-redis-test:6379/0
+      - LOG_LEVEL=DEBUG
+      - SECRET_KEY=test_secret_key_for_testing_only
+      - ENCRYPTION_KEY=dGVzdF9lbmNyeXB0aW9uX2tleV90ZXN0X29ubHk=
+      - SIGNING_KEY=dGVzdF9zaWduaW5nX2tleV90ZXN0X29ubHk=
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    depends_on:
+      - goat-redis-test
+      - goat-db-test
+    networks:
+      - goat-network-test
+    command: ["python", "-m", "pytest", "tests/", "-v", "--tb=short", "--cov=goat", "--cov-report=html"]
+
+  goat-redis-test:
+    image: redis:7-alpine
+    container_name: goat-redis-test
+    ports:
+      - "6379:6379"
+    networks:
+      - goat-network-test
+    command: redis-server
+
+  goat-db-test:
+    image: postgres:15-alpine
+    container_name: goat-db-test
+    environment:
+      - POSTGRES_DB=goat_test
+      - POSTGRES_USER=goat
+      - POSTGRES_PASSWORD=test_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - goat-network-test
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U goat -d goat_test"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  goat_test_data:
+    driver: local
+
+networks:
+  goat-network-test:
+    driver: bridge

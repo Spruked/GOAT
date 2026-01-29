@@ -78,6 +78,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = False
+        extra = "ignore"  # Allow extra environment variables
 
     @validator("DATABASE_URL", pre=True)
     def assemble_db_url(cls, v, values):

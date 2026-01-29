@@ -1,3 +1,84 @@
+# GOAT specific
+goat_field.db
+skg_goat.db
+ucm_skg.db
+truemark_certificates/
+evidence_bundles/
+field_observations/
+apex_responses/
+mint_transactions/
+
+# Cryptographic keys (never commit!)
+*.key
+*.pem
+*.crt
+*_private_key*
+*_secret*
+hmac_secret*
+apex_api_secret*
+truemark_private_key*
+secrets/
+keys/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.*
+
+# Data and databases
+data/
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Vault and encryption
+vault_storage/
+*.enc
+*.encrypted
+chacha20_*
+aes_*
+
+# Evidence bundles and certificates
+*.bundle
+*.certificate
+*.cert
+apex_*
+truemark_*
+evidence_bundles/
+certificates/
+apex_output/
+truemark_output/
+
+# Queues and journals
+*.jsonl
+*_queue.json
+shadow_journal/
+field_observations/
+apex_responses/
+mint_transactions/
+
+# Logs and audit trails
+logs/
+*.log
+audit_*.json
+field_*.json
+observation_*.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.wav
+*.mp3
+*.mp4
+*.mov
+
 # Python
 __pycache__/
 *.py[cod]
@@ -24,6 +105,9 @@ wheels/
 venv/
 ENV/
 env/
+.venv/
+ENV/
+env/
 
 # IDEs
 .vscode/
@@ -32,7 +116,7 @@ env/
 *.swo
 *~
 
-# Node
+# Node (if frontend is used)
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -43,28 +127,6 @@ yarn-error.log*
 dist/
 build/
 *.local
-
-# Logs
-logs/
-*.log
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Data
-data/
-*.db
-*.sqlite
-*.sqlite3
-
-# Vault storage
-vault_storage/
-*.enc
-*.key
-*.pem
-*.crt
 
 # OS
 .DS_Store
@@ -78,15 +140,7 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 .tox/
-
-# Temporary
-tmp/
-temp/
-*.tmp
-*.wav
-*.mp3
-*.mp4
-*.mov
+.cache/
 
 # External dependencies (keep repos separate)
 Unified-Cognition-Module-Caleon-Prime-full-System/

@@ -19,3 +19,29 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Patent Notice
+
+This software implements proprietary methods for AI evidence preparation,
+cryptographic certification chains, and human-AI oversight systems.
+
+Patent protection is sought for the following inventions:
+
+1. GOAT↔APEX Handshake Protocol v1.0
+2. 13-Layer Certificate Generation System
+3. GOAT Field Review System with Mandatory Human Oversight
+4. Authority Separation Architecture for AI Systems
+5. Cryptographic Evidence Bundle Generation with HMAC-SHA256
+
+---
+
+## Trademark Notice
+
+"GOAT", "APEX DOC", "TrueMark", "GOAT Field", "GOAT↔APEX Handshake Protocol",
+and associated logos are trademarks of PRo Prime Series. All rights reserved.
+Unauthorized use prohibited.
+
+For licensing inquiries regarding patents or trademarks, please contact:
+legal@goat.gg

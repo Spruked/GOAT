@@ -1,0 +1,51 @@
+# dals/registry/distillers/visidata_distiller.yaml
+distiller:
+  id: visidata_core
+  version: 2.1.0
+  class: services.visidata_distiller.VisiDataDistiller
+
+  type: extraction_engine  # Categories: extraction, transformation, analysis
+
+  capabilities:
+    - structured_data_parsing
+    - frequency_analysis
+    - statistical_profiling
+    - cross_reference_detection
+    - anomaly_detection
+    - theme_extraction
+
+  inputs:
+    formats: [csv, xlsx, json, sqlite, parquet]
+    max_size_gb: 50
+    streaming_required: true
+
+  outputs:
+    signal_types:
+      - thematic_signals  # Recurring concepts
+      - anomaly_signals   # Statistical outliers
+      - relational_signals # Cross-file correlations
+      - structural_signals # Schema/dimensionality
+      - quality_signals   # Data quality metrics
+
+  resources:
+    memory_mb: 512
+    cpu_cores: 2
+    timeout_seconds: 3600
+
+  instrumentation:
+    metrics:
+      - processing_time_ms
+      - rows_processed
+      - memory_peak_mb
+      - signal_count
+      - confidence_score
+
+    health_checks:
+      - format_support_check
+      - memory_pressure_test
+      - signal_validation_test
+
+  lifecycle:
+    initialization: lazy  # Load on first use
+    pooling: true         # Reuse instances
+    max_pool_size: 5

@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  goat-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: goat-backend-prod
+    ports:
+      - "8000:8000"
+    environment:
+      - GOAT_ENV=production
+      - GOAT_VERSION=2.1.0
+      - LOG_LEVEL=INFO
+    env_file:
+      - .env
+    volumes:
+      - goat_data_prod:/app/data
+      - goat_logs_prod:/app/logs
+      - goat_vault_prod:/app/vault_storage
+      - goat_evidence_prod:/app/evidence_bundles
+      - ./ssl:/app/ssl:ro
+    depends_on:
+      - goat-redis-prod
+      - goat-db-prod
+    networks:
+      - goat-network-prod
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  goat-redis-prod:
+    image: redis:7-alpine
+    container_name: goat-redis-prod
+    volumes:
+      - goat_redis_data_prod:/data
+    networks:
+      - goat-network-prod
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+
+  goat-db-prod:
+    image: postgres:15-alpine
+    container_name: goat-db-prod
+    environment:
+      - POSTGRES_DB=goat
+      - POSTGRES_USER=goat
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - goat_db_data_prod:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - goat-network-prod
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U goat -d goat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  goat-frontend-prod:
+    image: nginx:alpine
+    container_name: goat-frontend-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - goat_static_prod:/usr/share/nginx/html
+    depends_on:
+      - goat-backend
+    networks:
+      - goat-network-prod
+    restart: unless-stopped
+
+  goat-backup:
+    image: postgres:15-alpine
+    container_name: goat-backup
+    environment:
+      - POSTGRES_DB=goat
+      - POSTGRES_USER=goat
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - goat_db_data_prod:/var/lib/postgresql/data:ro
+      - goat_backups:/backups
+    networks:
+      - goat-network-prod
+    command: >
+      sh -c "
+        while true; do
+          pg_dump -U goat -d goat > /backups/goat_$(date +%Y%m%d_%H%M%S).sql
+          sleep 86400
+        done
+      "
+    restart: unless-stopped
+
+volumes:
+  goat_data_prod:
+    driver: local
+  goat_logs_prod:
+    driver: local
+  goat_vault_prod:
+    driver: local
+  goat_evidence_prod:
+    driver: local
+  goat_redis_data_prod:
+    driver: local
+  goat_db_data_prod:
+    driver: local
+  goat_static_prod:
+    driver: local
+  goat_backups:
+    driver: local
+
+networks:
+  goat-network-prod:
+    driver: bridge

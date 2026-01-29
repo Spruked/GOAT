@@ -14,7 +14,18 @@ import {
   Sun,
   Moon,
   Palette,
-  Network
+  Network,
+  Mail,
+  BookOpen,
+  Mic,
+  Headphones,
+  Cpu,
+  Database,
+  Search,
+  BarChart3,
+  CreditCard,
+  Award,
+  Zap
 } from 'lucide-react'
 import axios from 'axios'
 
@@ -25,6 +36,18 @@ import { FilesTab } from './FilesTab'
 import { ProductsTab } from './ProductsTab'
 import { PreferencesTab } from './PreferencesTab'
 import { ProfileTab } from './ProfileTab'
+import { UsersTab } from './UsersTab'
+import { MarketingTab } from './MarketingTab'
+import { AudiobooksTab } from './AudiobooksTab'
+import { BooksTab } from './BooksTab'
+import { PodcastsTab } from './PodcastsTab'
+import { VoiceTab } from './VoiceTab'
+import { DistillersTab } from './DistillersTab'
+import { CollectorsTab } from './CollectorsTab'
+import { GOATFieldTab } from './GOATFieldTab'
+import { AnalyticsTab } from './AnalyticsTab'
+import { PaymentsTab } from './PaymentsTab'
+import { CertificatesTab } from './CertificatesTab'
 
 export function Dashboard() {
   const [activeTab, setActiveTab] = useState('home')
@@ -61,7 +84,21 @@ export function Dashboard() {
     { id: 'products', label: 'Products', icon: Download },
     { id: 'graph-demo', label: 'Knowledge Graphs', icon: Network },
     { id: 'preferences', label: 'Preferences', icon: Settings },
-    { id: 'profile', label: 'Profile', icon: User }
+    { id: 'profile', label: 'Profile', icon: User },
+    ...(user?.isAdmin ? [
+      { id: 'users', label: 'Users', icon: User },
+      { id: 'marketing', label: 'Marketing', icon: Mail },
+      { id: 'audiobooks', label: 'Audiobooks', icon: Headphones },
+      { id: 'books', label: 'Books', icon: BookOpen },
+      { id: 'podcasts', label: 'Podcasts', icon: Mic },
+      { id: 'voice', label: 'Voice Systems', icon: Cpu },
+      { id: 'distillers', label: 'Distillers', icon: Database },
+      { id: 'collectors', label: 'Collectors', icon: Search },
+      { id: 'goat-field', label: 'GOAT Field', icon: Zap },
+      { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+      { id: 'payments', label: 'Payments', icon: CreditCard },
+      { id: 'certificates', label: 'Certificates', icon: Award }
+    ] : [])
   ]
 
   const handleLogout = async () => {
@@ -134,6 +171,18 @@ export function Dashboard() {
       )}
       {activeTab === 'preferences' && <PreferencesTab user={user} theme={theme} setTheme={setTheme} />}
       {activeTab === 'profile' && <ProfileTab user={user} />}
+      {activeTab === 'users' && user?.isAdmin && <UsersTab user={user} />}
+      {activeTab === 'marketing' && user?.isAdmin && <MarketingTab user={user} />}
+      {activeTab === 'audiobooks' && user?.isAdmin && <AudiobooksTab user={user} />}
+      {activeTab === 'books' && user?.isAdmin && <BooksTab user={user} />}
+      {activeTab === 'podcasts' && user?.isAdmin && <PodcastsTab user={user} />}
+      {activeTab === 'voice' && user?.isAdmin && <VoiceTab user={user} />}
+      {activeTab === 'distillers' && user?.isAdmin && <DistillersTab user={user} />}
+      {activeTab === 'collectors' && user?.isAdmin && <CollectorsTab user={user} />}
+      {activeTab === 'goat-field' && user?.isAdmin && <GOATFieldTab user={user} />}
+      {activeTab === 'analytics' && user?.isAdmin && <AnalyticsTab user={user} />}
+      {activeTab === 'payments' && user?.isAdmin && <PaymentsTab user={user} />}
+      {activeTab === 'certificates' && user?.isAdmin && <CertificatesTab user={user} />}
     </DashboardLayout>
   )
 }

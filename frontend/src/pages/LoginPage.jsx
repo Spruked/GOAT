@@ -49,7 +49,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     
-    console.log('Form submitted:', { isLogin, email: formData.email });
+    console.log('HANDLE SUBMIT FIRED', { isLogin, email: formData.email });
     
     // Check terms acceptance for signup
     if (!isLogin && !acceptedTerms) {
@@ -61,11 +61,11 @@ export default function LoginPage() {
 
     try {
       // Admin bypass check
-      if (isLogin && formData.email === 'admin@goat.local' && formData.password === 'goat2024admin') {
+      if (isLogin && formData.email === 'admin@goat.com' && formData.password === 'Acs222fiat') {
         // Admin bypass - no backend call needed
         localStorage.setItem('token', 'admin-bypass-token');
         localStorage.setItem('user', JSON.stringify({ 
-          email: 'admin@goat.local', 
+          email: 'admin@goat.com', 
           name: 'Admin',
           isAdmin: true 
         }));
@@ -91,14 +91,19 @@ export default function LoginPage() {
       let payload;
       
       if (isLogin) {
-        // Login uses form data (username/password)
-        const formDataObj = new FormData();
-        formDataObj.append('username', formData.email); // OAuth2 expects 'username'
-        formDataObj.append('password', formData.password);
+        // Login uses JSON
+        payload = JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        });
         
+        console.log('Sending login JSON:', payload);
         const res = await fetch(endpoint, {
           method: 'POST',
-          body: formDataObj, // Send as form data, not JSON
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: payload,
         });
         
         if (res.ok) {
@@ -117,12 +122,13 @@ export default function LoginPage() {
       } else {
         // Signup uses JSON
         payload = JSON.stringify({
-          email: formData.email,
           full_name: formData.name, // Backend expects full_name
-          password: formData.password,
-          marketing_opt_in: true
+          email: formData.email,
+          master_password: formData.password, // Backend expects master_password
+          agreements_accepted: acceptedTerms // Send terms acceptance
         });
         
+        console.log('Sending signup JSON:', payload);
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: {

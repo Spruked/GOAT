@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  goat-ci:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: goat-ci
+    environment:
+      - GOAT_ENV=ci
+      - GOAT_VERSION=2.1.0
+      - DATABASE_URL=postgresql://goat:ci_password@goat-db-ci:5432/goat_ci
+      - REDIS_URL=redis://goat-redis-ci:6379/0
+      - LOG_LEVEL=INFO
+      - SECRET_KEY=ci_secret_key_for_testing_only
+      - ENCRYPTION_KEY=Y2lfZW5jcnlwdGlvbl9rZXlfZm9yX3Rlc3Rpbmdfb25seQ==
+      - SIGNING_KEY=Y2lfZW5jcnlwdGlvbl9rZXlfZm9yX3Rlc3Rpbmdfb25seQ==
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    depends_on:
+      - goat-redis-ci
+      - goat-db-ci
+    networks:
+      - goat-network-ci
+    command: >
+      sh -c "
+        echo 'Running CI pipeline...' &&
+        python -m pytest tests/ -v --tb=short --cov=goat --cov-report=xml --cov-report=html &&
+        echo 'Running security checks...' &&
+        bandit -r goat/ -f json -o security_report.json || true &&
+        echo 'Running linting...' &&
+        flake8 goat/ --max-line-length=100 --extend-ignore=E203,W503 || true &&
+        echo 'CI pipeline completed'
+      "
+
+  goat-redis-ci:
+    image: redis:7-alpine
+    container_name: goat-redis-ci
+    networks:
+      - goat-network-ci
+    command: redis-server
+
+  goat-db-ci:
+    image: postgres:15-alpine
+    container_name: goat-db-ci
+    environment:
+      - POSTGRES_DB=goat_ci
+      - POSTGRES_USER=goat
+      - POSTGRES_PASSWORD=ci_password
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - goat-network-ci
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U goat -d goat_ci"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  goat_ci_data:
+    driver: local
+
+networks:
+  goat-network-ci:
+    driver: bridge

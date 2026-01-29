@@ -32,10 +32,10 @@ from app.security.auth import dual_auth
 from app.middleware.server_timing import server_timing_middleware
 
 # Import DALS routers
-# from api.host_routes import router as host_router
-# from api.uqv_routes import router as uqv_router
-# from api.tts_routes import router as tts_router
-# from api.broadcast_routes import router as broadcast_router
+from api.host_routes import router as host_router
+from api.uqv_routes import router as uqv_router
+from api.tts_routes import router as tts_router
+from api.broadcast_routes import router as broadcast_router
 from app.core.database import init_database
 from app.core.cache import init_cache
 from app.core.tracing import setup_tracing
@@ -85,6 +85,10 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+        "http://localhost:5175",
+        "http://127.0.0.1:5175",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -94,50 +98,56 @@ app.add_middleware(
 app.middleware("http")(server_timing_middleware)
 
 # ROUTES
-app.include_router(triples.router, prefix="/api/v1/triples", tags=["Triples"])
-app.include_router(query.router, prefix="/api/v1/query", tags=["Query"])
-app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["Analytics"])
-app.include_router(video.router, prefix="/api/v1/video", tags=["Video"])
-app.include_router(admin.router, prefix="/api/v1/admin", tags=["Admin"])
+app.include_router(triples, prefix="/api/v1/triples", tags=["Triples"])
+app.include_router(query, prefix="/api/v1/query", tags=["Query"])
+app.include_router(analytics, prefix="/api/v1/analytics", tags=["Analytics"])
+app.include_router(video, prefix="/api/v1/video", tags=["Video"])
+app.include_router(admin, prefix="/api/v1/admin", tags=["Admin"])
 app.include_router(host_bubble_router, prefix="/api/v1/host_bubble", tags=["HostBubble"])
-app.include_router(auth.router)
+app.include_router(auth, prefix="/api/v1/auth", tags=["Auth"])
+
+# DALS routers
+app.include_router(host_router, prefix="/api/v1/host", tags=["Host"])
+app.include_router(uqv_router, prefix="/api/v1/uqv", tags=["UQV"])
+app.include_router(tts_router, prefix="/api/v1/tts", tags=["TTS"])
+app.include_router(broadcast_router, prefix="/api/v1/broadcast", tags=["Broadcast"])
 
 
 # WebSocket for Orb connection to UCM
-@app.websocket("/ws/orb")
-async def orb_websocket(websocket: WebSocket):
-    await websocket.accept()
-    try:
-        while True:
-            # Poll UCM health for resonance data
-            try:
-                async with httpx.AsyncClient() as client:
-                    response = await client.get("http://localhost:8080/health", timeout=2.0)
-                    if response.status_code == 200:
-                        ucm_data = response.json()
-                        # Map UCM health to resonance
-                        phase_coherence = 0.8 if ucm_data.get("status") == "healthy" else 0.3
-                        await websocket.send_json({
-                            "type": "resonance_update",
-                            "data": {"phaseCoherence": phase_coherence}
-                        })
-                    else:
-                        await websocket.send_json({
-                            "type": "resonance_update", 
-                            "data": {"phaseCoherence": 0.2}
-                        })
-            except Exception as e:
-                # Fallback if UCM unavailable
-                await websocket.send_json({
-                    "type": "resonance_update",
-                    "data": {"phaseCoherence": 0.1}
-                })
-            
-            await asyncio.sleep(5)  # Update every 5 seconds
-    except Exception as e:
-        pass
-    finally:
-        await websocket.close()
+# @app.websocket("/ws/orb")
+# async def orb_websocket(websocket: WebSocket):
+#     await websocket.accept()
+#     try:
+#         while True:
+#             # Poll UCM health for resonance data
+#             try:
+#                 async with httpx.AsyncClient() as client:
+#                     response = await client.get("http://localhost:8080/health", timeout=2.0)
+#                     if response.status_code == 200:
+#                         ucm_data = response.json()
+#                         # Map UCM health to resonance
+#                         phase_coherence = 0.8 if ucm_data.get("status") == "healthy" else 0.3
+#                         await websocket.send_json({
+#                             "type": "resonance_update",
+#                             "data": {"phaseCoherence": phase_coherence}
+#                         })
+#                     else:
+#                         await websocket.send_json({
+#                             "type": "resonance_update", 
+#                             "data": {"phaseCoherence": 0.2}
+#                         })
+#             except Exception as e:
+#                 # Fallback if UCM unavailable
+#                 await websocket.send_json({
+#                     "type": "resonance_update",
+#                     "data": {"phaseCoherence": 0.1}
+#                 })
+#             
+#             await asyncio.sleep(5)  # Update every 5 seconds
+#     except Exception as e:
+#         pass
+#     finally:
+#         await websocket.close()
 
 
 # DALS ROUTES - All GOAT options available through DALS plugin

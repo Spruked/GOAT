@@ -1,0 +1,183 @@
+services:
+  # Redis Cache and Queue
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - goat-network
+
+  # FastAPI Backend for SKG GOAT Edition with DALS Integration
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"  # GOAT Backend / API - Authoritative port assignment
+    environment:
+      - DATABASE_URL=sqlite:///./goat.db
+      - REDIS_URL=redis://redis:6379
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-goat_jwt_secret_key_change_me}
+      - SECRET_KEY=${SECRET_KEY:-goat_secret_key_change_me}
+      - API_V1_STR=/api/v1
+      - BACKEND_CORS_ORIGINS=["http://localhost:3000", "http://localhost:5173"]
+      - VIDEO_OUTPUT_DIR=./videos
+      - AUDIO_CACHE_DIR=./audio_cache
+      # DALS Configuration
+      - DALS_ENDPOINT=http://backend:5000
+    networks:
+      - goat-network
+    depends_on:
+      - redis
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    networks:
+      - goat-network
+    depends_on:
+      - backend
+
+  # Neo4j Graph Database (optional - for advanced knowledge graph)
+  neo4j:
+    image: neo4j:5.20
+    environment:
+      - NEO4J_AUTH=neo4j/goatpassword123
+      - NEO4J_PLUGINS=["apoc"]
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j-data:/data
+    networks:
+      - goat-network
+
+  # ChromaDB for vector embeddings (optional)
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+    networks:
+      - goat-network
+
+  # IPFS Node (optional - for local IPFS)
+  ipfs:
+    image: ipfs/kubo:latest
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "9090:8080"  # IPFS Gateway - moved from 8080 to avoid UCM conflict
+    volumes:
+      - ipfs-data:/data/ipfs
+    networks:
+      - goat-network
+
+  # UCM Integration Service
+  ucm:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8080:8080"  # UCM Core - Authoritative port assignment
+    environment:
+      - UCM_MODE=production
+      - DALS_ENDPOINT=http://backend:5000
+      - UCM_API_KEY=${UCM_API_KEY:-ucm_secret_key}
+      - NEO4J_URI=bolt://neo4j:7687
+      - CHROMA_HOST=chroma
+    volumes:
+      - ./learning:/app/learning
+      - ./data:/app/data
+    networks:
+      - goat-network
+    depends_on:
+      - neo4j
+      - chroma
+      - backend
+    command: python -m learning.ucm_service
+
+  # Enhanced Cali X One Core with SKG Intelligence
+  cali-x-one:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports: 
+      - "8003:8003"  # DALS Core API - Authoritative port assignment
+    environment:
+      - CALI_MODE=production
+      - BACKEND_ENDPOINT=http://backend:5000
+      - SKG_ENDPOINT=http://skg-service:8004
+      - NEO4J_URI=bolt://neo4j:7687
+      - CHROMA_HOST=chroma
+    volumes:
+      - ./cali_scripts:/app/cali_scripts
+      - ./data:/app/data
+      - ./knowledge:/app/knowledge
+    networks:
+      - goat-network
+    depends_on:
+      - neo4j
+      - chroma
+      - backend
+      - skg-service
+    command: python -m cali_scripts.engine
+
+  # SKG API Service for direct knowledge graph operations
+  skg-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8004:8004"  # SKG service
+    environment:
+      - SKG_MODE=production
+      - NEO4J_URI=bolt://neo4j:7687
+      - CHROMA_HOST=chroma
+    volumes:
+      - ./knowledge:/app/knowledge
+      - ./data:/app/data
+    networks:
+      - goat-network
+    depends_on:
+      - neo4j
+      - chroma
+    command: python -c "from skg.core import SKGCore; skg = SKGCore(); skg.run_api_server()"
+
+  # Vault Watch Service
+  vault-watch:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8005:8005"  # Vault monitoring
+    environment:
+      - VAULT_WATCH_MODE=production
+      - VAULT_PATH=/app/data/vault
+      - BACKEND_ENDPOINT=http://backend:5000
+    volumes:
+      - ./vault:/app/vault
+      - ./data:/app/data
+    networks:
+      - goat-network
+    depends_on:
+      - backend
+    command: python -m vault_forge.watch_service
+
+networks:
+  goat-network:
+    driver: bridge
+
+volumes:
+  neo4j-data:
+  chroma-data:
+  ipfs-data:
+  redis-data:
